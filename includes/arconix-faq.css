@@ -1,12 +1,24 @@
-/**
- * Arconix FAQ Stylesheet
- *
- * The best way to modify this stylesheet is to copy this stylesheet to the root of your
- * theme's folder and rename it to 'arconix-faq.css'. The plugin will load that sheet in
- * place of this, allowing easy changes which won't be overwritten durign a plugin upgrade
- */
- 
- 
+/* 
+ARCONIX FAQ CSS
+--------------------------
+
+PLEASE DO NOT make modifications to this file directly as it will be overwritten on update.
+Instead, save a copy of this file to your theme or child theme directory. It will then be
+loaded in place of the plugin's version and will maintain your changes on upgrade
+
+IMPORTANT NOTE: Since the directory structure will be changing, and image URLS are always loaded
+relative to their current path, the links to the toggle images in this file will also need to change. 
+For example:
+
+    'url(../images ...'
+
+would have to be changed to
+
+    'url(../../plugins/arconix-faq/images ...'
+
+in order to for the files to be displayed.
+*/
+
 /* Term Title
 ------------------------------------------------------------ */
  h3.arconix-faq-term-title {}
@@ -31,14 +43,14 @@ p.arconix-faq-term-description { font-style: italic; }
 /* FAQ Title
 ------------------------------------------------------------ */
 .arconix-faq-title {
-    background: url("../images/toggle-open.png") no-repeat left transparent;
+    background: url(../images/toggle-open.png) no-repeat left transparent;
     cursor: pointer;
     font-size: 16px;
     padding: 0 0 0 30px;
     position: relative;
 }
 
-.arconix-faq-title.active { background: url("../images/toggle-close.png") no-repeat left transparent; }
+.arconix-faq-title.active { background: url(../images/toggle-close.png) no-repeat left transparent; }
 
 /* FAQ Content
 ------------------------------------------------------------ */
