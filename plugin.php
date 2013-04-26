@@ -293,8 +293,9 @@ class Arconix_FAQ {
                         if( $rtt ) {
                             $rtt_text = __( 'Return to Top', 'acf' );
                             $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
-                        }
+
                             $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
+                        }
 
                         $return .= '</div>'; // faq-content
                         $return .= '</div>'; // faq-wrap
@@ -335,8 +336,12 @@ class Arconix_FAQ {
                     $return .= '<div class="arconix-faq-content">' . apply_filters( 'the_content', get_the_content() );
 
                     // If Return to Top checkbox is true
-                    if( $rtt )
-                        $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . __( 'Return to Top', 'acf' ) . '</a></div>';
+                    if( $rtt ) {
+                        $rtt_text = __( 'Return to Top', 'acf' );
+                        $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
+
+                        $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
+                    }
 
                     $return .= '</div>'; // faq-content
                     $return .= '</div>'; // faq-wrap
