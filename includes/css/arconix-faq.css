@@ -10,15 +10,15 @@ IMPORTANT NOTE: Since the directory structure will be changing, and image URLS a
 relative to their current path, the links to the toggle images in this file will also need to change. 
 For example:
 
-    'url(../images ...'
+    'url(../../images ...'
 
 would have to be changed to
 
-    'url(../../plugins/arconix-faq/images ...'
+    'url(../../../plugins/arconix-faq/images ...'
 
 in order to for the files to be displayed.
 */
-
+ 
 /* Term Title
 ------------------------------------------------------------ */
  h3.arconix-faq-term-title {}
@@ -30,9 +30,9 @@ p.arconix-faq-term-description { font-style: italic; }
 /* FAQ Wrapper
 ------------------------------------------------------------ */
 .arconix-faq-wrap {
-    border-radius: 5px;
-	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
     background:	none repeat scroll 0 0 #fbfbfb;
     clear: both;
     border: 1px solid #ddd;
@@ -43,14 +43,14 @@ p.arconix-faq-term-description { font-style: italic; }
 /* FAQ Title
 ------------------------------------------------------------ */
 .arconix-faq-title {
-    background: url(../images/toggle-open.png) no-repeat left transparent;
+    background: url(../../images/toggle-open.png) no-repeat left transparent;
     cursor: pointer;
     font-size: 16px;
     padding: 0 0 0 30px;
     position: relative;
 }
 
-.arconix-faq-title.active { background: url(../images/toggle-close.png) no-repeat left transparent; }
+.arconix-faq-title.active { background: url(../../images/toggle-close.png) no-repeat left transparent; }
 
 /* FAQ Content
 ------------------------------------------------------------ */
@@ -63,3 +63,5 @@ p.arconix-faq-term-description { font-style: italic; }
     margin: 0 0 10px 0 !important;
     padding: 0 !important;
 }
+
+.arconix-faq-to-top {}
