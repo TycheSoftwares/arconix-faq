@@ -9,7 +9,7 @@ Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to their website. Display them using the supplied shortcode (`[faq]`) and show/hide them via a jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation.
+Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to their website. Display them using the supplied shortcode (`[ faq ]`) and show/hide them via a jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation.
 
 = Features =
 * Custom Post-Type driven
@@ -29,7 +29,7 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 == Frequently Asked Questions ==
 
 = Quick and dirty - how do I display my FAQ's? =
-* use the `[faq]` shortcode in a widget or on a post/page.
+* use the `[ faq ]` shortcode in a widget or on a post/page.
 
 = Where can I find more information on how to use the plugin?  =
 
@@ -39,7 +39,7 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 = The toggle isn't working. What can I do? =
 
 While you can certainly start a thread in the [support forum](http://arcnx.co/afhelp), there are some troubleshooting steps you can take beforehand to help speed up the process.
-1. Check to make sure the javascripts are loading correctly. Load the faq page in your browser and view your page's source (usually CTRL + U). Look for jQuery and Arconix FAQ JS files there. If you don't see the Arconix FAQ JS file (towards the bottom), then your theme's `footer.php` file is likely missing `<?php wp_footer(); ?>`, which is neccessary for the operation of mine and many other plugins.
+1. Check to make sure the javascripts are loading correctly. Load the faq page in your browser and view your page's source. Look for jQuery and Arconix FAQ JS files there. If you don't see the Arconix FAQ JS file (towards the bottom), then your theme's `footer.php` file is likely missing `<?php wp_footer(); ?>`, which is neccessary for the operation of mine and many other plugins.
 2. Check to make sure only one copy of jQuery is being loaded. Many times conflicts arise when themes or plugins load jQuery incorrectly, causing the script to be loaded multiple times in multiple versions. In order to find the offending item, start by disabling your plugins one by one until you find the problem. If you've disabled all your plugins, try switching to a different them, such as twentyten or twentytwelve to see if the problem is with your theme. Once you've found the problem, contact the developer for assistance getting the issue resolved.
 
 = I need help =
@@ -57,7 +57,7 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 
 == Changelog ==
 = 1.2.0 =
-* Added a "Return to Top" meta box option for each FAQ. Checking that box will display a link (text overridable via filter) that will return the user to the top of the FAQ
+* Added a "Return to Top" meta box option for each FAQ. Checking that box will display a link (text overridable via filter) that will return the user to the top of that item
 * Supports linking directly to specific FAQ's via the FAQ title. View the [documentation](http://arcnx.co/afwiki) for guidance
 * Added additional CSS classes to each FAQ for increased styling options
 * Added filters to allow users to prevent the CSS, JS or dashboard widget from loading
