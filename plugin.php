@@ -147,7 +147,7 @@ class Arconix_FAQ {
                     'show_ui'                   => true,
                     'update_count_callback'     => '_update_post_term_count',
                     'query_var'                 => true,
-                    'rewrite'                   => array( 'slug' => 'group' )
+                    'rewrite'                   => array( 'with_front' => false )
                 )
             ),
             'query' => array(
@@ -235,14 +235,11 @@ class Arconix_FAQ {
 
         // Get the taxonomy terms assigned to all FAQs 
         $terms = get_terms( $default_args['taxonomy']['slug'] );
-        $count = 0;
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs 
         if( $terms ) {
 
             foreach( $terms as $term ) {
-                $count ++;
-                $return .= '<!-- count = ' . $count . ' and slug = '. $term->slug . ' -->';
 
                 // If a user sets a specific group in the params, that's the only one we care about 
                 $group = $args['group'];
