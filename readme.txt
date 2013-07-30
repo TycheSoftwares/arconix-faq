@@ -56,6 +56,9 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.3.0 =
+
+
 = 1.2.0 =
 * Added a "Return to Top" meta box option for each FAQ. Checking that box will display a link (text overridable via filter) that will return the user to the top of that item
 * Supports linking directly to specific FAQ's via the FAQ title. View the [documentation](http://arcnx.co/afwiki) for guidance
