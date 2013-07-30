@@ -365,6 +365,8 @@ class Arconix_FAQ {
      * 
      * If you would like to bundle the Javacsript or CSS funtionality into another file and prevent either of the plugin's
      * JS or CSS from loading at all, return false to whichever of the pre_register filters you wish to override
+     *
+     * @example add_filter( 'pre_register_arconix_faq_js', '__return_false' );
      * 
      * If you'd like to use your own JS or CSS file, you can copy the arconix-faq.js or arconix-faq.css files to the 
      * root of your theme's folder. That will be loaded in place of the plugin's version, which means you can modify 
@@ -498,7 +500,7 @@ class Arconix_FAQ {
      * @version 1.2
      */
     function dashboard_widget() {
-        if( apply_filters( 'pre_register_arconix_faq_dashboard_widget', true ) )
+        if( apply_filters( 'pre_register_arconix_faq_dashboard_widget', true ) and current_user_can( 'manage_options' ) )
             wp_add_dashboard_widget( 'ac-faq', 'Arconix FAQ', array( $this, 'dashboard_widget_output' ) );
     }
 
