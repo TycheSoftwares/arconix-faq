@@ -50,7 +50,7 @@ p.arconix-faq-term-description { font-style: italic; }
     position: relative;
 }
 
-.arconix-faq-title.active { background: url(../../images/toggle-close.png) no-repeat left transparent; }
+.arconix-faq-title.faq-open { background: url(../../images/toggle-close.png) no-repeat left transparent; }
 
 /* FAQ Content
 ------------------------------------------------------------ */
@@ -64,4 +64,6 @@ p.arconix-faq-term-description { font-style: italic; }
     padding: 0 !important;
 }
 
+/* Return to Top link
+------------------------------------------------------------ */
 .arconix-faq-to-top {}

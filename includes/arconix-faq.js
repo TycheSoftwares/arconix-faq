@@ -1,14 +1,27 @@
-jQuery(document).ready( function() {
-    //Hide (Collapse) the toggle containers on load
-    jQuery(".arconix-faq-content").hide();
-    //Switch the "Open" and "Close" state per click
-    jQuery(".arconix-faq-title").toggle(function(){
-        jQuery(this).addClass("active");
-        }, function () {
-        jQuery(this).removeClass("active");
+/*
+ARCONIX FAQ JS
+--------------------------
+
+PLEASE DO NOT make modifications to this file directly as it will be overwritten on update.
+Instead, save a copy of this file to your theme directory. It will then be loaded in place
+of the plugin's version and will maintain your changes on upgrade
+*/
+jQuery(document).ready( function(){
+    jQuery('.arconix-faq-content').each( function() {
+        // This looks at the initial state of each content area, and hide content areas that are closed
+        if( jQuery(this).hasClass('faq-closed')) {
+            jQuery(this).hide();
+        }
     });
-    //Slide up and down on click
-    jQuery(".arconix-faq-title").click(function(){
-        jQuery(this).next(".arconix-faq-content").slideToggle();
+
+    jQuery('.arconix-faq-title').each( function() {
+        // This runs when a Toggle Title is clicked. It changes the CSS and then runs the animation
+        jQuery(this).click(function() {
+            var toggleContent = jQuery(this).next('.arconix-faq-content');
+
+            jQuery(this).toggleClass('faq-open').toggleClass('faq-closed');            
+            toggleContent.toggleClass('faq-open').toggleClass('faq-closed');
+            toggleContent.slideToggle();
+        });
     });
 });

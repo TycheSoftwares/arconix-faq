@@ -180,8 +180,14 @@ class Arconix_FAQ {
             'fields'        => array(
                 array(
                     'id'    => '_acf_rtt',
-                    'name'  => 'Show Return to Top',
+                    'name'  => 'Show Return to Top', 'acf',
                     'desc'  => __( 'Enable a "Return to Top" link on this FAQ', 'acf' ),
+                    'type'  => 'checkbox'
+                ),
+                array(
+                    'id'    => '_acf_open',
+                    'name'  => __( 'Load FAQ Open', 'acf' ),
+                    'desc'  => __( 'Load this FAQ in the open state (default is closed)', 'acf' ),
                     'type'  => 'checkbox'
                 )
             )
@@ -278,13 +284,17 @@ class Arconix_FAQ {
 
                         // Grab our metadata
                         $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
+                        $lo = get_post_meta( get_the_id(), '_acf_open', true );
+
+                        // If Open on Load checkbox is true
+                        $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
 
                         // Set up our anchor link
                         $link = 'faq-' . sanitize_title( get_the_title() );
 
                         $return .= '<div id="post-' . get_the_ID() . '" class="arconix-faq-wrap arconix-faq-group-' . $term->slug . '">';
-                        $return .= '<div class="arconix-faq-title"><a name="' . $link . '"></a>' . get_the_title() . '</div>';
-                        $return .= '<div class="arconix-faq-content">' . apply_filters( 'the_content', get_the_content() );
+                        $return .= '<div class="arconix-faq-title' . $lo . '"><a name="' . $link . '"></a>' . get_the_title() . '</div>';
+                        $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
                         // If Return to Top checkbox is true
                         if( $rtt ) {
@@ -324,13 +334,17 @@ class Arconix_FAQ {
 
                     // Grab our metadata
                     $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
+                    $lo = get_post_meta( get_the_id(), '_acf_open', true );
+
+                    // If Open on Load checkbox is true
+                    $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
 
                     // Set up our anchor link
                     $link = 'faq-' . sanitize_title( get_the_title() );
 
                     $return .= '<div id="post-' . get_the_id() . '" class="arconix-faq-wrap arconix-faq-group-' . $term->slug . '">';
-                    $return .= '<div class="arconix-faq-title"><a name="' . $link . '"></a>' . get_the_title() . '</div>';
-                    $return .= '<div class="arconix-faq-content">' . apply_filters( 'the_content', get_the_content() );
+                    $return .= '<div class="arconix-faq-title' . $lo . '"><a name="' . $link . '"></a>' . get_the_title() . '</div>';
+                    $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
                     // If Return to Top checkbox is true
                     if( $rtt ) {
