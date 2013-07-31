@@ -172,7 +172,7 @@ class Arconix_FAQ {
     function metaboxes( $meta_boxes ) {
         $metabox = array(
             'id'            => 'faq-setting',
-            'title'         => __( 'FAQ Setting', 'act' ),
+            'title'         => __( 'FAQ Setting', 'acf' ),
             'pages'         => array( 'faq' ),
             'context'       => 'side',
             'priority'      => 'default',
@@ -180,7 +180,7 @@ class Arconix_FAQ {
             'fields'        => array(
                 array(
                     'id'    => '_acf_rtt',
-                    'name'  => 'Show Return to Top', 'acf',
+                    'name'  => __( 'Show Return to Top', 'acf' ),
                     'desc'  => __( 'Enable a "Return to Top" link on this FAQ', 'acf' ),
                     'type'  => 'checkbox'
                 ),
