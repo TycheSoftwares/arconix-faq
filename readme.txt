@@ -9,7 +9,7 @@ Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to their website. Display them using the supplied shortcode (`[ faq ]`) and show/hide them via a jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation.
+Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to their website. Display them using the supplied shortcode (`[faq]`) and show/hide them via a jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation.
 
 = Features =
 * Custom Post-Type driven
