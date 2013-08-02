@@ -392,11 +392,11 @@ class Arconix_FAQ {
         // Register the javascript - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
         if( apply_filters( 'pre_register_arconix_faq_js', true ) ) {
             if( file_exists( get_stylesheet_directory() . '/arconix-faq.js' ) )
-                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACF_VERSION, true );
+                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACF_VERSION );
             elseif( file_exists( get_template_directory() . '/arconix-faq.js' ) )
-                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACF_VERSION, true );
+                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACF_VERSION );
             else
-                wp_register_script( 'arconix-faq-js', ACF_INCLUDES_URL . 'arconix-faq.js', array( 'jquery' ), ACF_VERSION, true );
+                wp_register_script( 'arconix-faq-js', ACF_INCLUDES_URL . 'arconix-faq.js', array( 'jquery' ), ACF_VERSION );
         }
 
         // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
