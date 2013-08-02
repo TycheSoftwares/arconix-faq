@@ -7,15 +7,16 @@ Instead, save a copy of this file to your theme directory. It will then be loade
 of the plugin's version and will maintain your changes on upgrade
 */
 jQuery(document).ready( function(){
+    
+    // This looks at the initial state of each content area, and hide content areas that are closed
     jQuery('.arconix-faq-content').each( function() {
-        // This looks at the initial state of each content area, and hide content areas that are closed
         if( jQuery(this).hasClass('faq-closed')) {
             jQuery(this).hide();
         }
     });
 
+    // This runs when a Toggle Title is clicked. It changes the CSS and then runs the animation
     jQuery('.arconix-faq-title').each( function() {
-        // This runs when a Toggle Title is clicked. It changes the CSS and then runs the animation
         jQuery(this).click(function() {
             var toggleContent = jQuery(this).next('.arconix-faq-content');
 
