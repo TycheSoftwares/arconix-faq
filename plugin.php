@@ -342,8 +342,8 @@ class Arconix_FAQ {
                     // Set up our anchor link
                     $link = 'faq-' . sanitize_title( get_the_title() );
 
-                    $return .= '<div id="post-' . get_the_id() . '" class="arconix-faq-wrap arconix-faq-group-' . $term->slug . '">';
-                    $return .= '<div class="arconix-faq-title' . $lo . '"><a name="' . $link . '"></a>' . get_the_title() . '</div>';
+                    $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap arconix-faq-group-' . $term->slug . '">';
+                    $return .= '<div id="' $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
                     $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
                     // If Return to Top checkbox is true
