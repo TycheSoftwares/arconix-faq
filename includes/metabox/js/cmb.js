@@ -80,7 +80,7 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
-	window.original_send_to_editor = window.send_to_editor;
+	window.cmb_original_send_to_editor = window.send_to_editor;
     window.send_to_editor = function (html) {
 		var itemurl, itemclass, itemClassBits, itemid, htmlBits, itemtitle,
 			image, uploadStatus = true;
@@ -120,7 +120,7 @@ jQuery(document).ready(function ($) {
 			tb_remove();
 
 		} else {
-			window.original_send_to_editor(html);
+			window.cmb_original_send_to_editor(html);
 		}
 
 		formfield = '';
