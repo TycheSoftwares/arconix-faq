@@ -5,7 +5,7 @@ Contributors: 	Andrew Norcross (@norcross / andrewnorcross.com)
 				Jared Atchison (@jaredatch / jaredatchison.com)
 				Bill Erickson (@billerickson / billerickson.net)
 Description: 	This will create metaboxes with custom fields that will blow your mind.
-Version: 		0.9
+Version: 		0.9.0.1
 */
 
 /**
@@ -58,6 +58,7 @@ class cmb_Meta_Box_Validate {
  * If resources do not load, please check the wiki for details.
  */
 define( 'CMB_META_BOX_URL', apply_filters( 'cmb_meta_box_url', trailingslashit( str_replace( WP_CONTENT_DIR, WP_CONTENT_URL, dirname( __FILE__ ) ) ) ) );
+define( 'CMB_META_BOX_VERSION', '0.9.0.1' );
 
 /**
  * Create meta boxes
@@ -483,7 +484,7 @@ class cmb_Meta_Box {
 function cmb_scripts( $hook ) {
   	if ( $hook == 'post.php' || $hook == 'post-new.php' || $hook == 'page-new.php' || $hook == 'page.php' ) {
 		wp_register_script( 'cmb-timepicker', CMB_META_BOX_URL . 'js/jquery.timePicker.min.js' );
-		wp_register_script( 'cmb-scripts', CMB_META_BOX_URL . 'js/cmb.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox', 'farbtastic' ) );
+		wp_register_script( 'cmb-scripts', CMB_META_BOX_URL . 'js/cmb.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox', 'farbtastic' ), CMB_META_BOX_VERSION );
 		wp_enqueue_script( 'cmb-timepicker' );
 		wp_enqueue_script( 'cmb-scripts' );
 		wp_register_style( 'cmb-styles', CMB_META_BOX_URL . 'style.css', array( 'thickbox', 'farbtastic' ) );
