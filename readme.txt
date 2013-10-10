@@ -4,7 +4,7 @@ Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -57,9 +57,12 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.3.2 =
+Fixed a syntax error
+
 = 1.3.1 =
 * Resolves a conflict with themes from WooThemes that prevented users from inserting media into the editor
-* Also fixes an error with the Return to Top link introduced in 1.3.0
+* Fixes an error with the Return to Top link introduced in 1.3.0
 
 = 1.3.0 =
 * Updated toggle script to be compatible with WordPress 3.6
