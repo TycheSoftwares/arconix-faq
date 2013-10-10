@@ -58,7 +58,8 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 
 == Changelog ==
 = 1.3.1 =
-Resolves a conflict with themes from WooThemes that prevented users from inserting media into the editor
+* Resolves a conflict with themes from WooThemes that prevented users from inserting media into the editor
+* Also fixes an error with the Return to Top link introduced in 1.3.0
 
 = 1.3.0 =
 * Updated toggle script to be compatible with WordPress 3.6
