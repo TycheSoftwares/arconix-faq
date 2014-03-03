@@ -30,9 +30,9 @@ class Arconix_FAQ {
         add_action( 'wp_enqueue_scripts',           array( $this, 'enq_scripts' ) );
         add_action( 'admin_enqueue_scripts',        array( $this, 'enq_admin_scripts' ) );
         add_action( 'manage_posts_custom_column',   array( $this, 'column_action' ) );
-        add_action( 'right_now_content_table_end',  array( $this, 'right_now' ) );
+        add_action( 'dashboard_glance_items',       array( $this, 'at_a_glance' ) );
         add_action( 'wp_dashboard_setup',           array( $this, 'dashboard_widget' ) );
-        add_action( 'init',                         'arconix_faq_init_meta_boxes', 9999 );
+        add_action( 'init',                         'arconix_faq_init', 9999 );
 
         add_filter( 'manage_faq_posts_columns',     array( $this, 'columns_filter' ) );
         add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
@@ -55,7 +55,6 @@ class Arconix_FAQ {
         define( 'ACF_CSS_URL',          trailingslashit( ACF_INCLUDES_URL . 'css' ) );
         define( 'ACF_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
         define( 'ACF_INCLUDES_DIR',     trailingslashit( ACF_DIR . 'includes' ) );
-        define( 'ACF_VIEWS_DIR',        trailingslashit( ACF_INCLUDES_DIR . 'views' ) );
     }
 
     /**
@@ -117,7 +116,7 @@ class Arconix_FAQ {
                     'public'            => true,
                     'query_var'         => true,
                     'menu_position'     => 20,
-                    'menu_icon'         => ACF_IMAGES_URL . 'faq-16x16.png',
+                    'menu_icon'         => 'dashicons-editor-help',
                     'has_archive'       => false,
                     'supports'          => array( 'title', 'editor', 'revisions' ),
                     'rewrite'           => array( 'with_front' => false )
@@ -497,14 +496,14 @@ class Arconix_FAQ {
     }
 
     /**
-     * Add the Post type to the "Right Now" Dashboard Widget
+     * Add the Post type to the "At a Glance" Dashboard Widget
      *
-     * @link http://bajada.net/2010/06/08/how-to-add-custom-post-types-and-taxonomies-to-the-wordpress-right-now-dashboard-widget
      * @since 1.0
-     * @version  1.2.0
+     * @version  1.4.0
      */
-    function right_now() {
-        include_once( ACF_VIEWS_DIR . 'right-now.php' );
+    function at_a_glance() {
+        $glancer = new Gamajo_Dashboard_Glancer;
+        $glancer->add( 'faq' );
     }
 
     /**
@@ -546,10 +545,20 @@ class Arconix_FAQ {
 
 }
 
-
-function arconix_faq_init_meta_boxes() {
+/**
+ * Init function instantiates the MetaBox and Dashboard At a Glance classes
+ * 
+ * @return void
+ *
+ * @since  0.9.0
+ * @version  1.4.0
+ */
+function arconix_faq_init() {
     if( ! class_exists( 'cmb_Meta_Box' ) )
         require_once( plugin_dir_path( __FILE__ ) . '/includes/metabox/init.php' );
+
+    if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
+        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-gamajo-dashboard-glancer.php');
 }
 
 new Arconix_FAQ;

@@ -1,4 +1,4 @@
-.icon32-posts-faq { background: transparent url(../../images/faq-32x32.png) no-repeat !important; }
+.faq-count a:before { content:"\f223" !important; }
 #ac-faq .rsssummary { display: block; }
 .acf-widget-bottom { border-top: 1px solid #ddd; padding-top: 10px; text-align: center; }
 .acf-widget-bottom ul li { display: inline; list-style: none; padding-right: 20px; }
