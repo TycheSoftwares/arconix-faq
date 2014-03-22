@@ -27,12 +27,12 @@ class Arconix_FAQ {
         register_deactivation_hook( __FILE__,       array( $this, 'deactivation' ) );
 
         add_action( 'init',                         array( $this, 'content_types' ) );
+        add_action( 'init',                         array( $this, 'init' ), 9999 );
         add_action( 'wp_enqueue_scripts',           array( $this, 'enq_scripts' ) );
         add_action( 'admin_enqueue_scripts',        array( $this, 'enq_admin_scripts' ) );
         add_action( 'manage_posts_custom_column',   array( $this, 'column_action' ) );
         add_action( 'dashboard_glance_items',       array( $this, 'at_a_glance' ) );
         add_action( 'wp_dashboard_setup',           array( $this, 'dashboard_widget' ) );
-        add_action( 'init',                         'arconix_faq_init', 9999 );
 
         add_filter( 'manage_faq_posts_columns',     array( $this, 'columns_filter' ) );
         add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
@@ -118,7 +118,7 @@ class Arconix_FAQ {
                     'menu_position'     => 20,
                     'menu_icon'         => 'dashicons-editor-help',
                     'has_archive'       => false,
-                    'supports'          => array( 'title', 'editor', 'revisions' ),
+                    'supports'          => array( 'title', 'editor', 'revisions', 'page-attributes' ),
                     'rewrite'           => array( 'with_front' => false )
                 )
             ),    
@@ -180,7 +180,7 @@ class Arconix_FAQ {
                 array(
                     'id'    => '_acf_rtt',
                     'name'  => __( 'Show Return to Top', 'acf' ),
-                    'desc'  => __( 'Enable a "Return to Top" link on this FAQ', 'acf' ),
+                    'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ', 'acf' ),
                     'type'  => 'checkbox'
                 ),
                 array(
@@ -195,6 +195,20 @@ class Arconix_FAQ {
         $meta_boxes[] = $metabox;
 
         return $meta_boxes;
+    }
+
+    /**
+     * Loads the MetaBox and Dashboard At a Glance classes
+     *
+     * @since  0.9.0
+     * @version  1.4.0
+     */
+    function init() {
+        if( ! class_exists( 'cmb_Meta_Box' ) )
+            require_once( plugin_dir_path( __FILE__ ) . '/includes/metabox/init.php' );
+
+        if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
+            require_once( plugin_dir_path( __FILE__ ) . '/includes/class-gamajo-dashboard-glancer.php');
     }
 
     /**
@@ -545,20 +559,6 @@ class Arconix_FAQ {
 
 }
 
-/**
- * Init function instantiates the MetaBox and Dashboard At a Glance classes
- * 
- * @return void
- *
- * @since  0.9.0
- * @version  1.4.0
- */
-function arconix_faq_init() {
-    if( ! class_exists( 'cmb_Meta_Box' ) )
-        require_once( plugin_dir_path( __FILE__ ) . '/includes/metabox/init.php' );
 
-    if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
-        require_once( plugin_dir_path( __FILE__ ) . '/includes/class-gamajo-dashboard-glancer.php');
-}
 
 new Arconix_FAQ;
