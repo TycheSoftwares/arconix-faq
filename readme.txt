@@ -2,9 +2,9 @@
 Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
-Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 1.3.2
+Requires at least: 3.8
+Tested up to: 3.9
+Stable tag: 1.4.0
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -57,6 +57,10 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.4.0 =
+* Updated plugin to be compatible with WP 3.8 dashboard
+* Added support for 'menu order', which allows for custom ordering of FAQ items without the need for another plugin. Supports custom ordering within groups as well.
+
 = 1.3.2 =
 Fixed a syntax error
 
