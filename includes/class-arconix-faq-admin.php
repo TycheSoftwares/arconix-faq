@@ -1,0 +1,398 @@
+<?php
+class Arconix_FAQ_Admin {
+    /**
+     * Constructor
+     *
+     * @since 1.0
+     * @version 1.4.0
+     */
+    function __construct() {
+        $this->constants();
+
+        register_activation_hook( __FILE__,         array( $this, 'activation' ) );
+        register_deactivation_hook( __FILE__,       array( $this, 'deactivation' ) );
+
+        add_action( 'init',                         array( $this, 'content_types' ) );
+        add_action( 'init',                         array( $this, 'init' ), 9999 );
+        add_action( 'wp_enqueue_scripts',           array( $this, 'enq_scripts' ) );
+        add_action( 'admin_enqueue_scripts',        array( $this, 'enq_admin_scripts' ) );
+        add_action( 'manage_posts_custom_column',   array( $this, 'column_action' ) );
+        add_action( 'dashboard_glance_items',       array( $this, 'at_a_glance' ) );
+        add_action( 'wp_dashboard_setup',           array( $this, 'dashboard_widget' ) );
+
+        add_filter( 'manage_faq_posts_columns',     array( $this, 'columns_filter' ) );
+        add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
+        add_filter( 'cmb_meta_boxes',               array( $this, 'metaboxes' ) );
+
+        add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
+
+    }
+
+    /**
+     * Defines constants used by the plugin.
+     *
+     * @since   1.2.0
+     * @version 1.4.0
+     */
+    function constants() {
+        define( 'ACFAQ_VERSION',          '1.4.0' );
+        define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
+        define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
+    }
+
+    /**
+     * Runs on plugin activation
+     *
+     * @since 1.2.0
+     */
+    function activation() {
+        $this->content_types();
+        flush_rewrite_rules();
+    }
+
+    /**
+     * Runs on plugin deactivation
+     *
+     * @since 1.2.0
+     */
+    function deactivation() {
+        flush_rewrite_rules();
+    }
+
+    /**
+     * Register the post_type and taxonomy
+     *
+     * @since 1.2.0
+     */
+    function content_types() {
+        $defaults = $this->defaults();
+        register_post_type( $defaults['post_type']['slug'], $defaults['post_type']['args'] );
+        register_taxonomy( $defaults['taxonomy']['slug'], $defaults['post_type']['slug'],  $defaults['taxonomy']['args'] );
+    }
+
+    /**
+     * Define the defaults used in the registration of the post type and taxonomy
+     *
+     * @since  1.2.0
+     * @return array $defaults
+     */
+    function defaults() {
+        // Establishes plugin registration defaults for post type and taxonomy
+        $defaults = array(
+            'post_type' => array(
+                'slug'  => 'faq',
+                'args'  => array(
+                    'labels' => array(
+                        'name'                  => __( 'FAQ',                       'acf' ),
+                        'singular_name'         => __( 'FAQ',                       'acf' ),
+                        'add_new'               => __( 'Add New',                   'acf' ),
+                        'add_new_item'          => __( 'Add New Question',          'acf' ),
+                        'edit'                  => __( 'Edit',                      'acf' ),
+                        'edit_item'             => __( 'Edit Question',             'acf' ),
+                        'new_item'              => __( 'New Question',              'acf' ),
+                        'view'                  => __( 'View FAQ',                  'acf' ),
+                        'view_item'             => __( 'View Question',             'acf' ),
+                        'search_items'          => __( 'Search FAQ',                'acf' ),
+                        'not_found'             => __( 'No FAQs found',             'acf' ),
+                        'not_found_in_trash'    => __( 'No FAQs found in Trash',    'acf' )
+                    ),
+                    'public'            => true,
+                    'query_var'         => true,
+                    'menu_position'     => 20,
+                    'menu_icon'         => 'dashicons-editor-help',
+                    'has_archive'       => false,
+                    'supports'          => array( 'title', 'editor', 'revisions', 'page-attributes' ),
+                    'rewrite'           => array( 'with_front' => false )
+                )
+            ),    
+            'taxonomy' => array(
+                'slug' => 'group',
+                'args' => array(
+                    'labels' => array(
+                        'name'                          => __( 'Groups',                                'acf' ),
+                        'singular_name'                 => __( 'Group',                                 'acf' ),
+                        'search_items'                  => __( 'Search Groups',                         'acf' ),
+                        'popular_items'                 => __( 'Popular Groups',                        'acf' ),
+                        'all_items'                     => __( 'All Groups',                            'acf' ),
+                        'parent_item'                   => null,
+                        'parent_item_colon'             => null,
+                        'edit_item'                     => __( 'Edit Group' ,                           'acf' ),
+                        'update_item'                   => __( 'Update Group',                          'acf' ),
+                        'add_new_item'                  => __( 'Add New Group',                         'acf' ),
+                        'new_item_name'                 => __( 'New Group Name',                        'acf' ),
+                        'separate_items_with_commas'    => __( 'Separate groups with commas',           'acf' ),
+                        'add_or_remove_items'           => __( 'Add or remove groups',                  'acf' ),
+                        'choose_from_most_used'         => __( 'Choose from the most used groups',      'acf' ),
+                        'menu_name'                     => __( 'Groups',                                'acf' ),
+                    ),
+                    'hierarchical'              => false,
+                    'show_ui'                   => true,
+                    'update_count_callback'     => '_update_post_term_count',
+                    'query_var'                 => true,
+                    'rewrite'                   => array( 'with_front' => false )
+                )
+            ),
+            'query' => array(
+                'order'             => 'ASC',
+                'orderby'           => 'title',
+                'posts_per_page'    => -1,
+                'nopaging'          => true,
+                'group'             => '',
+            )
+        );
+
+        return apply_filters( 'arconix_faq_defaults', $defaults );
+    }
+
+    /**
+     * Create the post type metabox
+     *
+     * @param array $meta_boxes
+     * @return array $meta_boxes
+     * @since 1.2.0
+     */
+    function metaboxes( $meta_boxes ) {
+        $metabox = array(
+            'id'            => 'faq-setting',
+            'title'         => __( 'FAQ Setting', 'acf' ),
+            'pages'         => array( 'faq' ),
+            'context'       => 'side',
+            'priority'      => 'default',
+            'show_names'    => false,
+            'fields'        => array(
+                array(
+                    'id'    => '_acf_rtt',
+                    'name'  => __( 'Show Return to Top', 'acf' ),
+                    'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ', 'acf' ),
+                    'type'  => 'checkbox'
+                ),
+                array(
+                    'id'    => '_acf_open',
+                    'name'  => __( 'Load FAQ Open', 'acf' ),
+                    'desc'  => __( 'Load this FAQ in the open state (default is closed)', 'acf' ),
+                    'type'  => 'checkbox'
+                )
+            )
+        );
+
+        $meta_boxes[] = $metabox;
+
+        return $meta_boxes;
+    }
+
+    /**
+     * Loads the MetaBox and Dashboard At a Glance classes
+     *
+     * @since  0.9.0
+     * @version  1.4.0
+     */
+    function init() {
+        if( ! class_exists( 'cmb_Meta_Box' ) )
+            require_once( ACFAQ_DIR . 'metabox/init.php' );
+
+        if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
+            require_once( ACFAQ_DIR . 'class-gamajo-dashboard-glancer.php');
+    }
+
+    /**
+     * Display FAQs
+     *
+     * @param type $atts
+     * @since 0.9
+     * @version 1.2.0
+     */
+    function faq_shortcode( $atts, $content = null ) {
+        // Set our JS to load
+        wp_enqueue_script( 'arconix-faq-js' );
+
+        // Translate 'all' to nopaging = true ( for backward compatibility)
+        if( isset( $atts['showposts'] ) ) {
+            if( $atts['showposts'] != "all" and $atts['showposts'] > 0 ) {
+                $atts['posts_per_page'] = $atts['showposts'];
+                $atts['nopaging'] = false;
+            }
+        }
+
+        $d = $this->defaults();
+        $q = $d['query'];
+
+        $atts = wp_parse_args( $atts, $q );
+
+        $f = new Arconix_FAQ;
+
+        return $f->loop( $atts );
+    }
+
+    
+
+    /**
+     * Register the necessary Javascript and CSS, which can be overridden in a couple different ways.
+     * 
+     * If you would like to bundle the Javacsript or CSS funtionality into another file and prevent either of the plugin's
+     * JS or CSS from loading at all, return false to whichever of the pre_register filters you wish to override
+     *
+     * @example add_filter( 'pre_register_arconix_faq_js', '__return_false' );
+     * 
+     * If you'd like to use your own JS or CSS file, you can copy the arconix-faq.js or arconix-faq.css files to the 
+     * root of your theme's folder. That will be loaded in place of the plugin's version, which means you can modify 
+     * it to your heart's content and know the file will be safe when the plugin is updated in the future.
+     *
+     * @since 1.2.0
+     */
+    function enq_scripts() {
+        // Register the javascript - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
+        if( apply_filters( 'pre_register_arconix_faq_js', true ) ) {
+            if( file_exists( get_stylesheet_directory() . '/arconix-faq.js' ) )
+                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
+            elseif( file_exists( get_template_directory() . '/arconix-faq.js' ) )
+                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
+            else
+                wp_register_script( 'arconix-faq-js', ACFAQ_URL . 'includes/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
+        }
+
+        // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
+        if( apply_filters( 'pre_register_arconix_faq_css', true ) ) {
+            if( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
+                wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, ACFAQ_VERSION );
+            elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
+                wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, ACFAQ_VERSION );
+            else
+                wp_enqueue_style( 'arconix-faq', ACFAQ_URL . 'includes/css/arconix-faq.css', false, ACFAQ_VERSION );
+        }
+
+    }
+
+    /**
+     * Includes admin scripts. Use the pre_register filter if you'd like to prevent the file from being loaded
+     *
+     * @since 1.2.0
+     */
+    function enq_admin_scripts() {
+        if( apply_filters( 'pre_register_arconix_faq_admin_css', true ) )
+            wp_enqueue_style( 'arconix-faq-admin', ACFAQ_URL . 'includes/css/admin.css', false, ACFAQ_VERSION );
+    }
+
+    /**
+     * Change the Post Updated messages
+     *
+     * @global type $post
+     * @global type $post_ID
+     * @param type $messages
+     * @return type $messages
+     * @since 0.9
+     */
+    function messages( $messages ) {
+        global $post, $post_ID;
+
+        $messages['faq'] = array(
+            0 => '', // Unused. Messages start at index 1.
+            1 => sprintf( __( 'FAQ updated. <a href="%s">View staff</a>' ), esc_url( get_permalink( $post_ID ) ) ),
+            2 => __( 'Custom field updated.' ),
+            3 => __( 'Custom field deleted.' ),
+            4 => __( 'FAQ updated.' ),
+            /* translators: %s: date and time of the revision */
+            5 => isset( $_GET['revision'] ) ? sprintf( __( 'FAQ restored to revision from %s' ), wp_post_revision_title( ( int ) $_GET['revision'], false ) ) : false,
+            6 => sprintf( __( 'FAQ published. <a href="%s">View FAQ</a>' ), esc_url( get_permalink( $post_ID ) ) ),
+            7 => __( 'FAQ saved.' ),
+            8 => sprintf( __( 'FAQ submitted. <a target="_blank" href="%s">Preview FAQ</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+            9 => sprintf( __( 'FAQ scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview FAQ</a>' ),
+                    // translators: Publish box date format, see http://php.net/date
+                    date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+            10 => sprintf( __( 'FAQ draft updated. <a target="_blank" href="%s">Preview FAQ</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+        );
+
+        return $messages;
+    }
+
+    /**
+     * Choose the specific columns we want to display
+     *
+     * @param array $columns
+     * @return string $columns
+     * @since 0.9
+     * @version 1.2
+     */
+    function columns_filter( $columns ) {
+        $columns = array(
+            "cb"            => '<input type="checkbox" />',
+            "title"         => __( 'FAQ Title', 'acf' ),
+            "faq_content"   => __( 'Answer', 'acf' ),
+            'faq_groups'    => __( 'Group', 'acf' ),
+            "date"          => __( 'Date', 'acf' )
+        );
+
+        return $columns;
+    }
+
+    /**
+     * Filter the data that shows up in the columns we defined above
+     *
+     * @global type $post
+     * @param type $column
+     * @since 0.9
+     * @version 1.1
+     */
+    function column_action( $column ) {
+        global $post;
+
+        switch( $column ) {
+            case "faq_content":
+                the_excerpt();
+                break;
+            case "faq_groups":
+                echo get_the_term_list( $post->ID, 'group', '', ', ', '' );
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Add the Post type to the "At a Glance" Dashboard Widget
+     *
+     * @since 1.0
+     * @version  1.4.0
+     */
+    function at_a_glance() {
+        $glancer = new Gamajo_Dashboard_Glancer;
+        $glancer->add( 'faq' );
+    }
+
+    /**
+     * Adds a widget to the dashboard.
+     *
+     * @since 1.0.3
+     * @version 1.2
+     */
+    function dashboard_widget() {
+        if( apply_filters( 'pre_register_arconix_faq_dashboard_widget', true ) and current_user_can( 'manage_options' ) )
+            wp_add_dashboard_widget( 'ac-faq', 'Arconix FAQ', array( $this, 'dashboard_widget_output' ) );
+    }
+
+    /**
+     * Add a widget to the dashboard
+     *
+     * @since 1.0
+     * @version 1.2.0
+     */
+    function dashboard_widget_output() {
+        echo '<div class="rss-widget">';
+
+        wp_widget_rss_output( array(
+            'url'           => 'http://arconixpc.com/tag/arconix-faq/feed', // feed url
+            'title'         => 'Arconix FAQ', // feed title
+            'items'         => 3, // how many posts to show
+            'show_summary'  => 1, // display excerpt
+            'show_author'   => 0, // display author
+            'show_date'     => 1 // display post date
+        ) );
+
+        echo '<div class="acf-widget-bottom"><ul>
+                  <li><a href="http://arcnx.co/afwiki" class="af-docs">Documentation</a></li>
+                  <li><a href="http://arcnx.co/afhelp" class="af-help">Support Forum</a></li>
+                  <li><a href="http://arcnx.co/aftrello" class="af-dev">Dev Board</a></li>
+                  <li><a href="http://arcnx.co/afsource" class="af-source">Source Code</a></li>
+              </ul></div></div>';
+    }
+
+}
