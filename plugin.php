@@ -45,16 +45,13 @@ class Arconix_FAQ {
     /**
      * Defines constants used by the plugin.
      *
-     * @since 1.2.0
+     * @since   1.2.0
+     * @version 1.4.0
      */
     function constants() {
-        define( 'ACF_VERSION',          '1.4.0' );
-        define( 'ACF_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
-        define( 'ACF_INCLUDES_URL',     trailingslashit( ACF_URL . 'includes' ) );
-        define( 'ACF_IMAGES_URL',       trailingslashit( ACF_URL . 'images' ) );
-        define( 'ACF_CSS_URL',          trailingslashit( ACF_INCLUDES_URL . 'css' ) );
-        define( 'ACF_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
-        define( 'ACF_INCLUDES_DIR',     trailingslashit( ACF_DIR . 'includes' ) );
+        define( 'ACFAQ_VERSION',          '1.4.0' );
+        define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
+        define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }
 
     /**
@@ -205,10 +202,10 @@ class Arconix_FAQ {
      */
     function init() {
         if( ! class_exists( 'cmb_Meta_Box' ) )
-            require_once( plugin_dir_path( __FILE__ ) . '/includes/metabox/init.php' );
+            require_once( ACFAQ_DIR . 'includes/metabox/init.php' );
 
         if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
-            require_once( plugin_dir_path( __FILE__ ) . '/includes/class-gamajo-dashboard-glancer.php');
+            require_once( ACFAQ_DIR . 'includes/class-gamajo-dashboard-glancer.php');
     }
 
     /**
@@ -405,21 +402,21 @@ class Arconix_FAQ {
         // Register the javascript - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
         if( apply_filters( 'pre_register_arconix_faq_js', true ) ) {
             if( file_exists( get_stylesheet_directory() . '/arconix-faq.js' ) )
-                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACF_VERSION );
+                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
             elseif( file_exists( get_template_directory() . '/arconix-faq.js' ) )
-                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACF_VERSION );
+                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
             else
-                wp_register_script( 'arconix-faq-js', ACF_INCLUDES_URL . 'arconix-faq.js', array( 'jquery' ), ACF_VERSION );
+                wp_register_script( 'arconix-faq-js', ACFAQ_URL . 'includes/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
         }
 
         // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
         if( apply_filters( 'pre_register_arconix_faq_css', true ) ) {
             if( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
-                wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, ACF_VERSION );
+                wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, ACFAQ_VERSION );
             elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
-                wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, ACF_VERSION );
+                wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, ACFAQ_VERSION );
             else
-                wp_enqueue_style( 'arconix-faq', ACF_CSS_URL . 'arconix-faq.css', false, ACF_VERSION );
+                wp_enqueue_style( 'arconix-faq', ACFAQ_URL . 'includes/css/arconix-faq.css', false, ACFAQ_VERSION );
         }
 
     }
@@ -431,7 +428,7 @@ class Arconix_FAQ {
      */
     function enq_admin_scripts() {
         if( apply_filters( 'pre_register_arconix_faq_admin_css', true ) )
-            wp_enqueue_style( 'arconix-faq-admin', ACF_CSS_URL . 'admin.css', false, ACF_VERSION );
+            wp_enqueue_style( 'arconix-faq-admin', ACFAQ_URL . 'includes/css/admin.css', false, ACFAQ_VERSION );
     }
 
     /**
