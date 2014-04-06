@@ -58,7 +58,7 @@ class Arconix_FAQ {
                     'nopaging'          => $args['nopaging'],
                     'tax_query'         => array(
                         array(
-                            'taxonomy'      => $default_args['taxonomy']['slug'],
+                            'taxonomy'      => 'group',
                             'field'         => 'slug',
                             'terms'         => array( $term->slug ),
                             'operator'      => 'IN'
@@ -118,7 +118,7 @@ class Arconix_FAQ {
 
             // Set up our standard query args.
             $q = new WP_Query( array(
-                'post_type'         => $default_args['post_type']['slug'],
+                'post_type'         => 'faq',
                 'order'             => $args['order'],
                 'orderby'           => $args['orderby'],
                 'posts_per_page'    => $args['posts_per_page'],
