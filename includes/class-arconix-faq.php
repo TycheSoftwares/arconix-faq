@@ -41,8 +41,8 @@ class Arconix_FAQ {
         $terms = get_terms( 'group' );
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs 
-        if( $terms ) {
-
+        if( ! empty( $terms ) ) {
+            
             foreach( $terms as $term ) {
 
                 // If a user sets a specific group in the params, that's the only one we care about 
