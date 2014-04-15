@@ -10,7 +10,7 @@ Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to their website. Display them using the supplied shortcode (`[faq]`) and show/hide them via a jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation.
+Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation. They can also be loaded closed or open, and for long FAQ's, there's a checkbox to add a "return to top" link at the bottom.
 
 = Features =
 * Custom Post-Type driven
@@ -41,6 +41,7 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 
 While you can certainly start a thread in the [support forum](http://arcnx.co/afhelp), there are some troubleshooting steps you can take beforehand to help speed up the process.
 1. Check to make sure the javascripts are loading correctly. Load the faq page in your browser and view your page's source. Look for jQuery and Arconix FAQ JS files there. If you don't see the Arconix FAQ JS file, then your theme's `header.php` file is likely missing `<?php wp_head(); ?>`, which is neccessary for the operation of mine and many other plugins.
+
 2. Check to make sure only one copy of jQuery is being loaded. Many times conflicts arise when themes or plugins load jQuery incorrectly, causing the script to be loaded multiple times in multiple versions. In order to find the offending item, start by disabling your plugins one by one until you find the problem. If you've disabled all your plugins, try switching to a different them, such as twentyten or twentytwelve to see if the problem is with your theme. Once you've found the problem, contact the developer for assistance getting the issue resolved.
 
 = I need help =
@@ -58,8 +59,9 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 
 == Changelog ==
 = 1.4.0 =
-* Updated plugin to be compatible with WP 3.8 dashboard
+* Updated plugin to be better integrated with WP 3.8 dashboard
 * Added support for 'menu order', which allows for custom ordering of FAQ items without the need for another plugin. Supports custom ordering within groups as well.
+* Other miscellaneous improvements and bug fixes
 
 = 1.3.2 =
 Fixed a syntax error
