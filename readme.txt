@@ -4,13 +4,16 @@ Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle box. The FAQ's can be displayed in groups by tagging them during the FAQ item's creation. They can also be loaded closed or open, and for long FAQ's, there's a checkbox to add a "return to top" link at the bottom.
+Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle box.
+The FAQ's can be displayed in groups by tagging them during the FAQ item's creation. They can also be loaded closed or open, and for long FAQ's, there's a checkbox to add a "return to top" link at the bottom.
+
+[Live Demo](http://demo.arconixpc.com/arconix-faq)
 
 = Features =
 * Custom Post-Type driven
@@ -58,6 +61,9 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.4.1 =
+Updated the metabox script to the latest release. This resolves some content editor bugs that may pop up in certain configurations.
+
 = 1.4.0 =
 * Updated plugin to be better integrated with WP 3.8 dashboard
 * Added support for 'menu order', which allows for custom ordering of FAQ items without the need for another plugin. Supports custom ordering within groups as well.

@@ -35,7 +35,7 @@ class Arconix_FAQ_Admin {
      * @version 1.4.0
      */
     function constants() {
-        define( 'ACFAQ_VERSION',          '1.4.0' );
+        define( 'ACFAQ_VERSION',          '1.4.1' );
         define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }
@@ -104,7 +104,7 @@ class Arconix_FAQ_Admin {
                     'supports'          => array( 'title', 'editor', 'revisions', 'page-attributes' ),
                     'rewrite'           => array( 'with_front' => false )
                 )
-            ),    
+            ),
             'taxonomy' => array(
                 'slug' => 'group',
                 'args' => array(
@@ -223,18 +223,18 @@ class Arconix_FAQ_Admin {
         return $f->loop( $atts );
     }
 
-    
+
 
     /**
      * Register the necessary Javascript and CSS, which can be overridden in a couple different ways.
-     * 
+     *
      * If you would like to bundle the Javacsript or CSS funtionality into another file and prevent either of the plugin's
      * JS or CSS from loading at all, return false to whichever of the pre_register filters you wish to override
      *
      * @example add_filter( 'pre_register_arconix_faq_js', '__return_false' );
-     * 
-     * If you'd like to use your own JS or CSS file, you can copy the arconix-faq.js or arconix-faq.css files to the 
-     * root of your theme's folder. That will be loaded in place of the plugin's version, which means you can modify 
+     *
+     * If you'd like to use your own JS or CSS file, you can copy the arconix-faq.js or arconix-faq.css files to the
+     * root of your theme's folder. That will be loaded in place of the plugin's version, which means you can modify
      * it to your heart's content and know the file will be safe when the plugin is updated in the future.
      *
      * @since 1.2.0
