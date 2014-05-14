@@ -7,14 +7,11 @@ class Arconix_FAQ {
      * @since 1.0
      * @version 1.4.0
      */
-    function __construct() {
-        
-
-    }
+    function __construct() { }
 
 /**
      * Get our FAQ data
-     * 
+     *
      * @param  array   $args
      * @param  boolean $echo Echo or Return the data
      * @return mixed   FAQ information for display
@@ -37,15 +34,15 @@ class Arconix_FAQ {
         // Container
         $return = '';
 
-        // Get the taxonomy terms assigned to all FAQs 
+        // Get the taxonomy terms assigned to all FAQs
         $terms = get_terms( 'group' );
 
-        // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs 
+        // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
         if( ! empty( $terms ) ) {
-            
+
             foreach( $terms as $term ) {
 
-                // If a user sets a specific group in the params, that's the only one we care about 
+                // If a user sets a specific group in the params, that's the only one we care about
                 $group = $args['group'];
                 if( isset( $group ) and $group != '' and $term->slug != $group ) continue;
 
@@ -127,7 +124,7 @@ class Arconix_FAQ {
 
 
             if( $q->have_posts() ) {
-                
+
                 while( $q->have_posts() ) : $q->the_post();
 
                     // Grab our metadata
@@ -140,7 +137,7 @@ class Arconix_FAQ {
                     // Set up our anchor link
                     $link = 'faq-' . sanitize_title( get_the_title() );
 
-                    $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap arconix-faq-group-' . $term->slug . '">';
+                    $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
                     $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
                     $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
@@ -160,7 +157,7 @@ class Arconix_FAQ {
             } // end have_posts()
 
             wp_reset_postdata();
-        
+
         }
 
         // Allow complete override of the FAQ content
