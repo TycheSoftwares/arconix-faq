@@ -4,7 +4,7 @@
  * Plugin URI: http://arconixpc.com/plugins/arconix-faq
  * Description: Plugin to handle the display of FAQs
  *
- * Version: 1.4.1
+ * Version: 1.4.2
  *
  * Author: John Gardner
  * Author URI: http://arconixpc.com/

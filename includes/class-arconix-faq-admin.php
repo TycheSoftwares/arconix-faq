@@ -35,7 +35,7 @@ class Arconix_FAQ_Admin {
      * @version 1.4.0
      */
     function constants() {
-        define( 'ACFAQ_VERSION',          '1.4.1' );
+        define( 'ACFAQ_VERSION',          '1.4.2' );
         define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }

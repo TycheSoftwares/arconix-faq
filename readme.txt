@@ -4,7 +4,7 @@ Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -61,6 +61,9 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.4.2 =
+Fix undefined variable bug that would show up when no FAQ groups were used
+
 = 1.4.1 =
 Updated the metabox script to the latest release. This resolves some content editor bugs that may pop up in certain configurations.
 

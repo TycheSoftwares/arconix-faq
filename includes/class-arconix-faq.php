@@ -16,7 +16,7 @@ class Arconix_FAQ {
      * @param  boolean $echo Echo or Return the data
      * @return mixed   FAQ information for display
      * @since 1.2.0
-     * @version 1.4.0
+     * @version 1.4.2
      */
     function loop( $args, $echo = false ) {
 
