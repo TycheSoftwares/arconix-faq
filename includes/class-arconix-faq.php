@@ -16,7 +16,7 @@ class Arconix_FAQ {
      * @param  boolean $echo Echo or Return the data
      * @return mixed   FAQ information for display
      * @since 1.2.0
-     * @version 1.4.2
+     * @version 1.4.3
      */
     function loop( $args, $echo = false ) {
 
@@ -24,7 +24,6 @@ class Arconix_FAQ {
                 'order'             => 'ASC',
                 'orderby'           => 'title',
                 'posts_per_page'    => -1,
-                'nopaging'          => true,
                 'group'             => '',
         );
 
@@ -52,7 +51,6 @@ class Arconix_FAQ {
                     'order'             => $args['order'],
                     'orderby'           => $args['orderby'],
                     'posts_per_page'    => $args['posts_per_page'],
-                    'nopaging'          => $args['nopaging'],
                     'tax_query'         => array(
                         array(
                             'taxonomy'      => 'group',
@@ -118,8 +116,7 @@ class Arconix_FAQ {
                 'post_type'         => 'faq',
                 'order'             => $args['order'],
                 'orderby'           => $args['orderby'],
-                'posts_per_page'    => $args['posts_per_page'],
-                'nopaging'          => $args['nopaging'],
+                'posts_per_page'    => $args['posts_per_page']
             ) );
 
 

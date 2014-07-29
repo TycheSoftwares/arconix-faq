@@ -35,7 +35,7 @@ class Arconix_FAQ_Admin {
      * @version 1.4.0
      */
     function constants() {
-        define( 'ACFAQ_VERSION',          '1.4.2' );
+        define( 'ACFAQ_VERSION',          '1.4.3' );
         define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }
@@ -136,7 +136,6 @@ class Arconix_FAQ_Admin {
                 'order'             => 'ASC',
                 'orderby'           => 'title',
                 'posts_per_page'    => -1,
-                'nopaging'          => true,
                 'group'             => '',
             )
         );
@@ -209,7 +208,6 @@ class Arconix_FAQ_Admin {
         if( isset( $atts['showposts'] ) ) {
             if( $atts['showposts'] != "all" and $atts['showposts'] > 0 ) {
                 $atts['posts_per_page'] = $atts['showposts'];
-                $atts['nopaging'] = false;
             }
         }
 
