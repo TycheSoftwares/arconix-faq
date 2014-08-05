@@ -162,7 +162,7 @@ class Arconix_FAQ_Admin {
                 array(
                     'id'    => '_acf_rtt',
                     'name'  => __( 'Show Return to Top', 'acf' ),
-                    'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ', 'acf' ),
+                    'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ. The link will return the user to the top of this specific question', 'acf' ),
                     'type'  => 'checkbox'
                 ),
                 array(
