@@ -1,49 +1,59 @@
 <?php
 
 class Arconix_FAQ {
+
     /**
      * Constructor
      *
      * @since 1.0
      * @version 1.4.0
      */
-    function __construct() { }
+    function __construct() {
 
-/**
+    }
+
+    /**
      * Get our FAQ data
      *
      * @param  array   $args
      * @param  boolean $echo Echo or Return the data
+     *
      * @return mixed   FAQ information for display
+     *
      * @since 1.2.0
-     * @version 1.4.3
+     * @version 1.5.0
      */
     function loop( $args, $echo = false ) {
 
         $defaults = array(
-                'order'             => 'ASC',
-                'orderby'           => 'title',
-                'posts_per_page'    => -1,
-                'group'             => '',
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'posts_per_page' => -1,
+            'group' => '',
+            'skip_group' => 'false'
         );
 
         // Merge incoming args with the function defaults
         $args = wp_parse_args( $args, $defaults );
+        $args = apply_filters( 'arconix_faq_query_defaults', $args );
 
         // Container
         $return = '';
 
         // Get the taxonomy terms assigned to all FAQs
         $terms = get_terms( 'group' );
+        // Are we skipping the group check?
+        $skip_group = $args['skip_group'];
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
-        if( ! empty( $terms ) ) {
+        if ( ! empty( $terms ) || $skip_group = 'false' ) {
 
-            foreach( $terms as $term ) {
+            foreach ( $terms as $term ) {
 
                 // If a user sets a specific group in the params, that's the only one we care about
                 $group = $args['group'];
-                if( isset( $group ) and $group != '' and $term->slug != $group ) continue;
+                if ( isset( $group ) and $group != '' and $term->slug != $group )
+                    continue;
 
                 // Set up our standard query args.
                 $query_args = array(
@@ -53,10 +63,10 @@ class Arconix_FAQ {
                     'posts_per_page'    => $args['posts_per_page'],
                     'tax_query'         => array(
                         array(
-                            'taxonomy'      => 'group',
-                            'field'         => 'slug',
-                            'terms'         => array( $term->slug ),
-                            'operator'      => 'IN'
+                            'taxonomy'  => 'group',
+                            'field'     => 'slug',
+                            'terms'     => array( $term->slug ),
+                            'operator'  => 'IN'
                         )
                     )
                 );
@@ -64,16 +74,16 @@ class Arconix_FAQ {
                 // New query just for the tax term we're looping through
                 $q = new WP_Query( $query_args );
 
-                if( $q->have_posts() ) {
+                if ( $q->have_posts() ) {
 
                     $return .= '<h3 class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
                     // If the term has a description, show it
-                    if( $term->description )
+                    if ( $term->description )
                         $return .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
 
                     // Loop through the rest of the posts for the term
-                    while( $q->have_posts() ) : $q->the_post();
+                    while ( $q->have_posts() ) : $q->the_post();
 
                         // Grab our metadata
                         $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
@@ -90,7 +100,7 @@ class Arconix_FAQ {
                         $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
                         // If Return to Top checkbox is true
-                        if( $rtt ) {
+                        if ( $rtt ) {
                             $rtt_text = __( 'Return to Top', 'acf' );
                             $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
 
@@ -104,12 +114,9 @@ class Arconix_FAQ {
                 } // end have_posts()
 
                 wp_reset_postdata();
-
             } // end foreach
-
         } // End if( $terms )
-
-        else {
+        else { // If $terms is blank (faq groups aren't in use) or $skip_group is true
 
             // Set up our standard query args.
             $q = new WP_Query( array(
@@ -120,9 +127,9 @@ class Arconix_FAQ {
             ) );
 
 
-            if( $q->have_posts() ) {
+            if ( $q->have_posts() ) {
 
-                while( $q->have_posts() ) : $q->the_post();
+                while ( $q->have_posts() ) : $q->the_post();
 
                     // Grab our metadata
                     $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
@@ -139,7 +146,7 @@ class Arconix_FAQ {
                     $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
                     // If Return to Top checkbox is true
-                    if( $rtt ) {
+                    if ( $rtt ) {
                         $rtt_text = __( 'Return to Top', 'acf' );
                         $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
 
@@ -150,19 +157,18 @@ class Arconix_FAQ {
                     $return .= '</div>'; // faq-wrap
 
                 endwhile;
-
             } // end have_posts()
 
             wp_reset_postdata();
-
         }
 
         // Allow complete override of the FAQ content
         $return = apply_filters( 'arconix_faq_return', $return );
 
-        if( $echo === true )
+        if ( $echo === true )
             echo $return;
         else
             return $return;
     }
+
 }

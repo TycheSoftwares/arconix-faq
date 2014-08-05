@@ -131,12 +131,6 @@ class Arconix_FAQ_Admin {
                     'query_var'                 => true,
                     'rewrite'                   => array( 'with_front' => false )
                 )
-            ),
-            'query' => array(
-                'order'             => 'ASC',
-                'orderby'           => 'title',
-                'posts_per_page'    => -1,
-                'group'             => '',
             )
         );
 
