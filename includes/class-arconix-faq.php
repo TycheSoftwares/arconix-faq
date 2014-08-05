@@ -26,11 +26,12 @@ class Arconix_FAQ {
     function loop( $args, $echo = false ) {
 
         $defaults = array(
-            'order' => 'ASC',
-            'orderby' => 'title',
-            'posts_per_page' => -1,
-            'group' => '',
-            'skip_group' => 'false'
+            'order'             => 'ASC',
+            'orderby'           => 'title',
+            'posts_per_page'    => -1,
+            'group'             => '',
+            'skip_group'        => false,
+            'accordion'         => false
         );
 
         // Merge incoming args with the function defaults
@@ -44,9 +45,11 @@ class Arconix_FAQ {
         $terms = get_terms( 'group' );
         // Are we skipping the group check?
         $skip_group = $args['skip_group'];
+        // Are we outputting an accordion?
+        $accordion = $args['accordion'];
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
-        if ( ! empty( $terms ) || $skip_group = 'false' ) {
+        if ( ! empty( $terms ) && $skip_group = false ) {
 
             foreach ( $terms as $term ) {
 
@@ -169,6 +172,17 @@ class Arconix_FAQ {
             echo $return;
         else
             return $return;
+    }
+
+
+
+
+    function accordion_output() {
+
+    }
+
+    function standard_output() {
+
     }
 
 }
