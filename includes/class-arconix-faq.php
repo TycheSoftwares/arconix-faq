@@ -55,7 +55,7 @@ class Arconix_FAQ {
 
                 // If a user sets a specific group in the params, that's the only one we care about
                 $group = $args['group'];
-                if ( isset( $group ) and $group != '' and $term->slug != $group )
+                if ( isset( $group ) && $group != '' && $term->slug != $group )
                     continue;
 
                 // Set up our standard query args.
@@ -88,30 +88,10 @@ class Arconix_FAQ {
                     // Loop through the rest of the posts for the term
                     while ( $q->have_posts() ) : $q->the_post();
 
-                        // Grab our metadata
-                        $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
-                        $lo = get_post_meta( get_the_id(), '_acf_open', true );
-
-                        // If Open on Load checkbox is true
-                        $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
-
-                        // Set up our anchor link
-                        $link = 'faq-' . sanitize_title( get_the_title() );
-
-                        $return .= '<div id="faq-' . get_the_ID() . '" class="arconix-faq-wrap arconix-faq-group-' . $term->slug . '">';
-                        $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
-                        $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
-
-                        // If Return to Top checkbox is true
-                        if ( $rtt ) {
-                            $rtt_text = __( 'Return to Top', 'acf' );
-                            $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
-
-                            $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
-                        }
-
-                        $return .= '</div>'; // faq-content
-                        $return .= '</div>'; // faq-wrap
+                        if ( $args['accordion'] === true )
+                            $return .= $this->accordion_output();
+                        else
+                            $return .= $this->standard_output();
 
                     endwhile;
                 } // end have_posts()
@@ -134,30 +114,10 @@ class Arconix_FAQ {
 
                 while ( $q->have_posts() ) : $q->the_post();
 
-                    // Grab our metadata
-                    $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
-                    $lo = get_post_meta( get_the_id(), '_acf_open', true );
-
-                    // If Open on Load checkbox is true
-                    $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
-
-                    // Set up our anchor link
-                    $link = 'faq-' . sanitize_title( get_the_title() );
-
-                    $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
-                    $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
-                    $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
-
-                    // If Return to Top checkbox is true
-                    if ( $rtt ) {
-                        $rtt_text = __( 'Return to Top', 'acf' );
-                        $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
-
-                        $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
-                    }
-
-                    $return .= '</div>'; // faq-content
-                    $return .= '</div>'; // faq-wrap
+                    if ( $args['accordion'] === true )
+                            $return .= $this->accordion_output();
+                        else
+                            $return .= $this->standard_output();
 
                 endwhile;
             } // end have_posts()
@@ -175,14 +135,71 @@ class Arconix_FAQ {
     }
 
 
+    function accordion_output( $echo = false ) {
+        $return = '';
 
+        // Set up our anchor link
+        $link = 'faq-' . get_the_title();
 
-    function accordion_output() {
+        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title '. get_the_title() . '">';
+        $return .= get_the_title() . '</div>';
+        $return .= '<div class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
+        $return .= $this->return_to_top( $link );
+        $return .= '</div>';
 
+        if ( $echo === true )
+            echo $return;
+        else
+            return $return;
     }
 
-    function standard_output() {
 
+    function standard_output( $echo = false ) {
+        $return = '';
+
+        // Grab our metadata
+        $lo = get_post_meta( get_the_id(), '_acf_open', true );
+
+        // If Open on Load checkbox is true
+        $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
+
+        // Set up our anchor link
+        $link = 'faq-' . get_the_title();
+
+        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
+        $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
+        $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
+
+        $return .= $this->return_to_top( $link );
+
+        $return .= '</div>'; // faq-content
+        $return .= '</div>'; // faq-wrap
+
+        if ( $echo === true )
+            echo $return;
+        else
+            return $return;
+    }
+
+
+    function return_to_top( $link, $echo = false ) {
+        $return = '';
+
+        // Grab our metadata
+        $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
+
+        // If Return to Top checkbox is true
+        if ( $rtt && $link ) {
+            $rtt_text = __( 'Return to Top', 'acf' );
+            $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
+
+            $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
+        }
+
+        if ( $echo === true )
+            echo $return;
+        else
+            return $return;
     }
 
 }
