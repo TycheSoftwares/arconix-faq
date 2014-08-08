@@ -8,9 +8,7 @@ class Arconix_FAQ {
      * @since 1.0
      * @version 1.4.0
      */
-    function __construct() {
-
-    }
+    function __construct() { }
 
     /**
      * Get our FAQ data
@@ -31,7 +29,7 @@ class Arconix_FAQ {
             'posts_per_page'    => -1,
             'group'             => '',
             'skip_group'        => false,
-            'accordion'         => false
+            'style'             => 'accordion'
         );
 
         // Merge incoming args with the function defaults
@@ -46,7 +44,7 @@ class Arconix_FAQ {
         // Are we skipping the group check?
         $skip_group = $args['skip_group'];
         // Are we outputting an accordion?
-        $accordion = $args['accordion'];
+        $args['style'] = "accordion" ? $accordion = true : $accordion = false;
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
         if ( ! empty( $terms ) && $skip_group = false ) {
@@ -81,6 +79,9 @@ class Arconix_FAQ {
 
                     $return .= '<h3 class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
+                    if ( $accordion )
+                        $return .= '<div id="arconix-faq-accordion-wrap">';
+
                     // If the term has a description, show it
                     if ( $term->description )
                         $return .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
@@ -88,12 +89,15 @@ class Arconix_FAQ {
                     // Loop through the rest of the posts for the term
                     while ( $q->have_posts() ) : $q->the_post();
 
-                        if ( $args['accordion'] === true )
+                        if ( $accordion )
                             $return .= $this->accordion_output();
                         else
                             $return .= $this->standard_output();
 
                     endwhile;
+
+                    $return .= '</div>';
+
                 } // end have_posts()
 
                 wp_reset_postdata();
@@ -112,14 +116,19 @@ class Arconix_FAQ {
 
             if ( $q->have_posts() ) {
 
+                if ( $accordion )
+                        $return .= '<div id="arconix-faq-accordion-wrap">';
+
                 while ( $q->have_posts() ) : $q->the_post();
 
-                    if ( $args['accordion'] === true )
-                            $return .= $this->accordion_output();
-                        else
-                            $return .= $this->standard_output();
+                    if ( $accordion )
+                        $return .= $this->accordion_output();
+                    else
+                        $return .= $this->standard_output();
 
                 endwhile;
+
+                $return .= '</div>';
             } // end have_posts()
 
             wp_reset_postdata();
@@ -139,9 +148,9 @@ class Arconix_FAQ {
         $return = '';
 
         // Set up our anchor link
-        $link = 'faq-' . get_the_title();
+        $link = 'faq-' . sanitize_html_class( get_the_title() );
 
-        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title '. get_the_title() . '">';
+        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title '. sanitize_html_class( get_the_title() ) . '">';
         $return .= get_the_title() . '</div>';
         $return .= '<div class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
         $return .= $this->return_to_top( $link );
@@ -164,10 +173,10 @@ class Arconix_FAQ {
         $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
 
         // Set up our anchor link
-        $link = 'faq-' . get_the_title();
+        $link = 'faq-' . sanitize_html_class( get_the_title() );
 
         $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
-        $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
+        $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . sanitize_html_class( get_the_title() ) . '</div>';
         $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
         $return .= $this->return_to_top( $link );

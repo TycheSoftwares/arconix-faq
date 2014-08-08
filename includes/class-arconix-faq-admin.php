@@ -162,7 +162,7 @@ class Arconix_FAQ_Admin {
                 array(
                     'id'    => '_acf_open',
                     'name'  => __( 'Load FAQ Open', 'acf' ),
-                    'desc'  => __( 'Load this FAQ in the open state (default is closed)', 'acf' ),
+                    'desc'  => __( 'Load this FAQ in the open state (default is closed). This is not available when using the accordion configuration', 'acf' ),
                     'type'  => 'checkbox'
                 )
             )
