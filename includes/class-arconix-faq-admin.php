@@ -232,15 +232,24 @@ class Arconix_FAQ_Admin {
      * @since 1.2.0
      */
     function enq_scripts() {
+        global $wp_scripts;
+
+        // get registered script object for jquery-ui
+        $ui = $wp_scripts->query( 'jquery-ui-core' );
+
         // Register the javascript - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
-        if( apply_filters( 'pre_register_arconix_faq_js', true ) ) {
+        if ( apply_filters( 'pre_register_arconix_faq_js', true ) ) {
             if( file_exists( get_stylesheet_directory() . '/arconix-faq.js' ) )
-                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
+                wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery-ui-accordion' ), ACFAQ_VERSION );
             elseif( file_exists( get_template_directory() . '/arconix-faq.js' ) )
-                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
+                wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery-ui-accordion' ), ACFAQ_VERSION );
             else
-                wp_register_script( 'arconix-faq-js', ACFAQ_URL . 'js/arconix-faq.js', array( 'jquery' ), ACFAQ_VERSION );
+                wp_register_script( 'arconix-faq-js', ACFAQ_URL . 'js/arconix-faq.js', array( 'jquery-ui-accordion' ), ACFAQ_VERSION );
         }
+
+        wp_register_style( 'jquery-ui-smoothness', "//ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/smoothness/jquery-ui.css", false, $ui->ver );
+
+
 
         // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
         if( apply_filters( 'pre_register_arconix_faq_css', true ) ) {
@@ -249,7 +258,7 @@ class Arconix_FAQ_Admin {
             elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
                 wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, ACFAQ_VERSION );
             else
-                wp_enqueue_style( 'arconix-faq', ACFAQ_URL . 'css/arconix-faq.css', false, ACFAQ_VERSION );
+                wp_enqueue_style( 'arconix-faq', ACFAQ_URL . 'css/arconix-faq.css', array( 'jquery-ui-smoothness' ), ACFAQ_VERSION );
         }
 
     }

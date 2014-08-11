@@ -7,7 +7,7 @@ Instead, save a copy of this file to your theme directory. It will then be loade
 of the plugin's version and will maintain your changes on upgrade
 */
 jQuery(document).ready( function(){
-    
+
     // This looks at the initial state of each content area, and hide content areas that are closed
     jQuery('.arconix-faq-content').each( function() {
         if( jQuery(this).hasClass('faq-closed')) {
@@ -20,9 +20,16 @@ jQuery(document).ready( function(){
         jQuery(this).click(function() {
             var toggleContent = jQuery(this).next('.arconix-faq-content');
 
-            jQuery(this).toggleClass('faq-open').toggleClass('faq-closed');            
+            jQuery(this).toggleClass('faq-open').toggleClass('faq-closed');
             toggleContent.toggleClass('faq-open').toggleClass('faq-closed');
             toggleContent.slideToggle();
         });
+    });
+
+    // If the user sets the style to "accordion"
+    jQuery('.arconix-faq-accordion-wrap').accordion( {
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
     });
 });
