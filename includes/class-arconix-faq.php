@@ -50,7 +50,7 @@ class Arconix_FAQ {
 
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
-        if ( ! empty( $terms ) && $skip_group = false ) {
+        if ( ! empty( $terms ) && $skip_group == false ) {
 
             foreach ( $terms as $term ) {
 
@@ -99,7 +99,8 @@ class Arconix_FAQ {
 
                     endwhile;
 
-                    $return .= '</div>';
+                    if ( $accordion )
+                        $return .= '</div>';
 
                 } // end have_posts()
 
