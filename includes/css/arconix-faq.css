@@ -1,4 +1,4 @@
-/* 
+/*
 ARCONIX FAQ CSS
 --------------------------
 
@@ -7,7 +7,7 @@ Instead, save a copy of this file to your theme or child theme directory. It wil
 loaded in place of the plugin's version and will maintain your changes on upgrade
 
 IMPORTANT NOTE: Since the directory structure will be changing, and image URLS are always loaded
-relative to their current path, the links to the toggle images in this file will also need to change. 
+relative to their current path, the links to the toggle images in this file will also need to change.
 For example:
 
     'url(../../images ...'
@@ -16,21 +16,21 @@ would have to be changed to
 
     'url(../../../plugins/arconix-faq/images ...'
 
-in order to for the files to be displayed.
+in order to for the images to be displayed.
 */
- 
+
 /* Term Title
 ------------------------------------------------------------ */
- h3.arconix-faq-term-title {}
-  
+ h3.arconix-faq-term-title { margin: 20px 0 10px }
+
 /* Term Description
------------------------------------------------------------- */ 
+------------------------------------------------------------ */
 p.arconix-faq-term-description { font-style: italic; }
 
 /* FAQ Wrapper
 ------------------------------------------------------------ */
 .arconix-faq-wrap {
-	-webkit-border-radius: 5px;
+    -webkit-border-radius: 5px;
        -moz-border-radius: 5px;
             border-radius: 5px;
     background:	none repeat scroll 0 0 #fbfbfb;
@@ -60,10 +60,40 @@ p.arconix-faq-term-description { font-style: italic; }
 }
 
 .arconix-faq-content p {
-    margin: 0 0 10px 0 !important;
     padding: 0 !important;
+}
+
+.arconix-faq-content p:last-child {
+    margin: 0 !important;
 }
 
 /* Return to Top link
 ------------------------------------------------------------ */
 .arconix-faq-to-top {}
+
+
+/* Accordion Modifications
+------------------------------------------------------------ */
+.ui-state-default {
+    // This removes the default background for the "smoothness" jQuery UI theme
+    // If you're going to load a different theme, you may want to remove this line
+    background: #fbfbfb;
+}
+
+/* Accordion Title
+------------------------------------------------------------ */
+.arconix-faq-accordion-title {}
+
+/* Accordion Content
+------------------------------------------------------------ */
+.arconix-faq-accordion-content {
+    padding: 5px 15px 5px 10px;
+}
+
+.arconix-faq-accordion-content p {
+    padding: 0 !important;
+}
+
+.arconix-faq-accordion-content p:last-child {
+    margin: 0 !important;
+}
