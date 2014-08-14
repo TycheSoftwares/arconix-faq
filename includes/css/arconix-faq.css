@@ -72,17 +72,13 @@ p.arconix-faq-term-description { font-style: italic; }
 .arconix-faq-to-top {}
 
 
-/* Accordion Modifications
+/* Accordion Title
 ------------------------------------------------------------ */
-.ui-state-default {
-    // This removes the default background for the "smoothness" jQuery UI theme
+.arconix-faq-accordion-title {
+    // This replaces the default background for the "smoothness" jQuery UI theme
     // If you're going to load a different theme, you may want to remove this line
     background: #fbfbfb;
 }
-
-/* Accordion Title
------------------------------------------------------------- */
-.arconix-faq-accordion-title {}
 
 /* Accordion Content
 ------------------------------------------------------------ */
