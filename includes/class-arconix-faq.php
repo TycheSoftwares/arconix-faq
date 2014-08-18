@@ -95,7 +95,7 @@ class Arconix_FAQ {
                         if ( $accordion )
                             $return .= $this->accordion_output();
                         else
-                            $return .= $this->standard_output();
+                            $return .= $this->toggle_output();
 
                     endwhile;
 
@@ -128,7 +128,7 @@ class Arconix_FAQ {
                     if ( $accordion )
                         $return .= $this->accordion_output();
                     else
-                        $return .= $this->standard_output();
+                        $return .= $this->toggle_output();
 
                 endwhile;
 
@@ -160,6 +160,9 @@ class Arconix_FAQ {
         $return .= $this->return_to_top( $link );
         $return .= '</div>';
 
+        // Allows a user to completely overwrite the output
+        $return = apply_filters( 'arconix_faq_accordion_output', $return );
+
         if ( $echo === true )
             echo $return;
         else
@@ -167,7 +170,7 @@ class Arconix_FAQ {
     }
 
 
-    function standard_output( $echo = false ) {
+    function toggle_output( $echo = false ) {
         $return = '';
 
         // Grab our metadata
@@ -187,6 +190,9 @@ class Arconix_FAQ {
 
         $return .= '</div>'; // faq-content
         $return .= '</div>'; // faq-wrap
+
+        // Allows a user to completely overwrite the output
+        $return = apply_filters( 'arconix_faq_toggle_output', $return );
 
         if ( $echo === true )
             echo $return;
