@@ -4,20 +4,20 @@ Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 1.4.3
+Stable tag: 1.5.0
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle box.
+Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle or accordion box.
 The FAQ's can be displayed in groups by tagging them during the FAQ item's creation. They can also be loaded closed or open, and for long FAQ's, there's a checkbox to add a "return to top" link at the bottom.
 
 [Live Demo](http://demo.arconixpc.com/arconix-faq)
 
 = Features =
 * Custom Post-Type driven
-* jQuery toggle when using the shortcode
+* jQuery toggle or accordion display when using the shortcode
 * Can be displayed in groups by using the "group" taxonomy
 
 == Installation ==
@@ -33,26 +33,24 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 == Frequently Asked Questions ==
 
 = Quick and dirty - how do I display my FAQ's? =
-* use the `[faq]` shortcode in a widget or on a post/page.
+Use the `[faq]` shortcode in a widget or on a post/page.
+
+= How do I enable the accordion display mode? =
+add `style="accordion"` to the shortcode, e.g. `[faq style="accordion"]
 
 = Where can I find more information on how to use the plugin?  =
-
 * Visit the plugin's [Wiki Page](http://arcnx.co/afwiki) for documentation
 * Tutorials on advanced plugin usage can be found at [Arconix Computers](http://arconixpc.com/tag/arconix-faq)
 
-= The toggle isn't working. What can I do? =
-
+= The toggle or accordion isn't working. What can I do? =
 While you can certainly start a thread in the [support forum](http://arcnx.co/afhelp), there are some troubleshooting steps you can take beforehand to help speed up the process.
 1. Check to make sure the javascripts are loading correctly. Load the faq page in your browser and view your page's source. Look for jQuery and Arconix FAQ JS files there. If you don't see the Arconix FAQ JS file, then your theme's `header.php` file is likely missing `<?php wp_head(); ?>`, which is neccessary for the operation of mine and many other plugins.
-
 2. Check to make sure only one copy of jQuery is being loaded. Many times conflicts arise when themes or plugins load jQuery incorrectly, causing the script to be loaded multiple times in multiple versions. In order to find the offending item, start by disabling your plugins one by one until you find the problem. If you've disabled all your plugins, try switching to a different them, such as twentyten or twentytwelve to see if the problem is with your theme. Once you've found the problem, contact the developer for assistance getting the issue resolved.
 
 = I need help =
-
 Check out the WordPress [support forum](http://arcnx.co/aphelp)
 
 = I have a great idea for your plugin! =
-
 That's fantastic! Feel free to submit a pull request over at [Github](http://arcnx.co/afsource), add an idea to the [Trello Board](http://arcnx.co/aftrello), or you can contact me through [Twitter](http://arcnx.co/twitter), [Facebook](http://arcnx.co/facebook) or my [Website](http://arcnx.co/1)
 
 == Screenshots ==
@@ -61,6 +59,11 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.5.0 =
+* Added the ability to display the FAQ's in a single list even if groups are in use.
+* FAQ's can now be displayed in a jQuery-powered accordion if desired
+* A few other minor backend improvements and fixes.
+
 = 1.4.3 =
 Fixes a parameter bug that prevented users from restricting the number of FAQ's returned for display
 

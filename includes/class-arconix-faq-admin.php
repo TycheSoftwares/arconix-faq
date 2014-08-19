@@ -35,7 +35,7 @@ class Arconix_FAQ_Admin {
      * @version 1.4.0
      */
     function constants() {
-        define( 'ACFAQ_VERSION',          '1.4.3' );
+        define( 'ACFAQ_VERSION',          '1.5.0' );
         define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }
@@ -257,7 +257,7 @@ class Arconix_FAQ_Admin {
             $ui = $wp_scripts->query( 'jquery-ui-core' );
 
             $css_args = apply_filters( 'arconix_jqueryui_css_reg', array(
-                'url' => '//ajax.googleapis.com/ajax/libs/jqueryui/' . $ui->ver . '/themes/smoothness/jquery-ui.css',
+                'url' => '//ajax.googleapis.com/ajax/libs/jqueryui/' . $ui->ver . '/themes/smoothness/jquery-ui.min.css',
                 'ver' => $ui->ver,
                 'dep' => false
             ) );
