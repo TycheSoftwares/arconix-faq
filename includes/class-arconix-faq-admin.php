@@ -205,11 +205,6 @@ class Arconix_FAQ_Admin {
             }
         }
 
-        $d = $this->defaults();
-        $q = $d['query'];
-
-        $atts = wp_parse_args( $atts, $q );
-
         $f = new Arconix_FAQ;
 
         return $f->loop( $atts );
