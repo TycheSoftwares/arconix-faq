@@ -293,22 +293,23 @@ class Arconix_FAQ_Admin {
      */
     function messages( $messages ) {
         global $post, $post_ID;
+        $post_type = get_post_type( $post_ID );
 
-        $messages['faq'] = array(
-            0 => '', // Unused. Messages start at index 1.
-            1 => sprintf( __( 'FAQ updated. <a href="%s">View staff</a>' ), esc_url( get_permalink( $post_ID ) ) ),
-            2 => __( 'Custom field updated.' ),
-            3 => __( 'Custom field deleted.' ),
-            4 => __( 'FAQ updated.' ),
-            /* translators: %s: date and time of the revision */
-            5 => isset( $_GET['revision'] ) ? sprintf( __( 'FAQ restored to revision from %s' ), wp_post_revision_title( ( int ) $_GET['revision'], false ) ) : false,
-            6 => sprintf( __( 'FAQ published. <a href="%s">View FAQ</a>' ), esc_url( get_permalink( $post_ID ) ) ),
-            7 => __( 'FAQ saved.' ),
-            8 => sprintf( __( 'FAQ submitted. <a target="_blank" href="%s">Preview FAQ</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
-            9 => sprintf( __( 'FAQ scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview FAQ</a>' ),
-                    // translators: Publish box date format, see http://php.net/date
-                    date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
-            10 => sprintf( __( 'FAQ draft updated. <a target="_blank" href="%s">Preview FAQ</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+        $obj = get_post_type_object( $post_type );
+        $singular = $obj->labels->singular_name;
+
+        $messages[$post_type] = array(
+            0  => '', // Unused. Messages start at index 1.
+            1  => sprintf( __( $singular . ' updated. <a href="%s">View ' . strtolower( $singular ) . '</a>' ), esc_url( get_permalink( $post_ID ) ) ),
+            2  => __( 'Custom field updated.' ),
+            3  => __( 'Custom field deleted.' ),
+            4  => __( $singular . ' updated.' ),
+            5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+            6  => sprintf( __( $singular . ' published. <a href="%s">View ' . strtolower( $singular ) . '</a>' ), esc_url( get_permalink( $post_ID ) ) ),
+            7  => __( 'Page saved.' ),
+            8  => sprintf( __( $singular . ' submitted. <a target="_blank" href="%s">Preview ' . strtolower( $singular ) . '</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+            9  => sprintf( __( $singular . ' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview ' . strtolower( $singular ) . '</a>' ), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+            10 => sprintf( __( $singular . ' draft updated. <a target="_blank" href="%s">Preview ' . strtolower( $singular ) . '</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
         );
 
         return $messages;
