@@ -121,7 +121,7 @@ class Arconix_FAQ {
             if ( $q->have_posts() ) {
 
                 if ( $accordion )
-                        $return .= '<div class="arconix-faq-accordion-wrap">';
+                    $return .= '<div class="arconix-faq-accordion-wrap">';
 
                 while ( $q->have_posts() ) : $q->the_post();
 
@@ -132,7 +132,8 @@ class Arconix_FAQ {
 
                 endwhile;
 
-                $return .= '</div>';
+                if ( $accordion )
+                    $return .= '</div>';
             } // end have_posts()
 
             wp_reset_postdata();
