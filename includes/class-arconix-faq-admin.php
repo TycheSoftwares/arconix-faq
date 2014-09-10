@@ -35,7 +35,7 @@ class Arconix_FAQ_Admin {
      * @version 1.4.0
      */
     function constants() {
-        define( 'ACFAQ_VERSION',          '1.5.1' );
+        define( 'ACFAQ_VERSION',          '1.5.2' );
         define( 'ACFAQ_URL',              trailingslashit( plugin_dir_url( __FILE__ ) ) );
         define( 'ACFAQ_DIR',              trailingslashit( plugin_dir_path( __FILE__ ) ) );
     }
@@ -285,11 +285,13 @@ class Arconix_FAQ_Admin {
     /**
      * Change the Post Updated messages
      *
-     * @global type $post
-     * @global type $post_ID
-     * @param type $messages
-     * @return type $messages
-     * @since 0.9
+     * @since   0.9
+     * @version 1.5.2
+     *
+     * @global  stdObj $post
+     * @global  int $post_ID
+     * @param   array $messages
+     * @return  array $messages
      */
     function messages( $messages ) {
         global $post, $post_ID;

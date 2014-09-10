@@ -19,7 +19,7 @@ class Arconix_FAQ {
      * @return mixed   FAQ information for display
      *
      * @since 1.2.0
-     * @version 1.5.0
+     * @version 1.5.2
      */
     function loop( $args, $echo = false ) {
 

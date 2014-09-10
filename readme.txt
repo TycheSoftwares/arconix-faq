@@ -3,8 +3,8 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
 Requires at least: 3.8
-Tested up to: 3.9
-Stable tag: 1.5.1
+Tested up to: 4.0
+Stable tag: 1.5.2
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -59,6 +59,10 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.5.2 =
+* Fixed a bug which caused an extra div to be output, breaking some site layouts.
+* Fixed a typo when saving/updating FAQ's
+
 = 1.5.1 =
 Fixed a FAQ title display bug
 
