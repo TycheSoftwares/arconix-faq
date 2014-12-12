@@ -42,6 +42,10 @@ class Arconix_FAQ_Admin {
      * @param   string      $version    The version of this plugin.
      */
     public function __construct( $version ) {
+        $this->version = $version;
+        $this->dir = trailingslashit( plugin_dir_path( __FILE__ ) );
+        $this->url = trailingslashit( plugin_dir_url( __FILE__ ) );
+
         register_activation_hook( __FILE__,         array( $this, 'activation' ) );
         register_deactivation_hook( __FILE__,       array( $this, 'deactivation' ) );
 
@@ -159,7 +163,7 @@ class Arconix_FAQ_Admin {
     /**
      * Create the post type metabox
      *
-     * @since 1.2.0
+     * @since   1.2.0
      * @param   array $meta_boxes
      * @return  array $meta_boxes
      */
@@ -227,7 +231,7 @@ class Arconix_FAQ_Admin {
      * root of your theme's folder. That will be loaded in place of the plugin's version, which means you can modify
      * it to your heart's content and know the file will be safe when the plugin is updated in the future.
      *
-     * @since 1.2.0
+     * @since   1.2.0
      * @version 1.5.3
      */
     function enq_scripts() {
@@ -291,10 +295,10 @@ class Arconix_FAQ_Admin {
      * @since   0.9
      * @version 1.5.2
      *
-     * @global  stdObj $post
-     * @global  int $post_ID
-     * @param   array $messages
-     * @return  array $messages
+     * @global  stdObj  $post
+     * @global  int     $post_ID
+     * @param   array   $messages
+     * @return  array   $messages
      */
     function messages( $messages ) {
         global $post, $post_ID;
@@ -323,9 +327,9 @@ class Arconix_FAQ_Admin {
     /**
      * Choose the specific columns we want to display
      *
-     * @param array $columns
-     * @return string $columns
-     * @since 0.9
+     * @param   array   $columns
+     * @return  string  $columns
+     * @since   0.9
      * @version 1.2
      */
     function columns_filter( $columns ) {
@@ -343,9 +347,9 @@ class Arconix_FAQ_Admin {
     /**
      * Filter the data that shows up in the columns we defined above
      *
-     * @global type $post
-     * @param type $column
-     * @since 0.9
+     * @global  stdObj $post
+     * @param   array $column
+     * @since   0.9
      * @version 1.1
      */
     function column_action( $column ) {
@@ -366,8 +370,8 @@ class Arconix_FAQ_Admin {
     /**
      * Add the Post type to the "At a Glance" Dashboard Widget
      *
-     * @since 1.0
-     * @version  1.4.0
+     * @since   1.0
+     * @version 1.4.0
      */
     function at_a_glance() {
         $glancer = new Gamajo_Dashboard_Glancer;
@@ -377,8 +381,8 @@ class Arconix_FAQ_Admin {
     /**
      * Adds a widget to the dashboard.
      *
-     * @since 1.0.3
-     * @version 1.2
+     * @since   1.0.3
+     * @version 1.2.0
      */
     function dashboard_widget() {
         if( apply_filters( 'pre_register_arconix_faq_dashboard_widget', true ) and current_user_can( 'manage_options' ) )
@@ -388,7 +392,7 @@ class Arconix_FAQ_Admin {
     /**
      * Add a widget to the dashboard
      *
-     * @since 1.0
+     * @since   1.0
      * @version 1.2.0
      */
     function dashboard_widget_output() {
