@@ -191,7 +191,7 @@ class Arconix_FAQ_Admin {
             )
         );
 
-        $meta_boxes[] = $metabox;
+        $meta_boxes[] = apply_filters( 'arconix_faq_metabox', $metabox );
 
         return $meta_boxes;
     }
