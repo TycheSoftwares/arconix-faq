@@ -43,6 +43,10 @@ class Arconix_FAQs {
         $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
         $this->load_dependencies();
         $this->load_admin();
+
+        // For some reason if run through load_dependencies() the class isn't loaded.
+        if ( ! class_exists( 'cmb_Meta_Box' ) )
+            require_once( $this->inc . 'metabox/init.php');
     }
 
     /**
@@ -59,9 +63,6 @@ class Arconix_FAQs {
     private function load_dependencies() {
         require_once( $this->inc . 'class-arconix-faq-admin.php' );
         require_once( $this->inc . 'class-arconix-faq-public.php' );
-
-        if ( ! class_exists( 'cmb_Meta_Box' ) )
-            require_once( $this->inc . 'metabox/init.php');
 
         if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
             require_once( $this->inc . 'class-gamajo-dashboard-glancer.php' );
