@@ -18,9 +18,9 @@ class Arconix_FAQs {
     /**
      * Plugin version.
      *
-     * @since 1.5.3
-     *
-     * @var string plugin version
+     * @since   1.5.3
+     * @access  private
+     * @var     string      $version    Plugin version
      */
     private $version;
 
@@ -29,7 +29,7 @@ class Arconix_FAQs {
      *
      * @since   1.5.3
      * @access  private
-     * @var     string      $dir    The directory path to the includes folder
+     * @var     string      $dir        The directory path to the includes folder
      */
     private $inc;
 
@@ -44,9 +44,7 @@ class Arconix_FAQs {
         $this->load_dependencies();
         $this->load_admin();
 
-        // For some reason if run through load_dependencies() the class isn't loaded.
-        if ( ! class_exists( 'cmb_Meta_Box' ) )
-            require_once( $this->inc . 'metabox/init.php');
+        add_action( 'init', array( $this, 'metabox_init' ), 9999 );
     }
 
     /**
@@ -54,8 +52,6 @@ class Arconix_FAQs {
      *
      * - Admin loads the backend functionality
      * - Public provides front-end functionality
-     * - Widgets loads the widget functionality
-     * - Metabox loads the helper class for metabox creation
      * - Dashboard Glancer loads the helper class for the admin dashboard
      *
      * @since   1.0.0
@@ -75,6 +71,16 @@ class Arconix_FAQs {
      */
     private function load_admin() {
         new Arconix_FAQ_Admin( $this->get_version() );
+    }
+
+    /**
+     * Conditionally load the metabox class
+     *
+     * @since   1.5.3
+     */
+    public function metabox_init() {
+        if ( ! class_exists( 'cmb_Meta_Box' ) )
+            require_once( $this->inc . 'metabox/init.php');
     }
 
     /**

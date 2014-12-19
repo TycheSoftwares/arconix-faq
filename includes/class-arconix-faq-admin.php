@@ -168,30 +168,30 @@ class Arconix_FAQ_Admin {
      * @return  array $meta_boxes
      */
     function metaboxes( $meta_boxes ) {
-        $metabox = array(
-            'id'            => 'faq-setting',
-            'title'         => __( 'FAQ Setting', 'acf' ),
-            'pages'         => array( 'faq' ),
-            'context'       => 'side',
-            'priority'      => 'default',
-            'show_names'    => false,
-            'fields'        => array(
-                array(
-                    'id'    => '_acf_rtt',
-                    'name'  => __( 'Show Return to Top', 'acf' ),
-                    'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ. The link will return the user to the top of this specific question', 'acf' ),
-                    'type'  => 'checkbox'
-                ),
-                array(
-                    'id'    => '_acf_open',
-                    'name'  => __( 'Load FAQ Open', 'acf' ),
-                    'desc'  => __( 'Load this FAQ in the open state (default is closed). This is not available when using the accordion configuration', 'acf' ),
-                    'type'  => 'checkbox'
+        $meta_boxes['faq_settings'] =
+            apply_filters( 'arconix_faq_metabox', array(
+                'id'            => 'faq_settings',
+                'title'         => __( 'FAQ Setting', 'acf' ),
+                'pages'         => array( 'faq' ),
+                'context'       => 'side',
+                'priority'      => 'default',
+                'show_names'    => false,
+                'fields'        => array(
+                    array(
+                        'id'    => '_acf_rtt',
+                        'name'  => __( 'Show Return to Top', 'acf' ),
+                        'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ. The link will return the user to the top of this specific question', 'acf' ),
+                        'type'  => 'checkbox'
+                    ),
+                    array(
+                        'id'    => '_acf_open',
+                        'name'  => __( 'Load FAQ Open', 'acf' ),
+                        'desc'  => __( 'Load this FAQ in the open state (default is closed). This is not available when using the accordion configuration', 'acf' ),
+                        'type'  => 'checkbox'
+                    )
                 )
             )
         );
-
-        $meta_boxes[] = apply_filters( 'arconix_faq_metabox', $metabox );
 
         return $meta_boxes;
     }
