@@ -7,30 +7,58 @@
 class Arconix_FAQ {
 
     /**
-     * Get our FAQ data
+     * Array of query defaults
      *
-     * @since 1.2.0
-     * @version 1.5.2
-     *
-     * @param  array    $args
-     * @param  boolean  $echo   Echo or Return the data
-     *
-     * @return string           FAQ information for display
+     * @since   1.5.3
+     * @access  protected
+     * @var     array       $defaults    Plugin query defaults
      */
-    function loop( $args, $echo = false ) {
+    protected $defaults;
 
-        $defaults = array(
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since   1.5.3
+     */
+    public function __construct() {
+        $this->defaults = apply_filters( 'arconix_faq_defaults', array(
+            'p'                 => '',
             'order'             => 'ASC',
             'orderby'           => 'title',
-            'posts_per_page'    => -1,
-            'group'             => '',
             'skip_group'        => false,
-            'style'             => 'toggle'
-        );
+            'style'             => 'toggle',
+            'posts_per_page'    => -1,
+            'nopaging'          => true,
+            'group'             => ''
+        ) );
+    }
 
-        // Merge incoming args with the function defaults
+    /**
+     * Get plugin query defaults
+     *
+     * @since   1.5.3
+     * @return  array       query defaults
+     */
+    public function getdefaults() {
+        return $this->defaults;
+    }
+
+    /**
+     * Get our FAQ data
+     *
+     * @since   1.2.0
+     * @version 1.5.2
+     *
+     * @param   array   $args
+     * @param   bool    $echo   Echo or Return the data
+     *
+     * @return  string          FAQ information for display
+     */
+    function loop( $args, $echo = false ) {
+        $defaults = $this->getdefaults();
+
+        // Merge incoming args with the class defaults
         $args = wp_parse_args( $args, $defaults );
-        $args = apply_filters( 'arconix_faq_query_defaults', $args );
 
         // Container
         $return = '';
@@ -46,7 +74,7 @@ class Arconix_FAQ {
 
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
-        if ( ! empty( $terms ) && $skip_group == false ) {
+        if ( ! empty( $terms ) && $skip_group == false && !empty( $args['p'] ) ) {
 
             foreach ( $terms as $term ) {
 
@@ -108,6 +136,7 @@ class Arconix_FAQ {
             // Set up our standard query args.
             $q = new WP_Query( array(
                 'post_type'         => 'faq',
+                'p'                 => $args['p'],
                 'order'             => $args['order'],
                 'orderby'           => $args['orderby'],
                 'posts_per_page'    => $args['posts_per_page']
