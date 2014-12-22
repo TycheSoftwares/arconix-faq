@@ -3,22 +3,23 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 1.5.2
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle or accordion box.
+Add an easy-to-create, stylish FAQ section to your website. Display your frequently asked questions using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle or accordion box.
 The FAQ's can be displayed in groups by tagging them during the FAQ item's creation. They can also be loaded closed or open, and for long FAQ's, there's a checkbox to add a "return to top" link at the bottom.
 
 [Live Demo](http://demo.arconixpc.com/arconix-faq)
+[Documentation](http://arcnx.co/afwiki)
 
 = Features =
 * Custom Post-Type driven
 * jQuery toggle or accordion display when using the shortcode
-* Can be displayed in groups by using the "group" taxonomy
+* Can be displayed individually, or in FAQ groups by using the "group" taxonomy
 
 == Installation ==
 
@@ -33,13 +34,13 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 == Frequently Asked Questions ==
 
 = Quick and dirty - how do I display my FAQ's? =
-Use the `[faq]` shortcode in a widget or on a post/page.
+Use the `[faq]` shortcode in a widget or on a post/page. This will output the FAQ's using the default settings (Ascending order by Title). If you'd like to use a different order, consult the [WordPress Codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters)
 
 = How do I enable the accordion display mode? =
 add `style="accordion"` to the shortcode, e.g. `[faq style="accordion"]
 
 = Where can I find more information on how to use the plugin?  =
-* Visit the plugin's [Wiki Page](http://arcnx.co/afwiki) for documentation
+* Visit the [documentation](http://arcnx.co/afwiki) for assistance
 * Tutorials on advanced plugin usage can be found at [Arconix Computers](http://arconixpc.com/tag/arconix-faq)
 
 = The toggle or accordion isn't working. What can I do? =
