@@ -102,7 +102,7 @@ class Arconix_FAQ {
 
                 if ( $q->have_posts() ) {
 
-                    $return .= '<h3 class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
+                    $return .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
                     if ( $accordion )
                         $return .= '<div class="arconix-faq-accordion-wrap">';
