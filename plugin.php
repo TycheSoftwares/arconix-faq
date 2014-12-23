@@ -4,7 +4,7 @@
  * Plugin URI: http://arconixpc.com/plugins/arconix-faq
  * Description: Plugin to handle the display of FAQs
  *
- * Version: 1.5.2
+ * Version: 1.6.0
  *
  * Author: John Gardner
  * Author URI: http://arconixpc.com/
@@ -18,7 +18,7 @@ class Arconix_FAQs {
     /**
      * Plugin version.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @access  private
      * @var     string      $version    Plugin version
      */
@@ -27,7 +27,7 @@ class Arconix_FAQs {
     /**
      * The directory path to the plugin file's includes folder.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @access  private
      * @var     string      $dir        The directory path to the includes folder
      */
@@ -36,10 +36,10 @@ class Arconix_FAQs {
     /**
      * Initialize the class and set its properties.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      */
     public function __construct() {
-        $this->version = '1.5.3';
+        $this->version = '1.6.0';
         $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
         $this->load_dependencies();
         $this->load_admin();
@@ -67,7 +67,7 @@ class Arconix_FAQs {
     /**
      * Loads the admin functionality
      *
-     * @since   1.5.3
+     * @since   1.6.0
      */
     private function load_admin() {
         new Arconix_FAQ_Admin( $this->get_version() );
@@ -76,7 +76,7 @@ class Arconix_FAQs {
     /**
      * Conditionally load the metabox class
      *
-     * @since   1.5.3
+     * @since   1.6.0
      */
     public function metabox_init() {
         if ( ! class_exists( 'cmb_Meta_Box' ) )
@@ -86,7 +86,7 @@ class Arconix_FAQs {
     /**
      * Return the current version of the plugin
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @return  string   Returns plugin version
      */
     public function get_version() {

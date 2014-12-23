@@ -9,7 +9,7 @@ class Arconix_FAQ_Admin {
     /**
      * The version of this plugin.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @access  private
      * @var     string      $version    The vurrent version of this plugin.
      */
@@ -18,7 +18,7 @@ class Arconix_FAQ_Admin {
     /**
      * The directory path to this plugin.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @access  private
      * @var     string      $dir    The directory path to this plugin
      */
@@ -27,7 +27,7 @@ class Arconix_FAQ_Admin {
     /**
      * The url path to this plugin.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @access  private
      * @var     string      $url    The url path to this plugin
      */
@@ -38,7 +38,7 @@ class Arconix_FAQ_Admin {
      * Initialize the class and set its properties.
      *
      * @since   1.4.0
-     * @version 1.5.3
+     * @version 1.6.0
      * @param   string      $version    The version of this plugin.
      */
     public function __construct( $version ) {
@@ -233,7 +233,7 @@ class Arconix_FAQ_Admin {
      * it to your heart's content and know the file will be safe when the plugin is updated in the future.
      *
      * @since   1.2.0
-     * @version 1.5.3
+     * @version 1.6.0
      */
     function enq_scripts() {
         // Register the javascript - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file

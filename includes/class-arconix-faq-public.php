@@ -9,7 +9,7 @@ class Arconix_FAQ {
     /**
      * Array of query defaults
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @access  protected
      * @var     array       $defaults    Plugin query defaults
      */
@@ -18,7 +18,7 @@ class Arconix_FAQ {
     /**
      * Initialize the class and set its properties.
      *
-     * @since   1.5.3
+     * @since   1.6.0
      */
     public function __construct() {
         $this->defaults = apply_filters( 'arconix_faq_defaults', array(
@@ -36,7 +36,7 @@ class Arconix_FAQ {
     /**
      * Get plugin query defaults
      *
-     * @since   1.5.3
+     * @since   1.6.0
      * @return  array       query defaults
      */
     public function getdefaults() {
