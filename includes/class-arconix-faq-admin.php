@@ -59,6 +59,7 @@ class Arconix_FAQ_Admin {
         add_filter( 'manage_faq_posts_columns',     array( $this, 'columns_filter' ) );
         add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
         add_filter( 'cmb_meta_boxes',               array( $this, 'metaboxes' ) );
+        add_action( 'add_meta_boxes_faq',           array( $this, 'add_faq_metabox' ) );
 
         add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
     }
@@ -413,6 +414,36 @@ class Arconix_FAQ_Admin {
                   <li><a href="http://arcnx.co/aftrello" class="af-dev">Dev Board</a></li>
                   <li><a href="http://arcnx.co/afsource" class="af-source">Source Code</a></li>
               </ul></div></div>';
+    }
+
+    /**
+     * Adds a metabox to the FAQ creation screen.
+     *
+     * This metabox shows the shortcode with the post_id for users to display
+     * just that faq on a post, page or other applicable location
+     *
+     * @since   1.6.0
+     */
+    public function add_faq_metabox() {
+        add_meta_box( 'arconix-faq-box', __( 'FAQ Shortcode', 'acf' ), array( $this, 'faq_box' ), 'faq', 'side' );
+    }
+
+    /**
+     * Output for the faq shortcode metabox. Creates a readonly inputbox that outputs the faq shortcode
+     * plus the $post_id
+     *
+     * @since   1.6.0
+     *
+     * @global  int     $post_ID    ID of the current post
+     */
+    public function faq_box() {
+        global $post_ID;
+        ?>
+        <p class="howto">
+            <?php _e( 'To display this question, copy the code below and paste it into your post, page, text widget or other content area.', 'acf' ); ?>
+        </p>
+        <p><input type="text" value="[faq p=<?php echo $post_ID; ?>]" readonly="readonly" class="widefat wp-ui-text-highlight code"></p>
+        <?php
     }
 
 }

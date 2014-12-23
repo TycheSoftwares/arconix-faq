@@ -55,10 +55,8 @@ class Arconix_FAQ {
      * @return  string          FAQ information for display
      */
     function loop( $args, $echo = false ) {
-        $defaults = $this->getdefaults();
-
         // Merge incoming args with the class defaults
-        $args = wp_parse_args( $args, $defaults );
+        $args = wp_parse_args( $args, $this->getdefaults() );
 
         // Container
         $return = '';
@@ -74,7 +72,7 @@ class Arconix_FAQ {
 
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
-        if ( ! empty( $terms ) && $skip_group == false && !empty( $args['p'] ) ) {
+        if ( ! empty( $terms ) && $skip_group == false && empty( $args['p'] ) ) {
 
             foreach ( $terms as $term ) {
 
