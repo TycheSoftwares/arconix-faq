@@ -184,7 +184,7 @@ class Arconix_FAQ {
         // Set up our anchor link
         $link = 'faq-' . sanitize_html_class( get_the_title() );
 
-        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title ' . get_the_title() . '">';
+        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title ' . sanitize_html_class( get_the_title() ) . '">';
         $return .= get_the_title() . '</div>';
         $return .= '<div id="' . $link . '" class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
         $return .= $this->return_to_top( $link );
