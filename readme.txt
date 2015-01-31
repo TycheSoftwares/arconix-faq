@@ -1,7 +1,7 @@
 === Arconix FAQ ===
 Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
-Tags: arconix, faq, toggle
+Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
 Tested up to: 4.1
 Stable tag: 1.5.2
