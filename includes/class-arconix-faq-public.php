@@ -21,7 +21,7 @@ class Arconix_FAQ {
      * @since   1.6.0
      */
     public function __construct() {
-        $this->defaults = apply_filters( 'arconix_faq_defaults', array(
+        $this->defaults = array(
             'p'                 => '',
             'order'             => 'ASC',
             'orderby'           => 'title',
@@ -30,17 +30,17 @@ class Arconix_FAQ {
             'posts_per_page'    => -1,
             'nopaging'          => true,
             'group'             => ''
-        ) );
+        );
     }
 
     /**
      * Get plugin query defaults
      *
      * @since   1.6.0
-     * @return  array       query defaults
+     * @return  array       filterable query defaults
      */
     public function getdefaults() {
-        return $this->defaults;
+        return apply_filters( 'arconix_faq_defaults', $this->defaults );
     }
 
     /**
