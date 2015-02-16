@@ -339,6 +339,7 @@ class Arconix_FAQ_Admin {
             "title"         => __( 'FAQ Title', 'acf' ),
             "faq_content"   => __( 'Answer', 'acf' ),
             'faq_groups'    => __( 'Group', 'acf' ),
+            'faq_shortcode' => __( 'Shortcode', 'acf' ),
             "date"          => __( 'Date', 'acf' )
         );
 
@@ -362,6 +363,9 @@ class Arconix_FAQ_Admin {
                 break;
             case "faq_groups":
                 echo get_the_term_list( $post->ID, 'group', '', ', ', '' );
+                break;
+            case "faq_shortcode":
+                printf( '[faq p=%d]', get_the_ID() );
                 break;
             default:
                 break;
