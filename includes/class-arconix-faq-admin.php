@@ -25,7 +25,6 @@ class Arconix_FAQ_Admin {
         add_filter( 'cmb_meta_boxes',               array( $this, 'metaboxes' ) );
 
         add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
-
     }
 
     /**
@@ -205,12 +204,10 @@ class Arconix_FAQ_Admin {
             }
         }
 
-        $f = new Arconix_FAQ;
+        $f = new Arconix_FAQ_Shortcode($atts);
 
-        return $f->loop( $atts );
+        return $f->display();
     }
-
-
 
     /**
      * Register the necessary Javascript and CSS, which can be overridden in a couple different ways.

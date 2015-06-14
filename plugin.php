@@ -14,7 +14,7 @@
  */
 
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-faq.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-faq-shortcode.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-arconix-faq-admin.php' );
 
-new Arconix_FAQ_Admin;
+new Arconix_FAQ_Admin();
