@@ -215,7 +215,7 @@ class Arconix_FAQ_Admin {
             }
         }
 
-        $f = new Arconix_FAQ;
+        $f = new Arconix_FAQ_Display;
 
         return $f->loop( $atts );
     }

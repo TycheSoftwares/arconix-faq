@@ -4,7 +4,7 @@
  *
  * @since   1.2.0
  */
-class Arconix_FAQ {
+class Arconix_FAQ_Display {
 
     /**
      * Array of query defaults

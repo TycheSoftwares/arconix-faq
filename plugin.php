@@ -13,7 +13,7 @@
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  */
 
-class Arconix_FAQs {
+class Arconix_FAQ {
 
     /**
      * Plugin version.
@@ -58,7 +58,7 @@ class Arconix_FAQs {
      */
     private function load_dependencies() {
         require_once( $this->inc . 'class-arconix-faq-admin.php' );
-        require_once( $this->inc . 'class-arconix-faq-public.php' );
+        require_once( $this->inc . 'class-arconix-faq-display.php' );
 
         if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
             require_once( $this->inc . 'class-gamajo-dashboard-glancer.php' );
@@ -75,6 +75,9 @@ class Arconix_FAQs {
 
     /**
      * Conditionally load the metabox class
+     *
+     * For one reason or another, this file can't be included in the load_dependencies function
+     * and must be referenced separately.
      *
      * @since   1.6.0
      */
@@ -96,8 +99,8 @@ class Arconix_FAQs {
 }
 
 /** Vroom vroom */
-add_action( 'plugins_loaded', 'arconix_faqs_run' );
+add_action( 'plugins_loaded', 'arconix_faq_run' );
 
-function arconix_faqs_run() {
-    new Arconix_FAQs;
+function arconix_faq_run() {
+    new Arconix_FAQ;
 }
