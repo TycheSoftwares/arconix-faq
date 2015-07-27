@@ -102,5 +102,5 @@ class Arconix_FAQ {
 add_action( 'plugins_loaded', 'arconix_faq_run' );
 
 function arconix_faq_run() {
-    new Arconix_FAQ;
+    new Arconix_FAQ();
 }
