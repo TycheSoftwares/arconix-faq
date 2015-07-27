@@ -54,12 +54,12 @@ class Arconix_FAQ_Display {
      *
      * @return  string          FAQ information for display
      */
-    function loop( $args, $echo = false ) {
+    public function loop( $args, $echo = false ) {
         // Merge incoming args with the class defaults
         $args = wp_parse_args( $args, $this->getdefaults() );
 
         // Container
-        $return = '';
+        $html = '';
 
         // Get the taxonomy terms assigned to all FAQs
         $terms = get_terms( 'group' );
@@ -102,27 +102,27 @@ class Arconix_FAQ_Display {
 
                 if ( $q->have_posts() ) {
 
-                    $return .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
+                    $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
                     if ( $accordion )
-                        $return .= '<div class="arconix-faq-accordion-wrap">';
+                        $html .= '<div class="arconix-faq-accordion-wrap">';
 
                     // If the term has a description, show it
                     if ( $term->description )
-                        $return .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
+                        $html .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
 
                     // Loop through the rest of the posts for the term
                     while ( $q->have_posts() ) : $q->the_post();
 
                         if ( $accordion )
-                            $return .= $this->accordion_output();
+                            $html .= $this->accordion_output();
                         else
-                            $return .= $this->toggle_output();
+                            $html .= $this->toggle_output();
 
                     endwhile;
 
                     if ( $accordion )
-                        $return .= '</div>';
+                        $html .= '</div>';
 
                 } // end have_posts()
 
@@ -144,31 +144,31 @@ class Arconix_FAQ_Display {
             if ( $q->have_posts() ) {
 
                 if ( $accordion )
-                    $return .= '<div class="arconix-faq-accordion-wrap">';
+                    $html .= '<div class="arconix-faq-accordion-wrap">';
 
                 while ( $q->have_posts() ) : $q->the_post();
 
                     if ( $accordion )
-                        $return .= $this->accordion_output();
+                        $html .= $this->accordion_output();
                     else
-                        $return .= $this->toggle_output();
+                        $html .= $this->toggle_output();
 
                 endwhile;
 
                 if ( $accordion )
-                    $return .= '</div>';
+                    $html .= '</div>';
             } // end have_posts()
 
             wp_reset_postdata();
         }
 
         // Allow complete override of the FAQ content
-        $return = apply_filters( 'arconix_faq_return', $return );
+        $html = apply_filters( 'arconix_faq_return', $html, $args );
 
         if ( $echo === true )
-            echo $return;
+            echo $html;
         else
-            return $return;
+            return $html;
     }
 
     /**
@@ -177,27 +177,27 @@ class Arconix_FAQ_Display {
      * @since   1.5.0
      * @version 1.6.0
      * @param   bool    $echo       echo or return the results
-     * @return  string  $return     FAQs in an accordion configuration
+     * @return  string  $html     FAQs in an accordion configuration
      */
-    function accordion_output( $echo = false ) {
-        $return = '';
+    private function accordion_output( $echo = false ) {
+        $html = '';
 
         // Set up our anchor link
         $link = 'faq-' . sanitize_html_class( get_the_title() );
 
-        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title">';
-        $return .= get_the_title() . '</div>';
-        $return .= '<div id="' . $link . '" class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
-        $return .= $this->return_to_top( $link );
-        $return .= '</div>';
+        $html .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title">';
+        $html .= get_the_title() . '</div>';
+        $html .= '<div id="' . $link . '" class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
+        $html .= $this->return_to_top( $link );
+        $html .= '</div>';
 
         // Allows a user to completely overwrite the output
-        $return = apply_filters( 'arconix_faq_accordion_output', $return );
+        $html = apply_filters( 'arconix_faq_accordion_output', $html );
 
         if ( $echo === true )
-            echo $return;
+            echo $html;
         else
-            return $return;
+            return $html;
     }
 
     /**
@@ -205,10 +205,10 @@ class Arconix_FAQ_Display {
      *
      * @since   1.5.0
      * @param   bool    $echo       echo or return the results
-     * @return  string  $return     FAQs in a toggle configuration
+     * @return  string  $html     FAQs in a toggle configuration
      */
-    function toggle_output( $echo = false ) {
-        $return = '';
+    private function toggle_output( $echo = false ) {
+        $html = '';
 
         // Grab our metadata
         $lo = get_post_meta( get_the_id(), '_acf_open', true );
@@ -219,22 +219,22 @@ class Arconix_FAQ_Display {
         // Set up our anchor link
         $link = 'faq-' . sanitize_html_class( get_the_title() );
 
-        $return .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
-        $return .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
-        $return .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
+        $html .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
+        $html .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
+        $html .= '<div class="arconix-faq-content' . $lo . '">' . apply_filters( 'the_content', get_the_content() );
 
-        $return .= $this->return_to_top( $link );
+        $html .= $this->return_to_top( $link );
 
-        $return .= '</div>'; // faq-content
-        $return .= '</div>'; // faq-wrap
+        $html .= '</div>'; // faq-content
+        $html .= '</div>'; // faq-wrap
 
         // Allows a user to completely overwrite the output
-        $return = apply_filters( 'arconix_faq_toggle_output', $return );
+        $html = apply_filters( 'arconix_faq_toggle_output', $html );
 
         if ( $echo === true )
-            echo $return;
+            echo $html;
         else
-            return $return;
+            return $html;
     }
 
     /**
@@ -243,10 +243,10 @@ class Arconix_FAQ_Display {
      * @since   1.5.0
      * @param   string  $link       The faq link to be hyperlinked
      * @param   bool    $echo       Echo or return the results
-     * @return  string  $return     Hyperlinked "Return to Top" link
+     * @return  string  $html     Hyperlinked "Return to Top" link
      */
-    function return_to_top( $link, $echo = false ) {
-        $return = '';
+    private function return_to_top( $link, $echo = false ) {
+        $html = '';
 
         // Grab our metadata
         $rtt = get_post_meta( get_the_id(), '_acf_rtt', true );
@@ -256,13 +256,13 @@ class Arconix_FAQ_Display {
             $rtt_text = __( 'Return to Top', 'acf' );
             $rtt_text = apply_filters( 'arconix_faq_return_to_top_text', $rtt_text );
 
-            $return .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
+            $html .= '<div class="arconix-faq-to-top"><a href="#' . $link . '">' . $rtt_text . '</a></div>';
         }
 
         if ( $echo === true )
-            echo $return;
+            echo $html;
         else
-            return $return;
+            return $html;
     }
 
 }
