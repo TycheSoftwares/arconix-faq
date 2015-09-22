@@ -107,18 +107,18 @@ class Arconix_FAQ_Admin {
                 'slug'  => 'faq',
                 'args'  => array(
                     'labels' => array(
-                        'name'                  => __( 'FAQ',                       'acf' ),
-                        'singular_name'         => __( 'FAQ',                       'acf' ),
-                        'add_new'               => __( 'Add New',                   'acf' ),
-                        'add_new_item'          => __( 'Add New Question',          'acf' ),
-                        'edit'                  => __( 'Edit',                      'acf' ),
-                        'edit_item'             => __( 'Edit Question',             'acf' ),
-                        'new_item'              => __( 'New Question',              'acf' ),
-                        'view'                  => __( 'View FAQ',                  'acf' ),
-                        'view_item'             => __( 'View Question',             'acf' ),
-                        'search_items'          => __( 'Search FAQ',                'acf' ),
-                        'not_found'             => __( 'No FAQs found',             'acf' ),
-                        'not_found_in_trash'    => __( 'No FAQs found in Trash',    'acf' )
+                        'name'                  => __( 'FAQ',                       'arconix-faq' ),
+                        'singular_name'         => __( 'FAQ',                       'arconix-faq' ),
+                        'add_new'               => __( 'Add New',                   'arconix-faq' ),
+                        'add_new_item'          => __( 'Add New Question',          'arconix-faq' ),
+                        'edit'                  => __( 'Edit',                      'arconix-faq' ),
+                        'edit_item'             => __( 'Edit Question',             'arconix-faq' ),
+                        'new_item'              => __( 'New Question',              'arconix-faq' ),
+                        'view'                  => __( 'View FAQ',                  'arconix-faq' ),
+                        'view_item'             => __( 'View Question',             'arconix-faq' ),
+                        'search_items'          => __( 'Search FAQ',                'arconix-faq' ),
+                        'not_found'             => __( 'No FAQs found',             'arconix-faq' ),
+                        'not_found_in_trash'    => __( 'No FAQs found in Trash',    'arconix-faq' )
                     ),
                     'public'            => true,
                     'query_var'         => true,
@@ -133,21 +133,21 @@ class Arconix_FAQ_Admin {
                 'slug' => 'group',
                 'args' => array(
                     'labels' => array(
-                        'name'                          => __( 'Groups',                                'acf' ),
-                        'singular_name'                 => __( 'Group',                                 'acf' ),
-                        'search_items'                  => __( 'Search Groups',                         'acf' ),
-                        'popular_items'                 => __( 'Popular Groups',                        'acf' ),
-                        'all_items'                     => __( 'All Groups',                            'acf' ),
+                        'name'                          => __( 'Groups',                                'arconix-faq' ),
+                        'singular_name'                 => __( 'Group',                                 'arconix-faq' ),
+                        'search_items'                  => __( 'Search Groups',                         'arconix-faq' ),
+                        'popular_items'                 => __( 'Popular Groups',                        'arconix-faq' ),
+                        'all_items'                     => __( 'All Groups',                            'arconix-faq' ),
                         'parent_item'                   => null,
                         'parent_item_colon'             => null,
-                        'edit_item'                     => __( 'Edit Group' ,                           'acf' ),
-                        'update_item'                   => __( 'Update Group',                          'acf' ),
-                        'add_new_item'                  => __( 'Add New Group',                         'acf' ),
-                        'new_item_name'                 => __( 'New Group Name',                        'acf' ),
-                        'separate_items_with_commas'    => __( 'Separate groups with commas',           'acf' ),
-                        'add_or_remove_items'           => __( 'Add or remove groups',                  'acf' ),
-                        'choose_from_most_used'         => __( 'Choose from the most used groups',      'acf' ),
-                        'menu_name'                     => __( 'Groups',                                'acf' ),
+                        'edit_item'                     => __( 'Edit Group' ,                           'arconix-faq' ),
+                        'update_item'                   => __( 'Update Group',                          'arconix-faq' ),
+                        'add_new_item'                  => __( 'Add New Group',                         'arconix-faq' ),
+                        'new_item_name'                 => __( 'New Group Name',                        'arconix-faq' ),
+                        'separate_items_with_commas'    => __( 'Separate groups with commas',           'arconix-faq' ),
+                        'add_or_remove_items'           => __( 'Add or remove groups',                  'arconix-faq' ),
+                        'choose_from_most_used'         => __( 'Choose from the most used groups',      'arconix-faq' ),
+                        'menu_name'                     => __( 'Groups',                                'arconix-faq' ),
                     ),
                     'hierarchical'              => false,
                     'show_ui'                   => true,
@@ -172,7 +172,7 @@ class Arconix_FAQ_Admin {
         $meta_boxes['faq_settings'] =
             apply_filters( 'arconix_faq_metabox', array(
                 'id'            => 'faq_settings',
-                'title'         => __( 'FAQ Setting', 'acf' ),
+                'title'         => __( 'FAQ Setting', 'arconix-faq' ),
                 'pages'         => array( 'faq' ),
                 'context'       => 'side',
                 'priority'      => 'default',
@@ -180,14 +180,14 @@ class Arconix_FAQ_Admin {
                 'fields'        => array(
                     array(
                         'id'    => '_acf_rtt',
-                        'name'  => __( 'Show Return to Top', 'acf' ),
-                        'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ. The link will return the user to the top of this specific question', 'acf' ),
+                        'name'  => __( 'Show Return to Top', 'arconix-faq' ),
+                        'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ. The link will return the user to the top of this specific question', 'arconix-faq' ),
                         'type'  => 'checkbox'
                     ),
                     array(
                         'id'    => '_acf_open',
-                        'name'  => __( 'Load FAQ Open', 'acf' ),
-                        'desc'  => __( 'Load this FAQ in the open state (default is closed). This is not available when using the accordion configuration', 'acf' ),
+                        'name'  => __( 'Load FAQ Open', 'arconix-faq' ),
+                        'desc'  => __( 'Load this FAQ in the open state (default is closed). This is not available when using the accordion configuration', 'arconix-faq' ),
                         'type'  => 'checkbox'
                     )
                 )
@@ -310,16 +310,16 @@ class Arconix_FAQ_Admin {
 
         $messages[$post_type] = array(
             0  => '', // Unused. Messages start at index 1.
-            1  => sprintf( __( $singular . ' updated. <a href="%s">View ' . strtolower( $singular ) . '</a>' ), esc_url( get_permalink( $post_ID ) ) ),
-            2  => __( 'Custom field updated.' ),
-            3  => __( 'Custom field deleted.' ),
-            4  => __( $singular . ' updated.' ),
-            5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-            6  => sprintf( __( $singular . ' published. <a href="%s">View ' . strtolower( $singular ) . '</a>' ), esc_url( get_permalink( $post_ID ) ) ),
+            1  => sprintf( __( $singular . ' updated. <a href="%s">View ' . strtolower( $singular ) . '</a>', 'arconix-faq' ), esc_url( get_permalink( $post_ID ) ) ),
+            2  => __( 'Custom field updated.', 'arconix-faq' ),
+            3  => __( 'Custom field deleted.', 'arconix-faq' ),
+            4  => __( $singular . ' updated.', 'arconix-faq' ),
+            5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s', 'arconix-faq' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+            6  => sprintf( __( $singular . ' published. <a href="%s">View ' . strtolower( $singular ) . '</a>', 'arconix-faq' ), esc_url( get_permalink( $post_ID ) ) ),
             7  => __( 'Page saved.' ),
-            8  => sprintf( __( $singular . ' submitted. <a target="_blank" href="%s">Preview ' . strtolower( $singular ) . '</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
-            9  => sprintf( __( $singular . ' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview ' . strtolower( $singular ) . '</a>' ), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
-            10 => sprintf( __( $singular . ' draft updated. <a target="_blank" href="%s">Preview ' . strtolower( $singular ) . '</a>' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+            8  => sprintf( __( $singular . ' submitted. <a target="_blank" href="%s">Preview ' . strtolower( $singular ) . '</a>', 'arconix-faq' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+            9  => sprintf( __( $singular . ' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview ' . strtolower( $singular ) . '</a>', 'arconix-faq' ), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+            10 => sprintf( __( $singular . ' draft updated. <a target="_blank" href="%s">Preview ' . strtolower( $singular ) . '</a>', 'arconix-faq' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
         );
 
         return $messages;
@@ -336,11 +336,11 @@ class Arconix_FAQ_Admin {
     function columns_filter( $columns ) {
         $columns = array(
             "cb"            => '<input type="checkbox" />',
-            "title"         => __( 'FAQ Title', 'acf' ),
-            "faq_content"   => __( 'Answer', 'acf' ),
-            'faq_groups'    => __( 'Group', 'acf' ),
-            'faq_shortcode' => __( 'Shortcode', 'acf' ),
-            "date"          => __( 'Date', 'acf' )
+            "title"         => __( 'FAQ Title', 'arconix-faq' ),
+            "faq_content"   => __( 'Answer', 'arconix-faq' ),
+            'faq_groups'    => __( 'Group', 'arconix-faq' ),
+            'faq_shortcode' => __( 'Shortcode', 'arconix-faq' ),
+            "date"          => __( 'Date', 'arconix-faq' )
         );
 
         return $columns;
@@ -412,12 +412,13 @@ class Arconix_FAQ_Admin {
             'show_date'     => 1 // display post date
         ) );
 
-        echo '<div class="acf-widget-bottom"><ul>
-                  <li><a href="http://arcnx.co/afwiki" class="af-docs">Documentation</a></li>
-                  <li><a href="http://arcnx.co/afhelp" class="af-help">Support Forum</a></li>
-                  <li><a href="http://arcnx.co/aftrello" class="af-dev">Dev Board</a></li>
-                  <li><a href="http://arcnx.co/afsource" class="af-source">Source Code</a></li>
-              </ul></div></div>';
+        ?>  <div class="acf-widget-bottom"><ul>;
+                <li><a href="http://arcnx.co/afwiki" class="af-docs"><?php _e( 'Documentation', 'arconix-faq'); ?></a></li>
+                <li><a href="http://arcnx.co/afhelp" class="af-help"><?php _e( 'Support Forum', 'arconix-faq'); ?></a></li>
+                <li><a href="http://arcnx.co/aftrello" class="af-dev"><?php _e( 'Dev Board', 'arconix-faq'); ?></a></li>
+                <li><a href="http://arcnx.co/afsource" class="af-source"><?php _e( 'Source Code', 'arconix-faq'); ?></a></li>
+            </ul></div></div>
+        <?php
     }
 
     /**
@@ -429,7 +430,7 @@ class Arconix_FAQ_Admin {
      * @since   1.6.0
      */
     public function add_faq_metabox() {
-        add_meta_box( 'arconix-faq-box', __( 'FAQ Shortcode', 'acf' ), array( $this, 'faq_box' ), 'faq', 'side' );
+        add_meta_box( 'arconix-faq-box', __( 'FAQ Shortcode', 'arconix-faq' ), array( $this, 'faq_box' ), 'faq', 'side' );
     }
 
     /**
@@ -444,7 +445,7 @@ class Arconix_FAQ_Admin {
         global $post_ID;
         ?>
         <p class="howto">
-            <?php _e( 'To display this question, copy the code below and paste it into your post, page, text widget or other content area.', 'acf' ); ?>
+            <?php _e( 'To display this question, copy the code below and paste it into your post, page, text widget or other content area.', 'arconix-faq' ); ?>
         </p>
         <p><input type="text" value="[faq p=<?php echo $post_ID; ?>]" readonly="readonly" class="widefat wp-ui-text-highlight code"></p>
         <?php

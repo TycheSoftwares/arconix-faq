@@ -9,6 +9,8 @@
  * Author: John Gardner
  * Author URI: http://arconixpc.com/
  *
+ * Text Domain: arconix-faq
+ *
  * License: GNU General Public License v2.0
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  */
@@ -102,5 +104,6 @@ class Arconix_FAQ {
 add_action( 'plugins_loaded', 'arconix_faq_run' );
 
 function arconix_faq_run() {
+    load_plugin_textdomain( 'arconix-faq' );
     new Arconix_FAQ();
 }
