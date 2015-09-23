@@ -19,11 +19,11 @@ would have to be changed to
 in order to for the images to be displayed.
 */
 
-/* Term Title
+/* FAQ Group Title
 ------------------------------------------------------------ */
  h3.arconix-faq-term-title { margin: 20px 0 10px }
 
-/* Term Description
+/* FAQ Group Description
 ------------------------------------------------------------ */
 p.arconix-faq-term-description { font-style: italic; }
 
@@ -74,7 +74,7 @@ p.arconix-faq-term-description { font-style: italic; }
 
 /* Accordion Title
 ------------------------------------------------------------ */
-.ui-state-default {
+.arconix-faq-accordion-title.ui-state-default {
     /*  This replaces the default background for the "smoothness" jQuery UI theme
         If you're going to load a different theme, you may want to remove this line
     */

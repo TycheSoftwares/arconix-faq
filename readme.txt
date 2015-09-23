@@ -1,24 +1,25 @@
 === Arconix FAQ ===
 Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
-Tags: arconix, faq, toggle
+Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 1.5.2
+Tested up to: 4.3
+Stable tag: 1.6.0
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
 == Description ==
 
-Utilizing Custom Post Types, this plugin allows the user to easily add FAQ items to his/her website. Display them using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle or accordion box.
+Add an easy-to-create, stylish FAQ section to your website. Display your frequently asked questions using the supplied shortcode (`[faq]`) and show/hide them via an animated, jQuery toggle or accordion box.
 The FAQ's can be displayed in groups by tagging them during the FAQ item's creation. They can also be loaded closed or open, and for long FAQ's, there's a checkbox to add a "return to top" link at the bottom.
 
 [Live Demo](http://demo.arconixpc.com/arconix-faq)
+[Documentation](http://arcnx.co/afwiki)
 
 = Features =
 * Custom Post-Type driven
 * jQuery toggle or accordion display when using the shortcode
-* Can be displayed in groups by using the "group" taxonomy
+* Can be displayed individually, or in FAQ groups by using the "group" taxonomy
 
 == Installation ==
 
@@ -33,13 +34,13 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 == Frequently Asked Questions ==
 
 = Quick and dirty - how do I display my FAQ's? =
-Use the `[faq]` shortcode in a widget or on a post/page.
+Use the `[faq]` shortcode in a widget or on a post/page. This will output the FAQ's using the default settings (Ascending order by Title in a Toggle configuration). If you'd like to use a different order, consult the [Documentation](http://arcnx.co/afwiki) for assistance.
 
 = How do I enable the accordion display mode? =
-add `style="accordion"` to the shortcode, e.g. `[faq style="accordion"]
+Add `style="accordion"` to the shortcode, e.g. `[faq style="accordion"]
 
 = Where can I find more information on how to use the plugin?  =
-* Visit the plugin's [Wiki Page](http://arcnx.co/afwiki) for documentation
+* Visit the [documentation](http://arcnx.co/afwiki) for assistance
 * Tutorials on advanced plugin usage can be found at [Arconix Computers](http://arconixpc.com/tag/arconix-faq)
 
 = The toggle or accordion isn't working. What can I do? =
@@ -51,7 +52,7 @@ While you can certainly start a thread in the [support forum](http://arcnx.co/af
 Check out the WordPress [support forum](http://arcnx.co/aphelp)
 
 = I have a great idea for your plugin! =
-That's fantastic! Feel free to submit a pull request over at [Github](http://arcnx.co/afsource), add an idea to the [Trello Board](http://arcnx.co/aftrello), or you can contact me through [Twitter](http://arcnx.co/twitter), [Facebook](http://arcnx.co/facebook) or my [Website](http://arcnx.co/1)
+That's fantastic! Feel free to open an issue or submit a pull request over at [Github](http://arcnx.co/afsource), or you can contact me through [Twitter](http://arcnx.co/twitter), [Facebook](http://arcnx.co/facebook) or my [Website](http://arcnx.co/1)
 
 == Screenshots ==
 1. Post Type in WordPress navigation list
@@ -59,6 +60,12 @@ That's fantastic! Feel free to submit a pull request over at [Github](http://arc
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.6.0 =
+* Prepared the plugin for [translations](https://make.wordpress.org/plugins/2015/09/01/plugin-translations-on-wordpress-org/) (yay!)
+* Anchor links to group headers are now supported. The format is `faq-group-slug` -- aka mysite.com/faq/#faq-group-slug
+* Allow users to now specify a single FAQ for display
+* Fixed a bug which caused some of the FAQ-specific CSS to be output improperly
+
 = 1.5.2 =
 * Fixed a bug which caused an extra div to be output, breaking some site layouts.
 * Fixed a typo when saving/updating FAQ's
