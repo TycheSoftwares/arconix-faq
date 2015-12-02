@@ -3,8 +3,8 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 1.6.0
+Tested up to: 4.4
+Stable tag: 1.6.1
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -37,7 +37,7 @@ Upgrade normally via your WordPress admin -> Plugins panel.
 Use the `[faq]` shortcode in a widget or on a post/page. This will output the FAQ's using the default settings (Ascending order by Title in a Toggle configuration). If you'd like to use a different order, consult the [Documentation](http://arcnx.co/afwiki) for assistance.
 
 = How do I enable the accordion display mode? =
-Add `style="accordion"` to the shortcode, e.g. `[faq style="accordion"]
+Add `style="accordion"` to the shortcode, e.g. `[faq style="accordion"]`
 
 = Where can I find more information on how to use the plugin?  =
 * Visit the [documentation](http://arcnx.co/afwiki) for assistance
@@ -49,7 +49,7 @@ While you can certainly start a thread in the [support forum](http://arcnx.co/af
 2. Check to make sure only one copy of jQuery is being loaded. Many times conflicts arise when themes or plugins load jQuery incorrectly, causing the script to be loaded multiple times in multiple versions. In order to find the offending item, start by disabling your plugins one by one until you find the problem. If you've disabled all your plugins, try switching to a different them, such as twentyten or twentytwelve to see if the problem is with your theme. Once you've found the problem, contact the developer for assistance getting the issue resolved.
 
 = I need help =
-Check out the WordPress [support forum](http://arcnx.co/aphelp)
+Check out the WordPress [support forum](http://arcnx.co/afhelp)
 
 = I have a great idea for your plugin! =
 That's fantastic! Feel free to open an issue or submit a pull request over at [Github](http://arcnx.co/afsource), or you can contact me through [Twitter](http://arcnx.co/twitter), [Facebook](http://arcnx.co/facebook) or my [Website](http://arcnx.co/1)
@@ -60,6 +60,9 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.6.1 =
+Fixed a bug which caused the FAQ Group descriptions to output incorrectly when using the accordion style
+
 = 1.6.0 =
 * Prepared the plugin for [translations](https://make.wordpress.org/plugins/2015/09/01/plugin-translations-on-wordpress-org/) (yay!)
 * Anchor links to group headers are now supported. The format is `faq-group-slug` -- aka mysite.com/faq/#faq-group-slug

@@ -47,7 +47,7 @@ class Arconix_FAQ_Display {
      * Get our FAQ data
      *
      * @since   1.2.0
-     * @version 1.5.2
+     * @version 1.6.1
      *
      * @param   array   $args
      * @param   bool    $echo   Echo or Return the data
@@ -104,12 +104,13 @@ class Arconix_FAQ_Display {
 
                     $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
-                    if ( $accordion )
-                        $html .= '<div class="arconix-faq-accordion-wrap">';
-
                     // If the term has a description, show it
                     if ( $term->description )
                         $html .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
+
+                    // Output the accordion wrapper if that style has been set
+                    if ( $accordion )
+                        $html .= '<div class="arconix-faq-accordion-wrap">';
 
                     // Loop through the rest of the posts for the term
                     while ( $q->have_posts() ) : $q->the_post();
@@ -121,6 +122,7 @@ class Arconix_FAQ_Display {
 
                     endwhile;
 
+                    // Close the accordion wrapper if necessary
                     if ( $accordion )
                         $html .= '</div>';
 
