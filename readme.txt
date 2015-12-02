@@ -3,8 +3,8 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 1.6.0
+Tested up to: 4.4
+Stable tag: 1.6.1
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -60,6 +60,9 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.6.1 =
+Fixed a bug which caused the FAQ Group descriptions to output incorrectly when using the accordion style
+
 = 1.6.0 =
 * Prepared the plugin for [translations](https://make.wordpress.org/plugins/2015/09/01/plugin-translations-on-wordpress-org/) (yay!)
 * Anchor links to group headers are now supported. The format is `faq-group-slug` -- aka mysite.com/faq/#faq-group-slug

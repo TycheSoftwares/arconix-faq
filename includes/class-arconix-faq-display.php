@@ -47,7 +47,7 @@ class Arconix_FAQ_Display {
      * Get our FAQ data
      *
      * @since   1.2.0
-     * @version 1.5.2
+     * @version 1.6.1
      *
      * @param   array   $args
      * @param   bool    $echo   Echo or Return the data
