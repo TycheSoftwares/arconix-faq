@@ -62,6 +62,8 @@ class Arconix_FAQ_Admin {
         add_action( 'add_meta_boxes_faq',           array( $this, 'add_faq_metabox' ) );
 
         add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
+		
+		add_action( 'admin_menu',                   array( $this, 'admin_menu' ) );
     }
 
     /**
@@ -451,4 +453,43 @@ class Arconix_FAQ_Admin {
         <?php
     }
 
+	public function admin_menu() {
+		add_submenu_page( 'tools.php', 'FAQ WordPress Export', 'FAQ Wordpress Export', 'manage_options', 'arconix_faq_export', array( $this, 'export_faq' ) );
+	}
+	
+	public function export_faq() {
+		
+		require_once( dirname( __FILE__ ) . '/html-to-markdown/HTML_To_Markdown.php');
+		
+		$textfaq = "== Frequently Asked Questions ==\r\n";
+		
+		// Set up our standard query args.
+		$q = new WP_Query( array(
+			'post_type'         => 'faq',
+			'p'                 => $args['p'],
+			'order'             => $args['order'],
+			'orderby'           => $args['orderby'],
+			'posts_per_page'    => $args['posts_per_page']
+		) );
+
+
+		if ( $q->have_posts() ) {
+
+			while ( $q->have_posts() ) : $q->the_post();
+
+				$title = get_the_title();
+				$body = apply_filters( 'the_content', get_the_content() );
+				$markdown = new HTML_To_Markdown( $body );
+			
+				$textfaq .= '= ' . $title . " =\r\n";
+				$textfaq .= $markdown . "\r\n\r\n";
+			endwhile;
+
+		} // end have_posts()
+		
+	echo "<br><textarea cols=80 rows=20>";
+	echo $textfaq;
+	echo "</textarea>";
+
+	}
 }
