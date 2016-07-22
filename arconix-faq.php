@@ -18,6 +18,10 @@
 // Load the metabox class
 require_once dirname( __FILE__ ) . '/includes/cmb2/init.php';
 
+// Load the Glancer class
+if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
+    require_once dirname( __FILE__ ) . '/includes/classes/gamajo-dashboard-glancer.php';
+
 // Set our plugin activation hook
 register_activation_hook( __FILE__, 'activate_arconix_faq' );
 
