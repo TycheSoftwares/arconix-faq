@@ -45,14 +45,6 @@ class Arconix_Taxonomy_Register {
 	protected $plural;
 	
 	/**
-     * Textdomain used for translation.
-     *
-     * @since   1.0.0
-     * @var		string			$textdomain			Used for i18n.
-     */
-	protected $textdomain;
-	
-	/**
      * Taxonomy registration labels.
      *
      * @since   1.0.0
@@ -89,16 +81,14 @@ class Arconix_Taxonomy_Register {
      *                                                  taxonomy will be registered only
      * @param	array           $settings               Additional taxonomy registration settings
      *                                                  (see https://codex.wordpress.org/Function_Reference/register_taxonomy#Arguments )
-     * @param	string          $textdomain             For i18n
      * @return	void                                    Return early if no taxonomy name was provided
      */
-    public function add( $taxonomy_names, $post_type_name = null, $settings = array(), $textdomain = 'default' ) {
+    public function add( $taxonomy_names, $post_type_name = null, $settings = array() ) {
 		// Bail if the taxonomy_name hasn't been set
 		if ( !isset( $taxonomy_names ) )
 			return;
 		
 		$this->set_taxonomy_names( $taxonomy_names );
-		$this->textdomain = $textdomain;
         $this->post_type_name = $post_type_name;
         $this->labels = $this->set_labels();
 		$this->settings = $this->set_settings( $settings );
@@ -153,20 +143,20 @@ class Arconix_Taxonomy_Register {
 		$plural = $this->plural;
 		
 		$labels = array( 'labels' => array (
-			'name'                  => sprintf( __( '%s', $this->textdomain ), $plural ),
-			'singular_name'         => sprintf( __( '%s', $this->textdomain ), $singular ),
-			'menu_name'             => sprintf( __( '%s', $this->textdomain ), $plural ),
-			'all_items'             => sprintf( __( '%s', $this->textdomain ), $plural ),
-			'add_new'               => __( 'Add New', $this->textdomain ),
-			'add_new_item'          => sprintf( __( 'Add New %s', $this->textdomain ), $singular ),
-			'edit_item'             => sprintf( __( 'Edit %s', $this->textdomain ), $singular ),
-			'new_item'              => sprintf( __( 'New %s', $this->textdomain ), $singular ),
-			'view_item'             => sprintf( __( 'View %s', $this->textdomain ), $singular ),
-			'search_items'          => sprintf( __( 'Search %s', $this->textdomain ), $plural ),
-			'not_found'             => sprintf( __( 'No %s found', $this->textdomain ), $plural ),
-			'not_found_in_trash'	=> sprintf( __( 'No %s found in Trash', $this->textdomain ), $plural ),
-			'parent_item_colon'     => sprintf( __( 'Parent %s:', $this->textdomain ), $singular ),
-            'parent_item'           => sprintf( __( 'Parent %s', $this->textdomain ), $singular ),
+			'name'                  => sprintf( __( '%s', 'arconix-faq' ), $plural ),
+			'singular_name'         => sprintf( __( '%s', 'arconix-faq' ), $singular ),
+			'menu_name'             => sprintf( __( '%s', 'arconix-faq' ), $plural ),
+			'all_items'             => sprintf( __( '%s', 'arconix-faq' ), $plural ),
+			'add_new'               => __( 'Add New', 'arconix-faq' ),
+			'add_new_item'          => sprintf( __( 'Add New %s', 'arconix-faq' ), $singular ),
+			'edit_item'             => sprintf( __( 'Edit %s', 'arconix-faq' ), $singular ),
+			'new_item'              => sprintf( __( 'New %s', 'arconix-faq' ), $singular ),
+			'view_item'             => sprintf( __( 'View %s', 'arconix-faq' ), $singular ),
+			'search_items'          => sprintf( __( 'Search %s', 'arconix-faq' ), $plural ),
+			'not_found'             => sprintf( __( 'No %s found', 'arconix-faq' ), $plural ),
+			'not_found_in_trash'	=> sprintf( __( 'No %s found in Trash', 'arconix-faq' ), $plural ),
+			'parent_item_colon'     => sprintf( __( 'Parent %s:', 'arconix-faq' ), $singular ),
+            'parent_item'           => sprintf( __( 'Parent %s', 'arconix-faq' ), $singular ),
 		) );
         
 		return $labels;

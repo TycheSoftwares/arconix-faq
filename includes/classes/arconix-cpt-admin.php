@@ -17,26 +17,16 @@ abstract class Arconix_CPT_Admin {
     protected $post_type_name;
 
     /**
-     * Textdomain used for translation.
-     *
-     * @since   1.0.0
-     * @var		string			$textdomain			Used for i18n.
-     */
-    protected $textdomain;
-
-    /**
      * Constructor
      * 
      * @since   1.0.0
      * @param	string			$post_type_name		Name of the Custom Post Type
-     * @param	string          $textdomain         For i18n
      */
-    public function __construct( $post_type_name, $textdomain = 'default' ) {
+    public function __construct( $post_type_name ) {
         if ( !isset( $post_type_name ) )
             return;
 
         $this->post_type_name = $post_type_name;
-        $this->textdomain     = $textdomain;
 
         $this->init();
     }
@@ -90,16 +80,16 @@ abstract class Arconix_CPT_Admin {
 
         $messages[ $this->post_type_name ] = array(
             0  => '',
-            1  => sprintf( __( '%s updated.', $this->textdomain ), $singular ),
-            2  => __( 'Custom field updated.', $this->textdomain ),
-            3  => __( 'Custom field deleted.', $this->textdomain ),
-            4  => sprintf( __( '%s updated.', $this->textdomain ), $singular ),
-            5  => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%2$s restored to revision from %1$s', $this->textdomain ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ), $singular ) : false,
-            6  => sprintf( __( '%s updated.', $this->textdomain ), $singular ),
-            7  => sprintf( __( '%s saved.', $this->textdomain ), $singular ),
-            8  => sprintf( __( '%s submitted.', $this->textdomain ), $singular ),
-            9  => sprintf( __( '%2$s scheduled for: <strong>%1$s</strong>.', $this->textdomain ), date_i18n( __( 'M j, Y @ G:i', $this->textdomain ), strtotime( $post->post_date ) ), $singular ),
-            10 => sprintf( __( '%s draft updated.', $this->textdomain ), $singular ),
+            1  => sprintf( __( '%s updated.', 'arconix-faq' ), $singular ),
+            2  => __( 'Custom field updated.', 'arconix-faq' ),
+            3  => __( 'Custom field deleted.', 'arconix-faq' ),
+            4  => sprintf( __( '%s updated.', 'arconix-faq' ), $singular ),
+            5  => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%2$s restored to revision from %1$s', 'arconix-faq' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ), $singular ) : false,
+            6  => sprintf( __( '%s updated.', 'arconix-faq' ), $singular ),
+            7  => sprintf( __( '%s saved.', 'arconix-faq' ), $singular ),
+            8  => sprintf( __( '%s submitted.', 'arconix-faq' ), $singular ),
+            9  => sprintf( __( '%2$s scheduled for: <strong>%1$s</strong>.', 'arconix-faq' ), date_i18n( __( 'M j, Y @ G:i', 'arconix-faq' ), strtotime( $post->post_date ) ), $singular ),
+            10 => sprintf( __( '%s draft updated.', 'arconix-faq' ), $singular ),
         );
         return $messages;
     }
