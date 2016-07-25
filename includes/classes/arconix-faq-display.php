@@ -40,7 +40,7 @@ class Arconix_FAQ_Display {
      * Get plugin query defaults
      *
      * @since   1.6.0
-     * @return  array       Filterable query defaults
+     * @return  array                   Filterable query defaults
      */
     public function getdefaults() {
         return apply_filters( 'arconix_faq_defaults', $this->defaults );
@@ -50,16 +50,13 @@ class Arconix_FAQ_Display {
      * Get our FAQ data
      *
      * @since   1.2.0
-     * @param   array   $args   Incoming arguments
-     * @param   bool    $echo   Echo or Return the data
-     * @return  string          FAQ information for display
+     * @param   array       $args       Incoming arguments
+     * @param   bool        $echo       Echo or Return the data
+     * @return  string                  FAQ information for display
      */
     public function loop( $args, $echo = false ) {
         // Merge incoming args with the class defaults
         $args = wp_parse_args( $args, $this->getdefaults() );
-
-        // Container
-        $html = '';
 
         // Get the taxonomy terms assigned to all FAQs
         $terms = get_terms( 'group' );
@@ -70,6 +67,8 @@ class Arconix_FAQ_Display {
         // Do we have an accordion?
         $args['style'] == 'accordion' ? $accordion = true : $accordion = false;
 
+        // Container
+        $html = '';
 
         // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
         if ( ! empty( $terms ) && $skip_group == false && empty( $args['p'] ) ) {
@@ -83,22 +82,13 @@ class Arconix_FAQ_Display {
 
                 // Set up our standard query args.
                 $query_args = array(
-                    'post_type'         => 'faq',
                     'order'             => $args['order'],
                     'orderby'           => $args['orderby'],
                     'posts_per_page'    => $args['posts_per_page'],
-                    'tax_query'         => array(
-                        array(
-                            'taxonomy'  => 'group',
-                            'field'     => 'slug',
-                            'terms'     => array( $term->slug ),
-                            'operator'  => 'IN'
-                        )
-                    )
                 );
-
-                // New query just for the tax term we're looping through
-                $q = new WP_Query( $query_args );
+                
+                // Query our FAQ Posts
+                $q = new Arconix_FAQ_Query( $query_args, $term->slug );
 
                 if ( $q->have_posts() ) {
 
@@ -134,14 +124,12 @@ class Arconix_FAQ_Display {
         else { // If $terms is blank (faq groups aren't in use) or $skip_group is true
 
             // Set up our standard query args.
-            $q = new WP_Query( array(
-                'post_type'         => 'faq',
+            $q = new Arconix_FAQ_Query( array(
                 'p'                 => $args['p'],
                 'order'             => $args['order'],
                 'orderby'           => $args['orderby'],
                 'posts_per_page'    => $args['posts_per_page']
             ) );
-
 
             if ( $q->have_posts() ) {
 
@@ -178,7 +166,7 @@ class Arconix_FAQ_Display {
      *
      * @since   1.5.0
      * @param   bool        $echo       Echo or return the results
-     * @return  string      $html       FAQs in an accordion configuration
+     * @return  string                  FAQs in an accordion configuration
      */
     protected function accordion_output( $echo = false ) {
         $html = '';
@@ -205,8 +193,8 @@ class Arconix_FAQ_Display {
      * Output the FAQs in a toggle style
      *
      * @since   1.5.0
-     * @param   bool    $echo       echo or return the results
-     * @return  string  $html     FAQs in a toggle configuration
+     * @param   bool    $echo       Echo or return the results
+     * @return  string              FAQs in a toggle configuration
      */
     protected function toggle_output( $echo = false ) {
         $html = '';
@@ -244,7 +232,7 @@ class Arconix_FAQ_Display {
      * @since   1.5.0
      * @param   string      $link       The faq link to be hyperlinked
      * @param   bool        $echo       Echo or return the results
-     * @return  string      $html       Hyperlinked "Return to Top" link
+     * @return  string                  Hyperlinked "Return to Top" link
      */
     protected function return_to_top( $link, $echo = false ) {
         $html = '';
