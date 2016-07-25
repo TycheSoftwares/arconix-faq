@@ -32,7 +32,8 @@ class Arconix_FAQ_Display {
             'style'             => 'toggle',
             'posts_per_page'    => -1,
             'nopaging'          => true,
-            'group'             => ''
+            'group'             => '',
+            'hide_title'        => false
         );
     }
 
@@ -91,8 +92,8 @@ class Arconix_FAQ_Display {
                 $q = new Arconix_FAQ_Query( $query_args, $term->slug );
 
                 if ( $q->have_posts() ) {
-
-                    $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
+                    if ( ! $args['hide_title'] )
+                        $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
                     // If the term has a description, show it
                     if ( $term->description )
