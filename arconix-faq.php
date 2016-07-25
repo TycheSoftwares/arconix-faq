@@ -79,14 +79,6 @@ final class Arconix_FAQ_Plugin {
      * @var		string	$version        Plugin version
      */
     const version = '1.7.0';
-    
-    /**
-     * Translation Textdomain
-     * 
-     * @since   1.7.0
-     * @var     string  $textdomain     For i18n
-     */
-    const textdomain = 'arconix-faq';
 	
 	/**
      * Post Type settings
@@ -136,7 +128,7 @@ final class Arconix_FAQ_Plugin {
         );
         
         $pt = new Arconix_CPT_Register();
-        $pt->add( $names, $settings['post_type']['args'], self::textdomain );
+        $pt->add( $names, $settings['post_type']['args'] );
     }
     
     
@@ -144,7 +136,7 @@ final class Arconix_FAQ_Plugin {
         $settings = $this->settings;
         
         $tax = new Arconix_Taxonomy_Register();
-        $tax->add( 'group', 'faq', $settings['taxonomy']['args'], self::textdomain );
+        $tax->add( 'group', 'faq', $settings['taxonomy']['args'] );
     }
     
     

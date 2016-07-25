@@ -140,19 +140,19 @@ class Arconix_CPT_Register {
         $plural   = $this->plural;
 
         $labels = array( 'labels' => array(
-                'name'               => sprintf( __( '%s', $this->textdomain ), $plural ),
-                'singular_name'      => sprintf( __( '%s', $this->textdomain ), $singular ),
-                'menu_name'          => sprintf( __( '%s', $this->textdomain ), $plural ),
-                'all_items'          => sprintf( __( '%s', $this->textdomain ), $plural ),
-                'add_new'            => __( 'Add New', $this->textdomain ),
-                'add_new_item'       => sprintf( __( 'Add New %s', $this->textdomain ), $singular ),
-                'edit_item'          => sprintf( __( 'Edit %s', $this->textdomain ), $singular ),
-                'new_item'           => sprintf( __( 'New %s', $this->textdomain ), $singular ),
-                'view_item'          => sprintf( __( 'View %s', $this->textdomain ), $singular ),
-                'search_items'       => sprintf( __( 'Search %s', $this->textdomain ), $plural ),
-                'not_found'          => sprintf( __( 'No %s found', $this->textdomain ), $plural ),
-                'not_found_in_trash' => sprintf( __( 'No %s found in Trash', $this->textdomain ), $plural ),
-                'parent_item_colon'  => sprintf( __( 'Parent %s:', $this->textdomain ), $singular )
+                'name'               => sprintf( __( '%s', 'arconix-faq' ), $plural ),
+                'singular_name'      => sprintf( __( '%s', 'arconix-faq' ), $singular ),
+                'menu_name'          => sprintf( __( '%s', 'arconix-faq' ), $plural ),
+                'all_items'          => sprintf( __( '%s', 'arconix-faq' ), $plural ),
+                'add_new'            => __( 'Add New', 'arconix-faq' ),
+                'add_new_item'       => sprintf( __( 'Add New %s', 'arconix-faq' ), $singular ),
+                'edit_item'          => sprintf( __( 'Edit %s', 'arconix-faq' ), $singular ),
+                'new_item'           => sprintf( __( 'New %s', 'arconix-faq' ), $singular ),
+                'view_item'          => sprintf( __( 'View %s', 'arconix-faq' ), $singular ),
+                'search_items'       => sprintf( __( 'Search %s', 'arconix-faq' ), $plural ),
+                'not_found'          => sprintf( __( 'No %s found', 'arconix-faq' ), $plural ),
+                'not_found_in_trash' => sprintf( __( 'No %s found in Trash', 'arconix-faq' ), $plural ),
+                'parent_item_colon'  => sprintf( __( 'Parent %s:', 'arconix-faq' ), $singular )
             ) );
 
         return $labels;

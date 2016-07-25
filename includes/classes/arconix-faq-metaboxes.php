@@ -10,23 +10,6 @@
 class Arconix_FAQ_Metaboxes {
     
     /**
-     * Translation Textdomain.
-     * 
-     * @since   1.2.0
-     * @var     string  $textdomain     For i18n
-     */
-    protected $textdomain;
-    
-    /**
-     * Initialize the class.
-     *
-     * @since   1.2.0
-     */
-    public function __construct() {
-        $this->textdomain = Arconix_FAQ_Plugin::textdomain; 
-    }
-    
-    /**
      * Get our hooks into WordPress
      * 
      * @since   1.2.0
@@ -45,7 +28,7 @@ class Arconix_FAQ_Metaboxes {
         // Initiate the metabox
         $cmb = new_cmb2_box( array(
             'id'            => 'faq_settings',
-            'title'         => __( 'FAQ Settings', $this->textdomain ),
+            'title'         => __( 'FAQ Settings', 'arconix-faq' ),
             'object_types'  => array( 'faq' ),
             'context'       => 'side',
             'priority'      => 'default',
@@ -55,14 +38,14 @@ class Arconix_FAQ_Metaboxes {
         // Add the Link Type field
         $cmb->add_field( array(
             'id'    => '_acf_rtt',
-            'name'  => __( 'Show Return to Top', $this->textdomain ),
+            'name'  => __( 'Show Return to Top', 'arconix-faq' ),
             'desc'  => __( 'Enable a "Return to Top" link at the bottom of this FAQ. The link will return the user to the top of this specific question', 'arconix-faq' ),
             'type'  => 'checkbox'
         ) );
         
         $cmb->add_field( array(
             'id'    => '_acf_open',
-            'name'  => __( 'Load FAQ Open', $this->textdomain ),
+            'name'  => __( 'Load FAQ Open', 'arconix-faq' ),
             'desc'  => __( 'Load this FAQ in the open state (default is closed). This is not available when using the accordion configuration', 'arconix-faq' ),
             'type'  => 'checkbox'
         ) );
@@ -77,7 +60,7 @@ class Arconix_FAQ_Metaboxes {
      * @since   1.6.0
      */
     public function shortcode_metabox() {
-        add_meta_box( 'arconix-faq-box', __( 'FAQ Shortcode', $this->textdomain ), array( $this, 'faq_box' ), 'faq', 'side' );
+        add_meta_box( 'arconix-faq-box', __( 'FAQ Shortcode', 'arconix-faq' ), array( $this, 'faq_box' ), 'faq', 'side' );
     }
 
     /**
@@ -94,7 +77,7 @@ class Arconix_FAQ_Metaboxes {
         ?>
         <p class="howto">
             <?php _e( 'To display this question, copy the code below and paste it into your post, page, text widget or other content area.', 
-            $this->textdomain ); ?>
+            'arconix-faq' ); ?>
         </p>
         <p><input type="text" value="[faq p=<?php echo $post_ID; ?>]" readonly="readonly" class="widefat wp-ui-text-highlight code"></p>
         <?php

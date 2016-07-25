@@ -28,7 +28,7 @@ class Arconix_FAQ_Admin extends Arconix_CPT_Admin {
     public function __construct() {
         $this->url = trailingslashit( plugin_dir_url( dirname( __FILE__ ) ) );
 
-        parent::__construct( 'faq', Arconix_FAQ_Plugin::textdomain );
+        parent::__construct( 'faq' );
     }
     
     /**
@@ -68,8 +68,8 @@ class Arconix_FAQ_Admin extends Arconix_CPT_Admin {
      */
     function columns_define( $columns ) {
         
-        $answer    = array( 'faq_content'   => __( 'Answer', Arconix_FAQ_Plugin::textdomain ) );
-        $shortcode = array( 'faq_shortcode' => __( 'Shortcode', Arconix_FAQ_Plugin::textdomain ) );
+        $answer    = array( 'faq_content'   => __( 'Answer', 'arconix-faq' ) );
+        $shortcode = array( 'faq_shortcode' => __( 'Shortcode', 'arconix-faq' ) );
 
         $columns = array_slice( $columns, 0, 2, true ) + $answer    + array_slice( $columns, 2, NULL, true );
         $columns = array_slice( $columns, 0, 3, true ) + $shortcode + array_slice( $columns, 3, NULL, true );
@@ -131,11 +131,11 @@ class Arconix_FAQ_Admin extends Arconix_CPT_Admin {
 
         ?>  <div class="acf-widget-bottom"><ul>;
                 <li><a href="http://arcnx.co/afwiki" class="af-docs">
-                    <?php _e( 'Documentation', Arconix_FAQ_Plugin::textdomain ); ?></a></li>
+                    <?php _e( 'Documentation', 'arconix-faq' ); ?></a></li>
                 <li><a href="http://arcnx.co/afhelp" class="af-help">
-                    <?php _e( 'Support Forum', Arconix_FAQ_Plugin::textdomain ); ?></a></li>
+                    <?php _e( 'Support Forum', 'arconix-faq' ); ?></a></li>
                 <li><a href="http://arcnx.co/afsource" class="af-source">
-                    <?php _e( 'Source Code', Arconix_FAQ_Plugin::textdomain ); ?></a></li>
+                    <?php _e( 'Source Code', 'arconix-faq' ); ?></a></li>
             </ul></div></div>
         <?php
     }

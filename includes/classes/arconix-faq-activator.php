@@ -17,11 +17,11 @@ class Arconix_FAQ_Activator {
 
 		if( version_compare( $wp_version, $wp, '<' ) && version_compare( PHP_VERSION, $php, '<' ) ) {
 			$string = sprintf( __( 'This plugin requires either WordPress 4.6 or PHP 5.3. You are running versions %s and %s, respectively', 
-			Arconix_FAQ_Plugin::textdomain ), $wp_version , PHP_VERSION );
+			'arconix-faq' ), $wp_version , PHP_VERSION );
 
 			deactivate_plugins( basename( __FILE__ ) );
 
-			wp_die( $string, __( 'Plugin Activation Error', Arconix_FAQ_Plugin::textdomain ), array( 'response' => 200, 'back_link' => TRUE ) );
+			wp_die( $string, __( 'Plugin Activation Error', 'arconix-faq' ), array( 'response' => 200, 'back_link' => TRUE ) );
 		
 		}
 	}
