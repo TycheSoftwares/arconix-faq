@@ -235,7 +235,7 @@ class Arconix_FAQ_Display {
      * @param   bool        $echo       Echo or return the results
      * @return  string                  Hyperlinked "Return to Top" link
      */
-    protected function return_to_top( $link, $echo = false ) {
+    public function return_to_top( $link, $echo = false ) {
         $html = '';
 
         // Grab our metadata
