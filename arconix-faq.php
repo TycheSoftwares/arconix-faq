@@ -26,7 +26,7 @@ if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
 register_activation_hook( __FILE__, 'activate_arconix_faq' );
 
 function activate_arconix_faq() {
-	require_once plugin_dir_path( __FILE__ ) . '/includes/classes/arconix-faq-activator.php';
+    require_once plugin_dir_path( __FILE__ ) . '/includes/classes/arconix-faq-activator.php';
     Arconix_FAQ_Activator::activate();
 }
 
@@ -37,7 +37,7 @@ spl_autoload_register( 'arconix_faq_autoloader' );
  * Class Autoloader
  * 
  * @param	string	$class_name		Class to check to autoload
- * @return	null					Return if it's not a valid class
+ * @return	null                    Return if it's not a valid class
  */
 function arconix_faq_autoloader( $class_name ) {
 	/**
@@ -50,7 +50,7 @@ function arconix_faq_autoloader( $class_name ) {
 
 	$file_name = str_replace(
 		array( 'Arconix_', '_' ),	// Prefix | Underscores 
-		array( '', '-' ),			// Remove | Replace with hyphens
+		array( '', '-' ),           // Remove | Replace with hyphens
 		strtolower( $class_name )	// lowercase
 	);
 
@@ -68,24 +68,24 @@ function arconix_faq_autoloader( $class_name ) {
  *
  * This is the base class which sets the version, loads dependencies and gets the plugin running
  *
- * @since 1.7.0
+ * @since   1.7.0
  */
 final class Arconix_FAQ_Plugin {
     
     /**
      * Plugin version.
      *
-     * @since	1.7.0
-     * @var		string	$version        Plugin version
+     * @since   1.7.0
+     * @var     string	$version        Plugin version
      */
     const version = '1.7.0';
 	
-	/**
-     * Post Type settings
-	 *
-	 * @since	1.7.0
-	 * @var		array	$settings       Post Type default settings
-	 */
+    /**
+     * Post Type Settings
+     *
+     * @since   1.7.0
+     * @var     array   $settings       Post Type default settings 
+     */
 	protected $settings;
 
     /**
@@ -97,7 +97,7 @@ final class Arconix_FAQ_Plugin {
         $this->settings = $this->get_settings();
     }
 	
-	/**
+    /**
      * Load the plugin instructions
      * 
      * @since   1.7.0
@@ -131,7 +131,11 @@ final class Arconix_FAQ_Plugin {
         $pt->add( $names, $settings['post_type']['args'] );
     }
     
-    
+    /**
+     * Register the Post Type Taxonomy
+     * 
+     * @since   1.7.0
+     */
     private function register_taxonomy() {
         $settings = $this->settings;
         
@@ -139,7 +143,11 @@ final class Arconix_FAQ_Plugin {
         $tax->add( 'group', 'faq', $settings['taxonomy']['args'] );
     }
     
-    
+    /**
+     * Load the Public-facing components of the plugin
+     * 
+     * @since   1.7.0
+     */
     private function load_public() {
         $p = new Arconix_FAQ_Public();
         
@@ -165,15 +173,15 @@ final class Arconix_FAQ_Plugin {
         
         $m->init();
     }
-    
+
     /**
-	 * Get our default Post Type and Taxonomy registration settings
+     * Get the default Post Type and Taxonomy registration settings
      * 
-     * Settings stored in a filterable array for customization purposes
-	 * 
-	 * @since	1.7.0
-	 * @return	array                   Default Registration Settings
-	 */
+     * Settings are stored in a filterable array for customization purposes
+     * 
+     * @since   1.7.0
+     * @return  array           Default registration settings
+     */
 	public function get_settings() {
 		$settings = array(
             'post_type' => array(
@@ -209,4 +217,5 @@ function arconix_faq_run() {
     
     $arconix_faq = new Arconix_FAQ_Plugin();
     $arconix_faq->init();
+    flush_rewrite_rules();
 }

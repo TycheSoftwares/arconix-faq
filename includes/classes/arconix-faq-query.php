@@ -20,7 +20,7 @@ class Arconix_FAQ_Query extends WP_Query {
      * @param   array       $args           Incoming query arguments
      * @param   string      $term_slug      Taxonomy term slug to query against
      */
-    function __construct( $args = array(), $term_slug = '' ) {
+    public function __construct( $args = array(), $term_slug = '' ) {
         
         // Form our taxonomy query args (if avail)
         $tax_args = $this->tax_query_args( $term_slug );
@@ -47,10 +47,10 @@ class Arconix_FAQ_Query extends WP_Query {
      * Build our taxonomy query if it is being called for.
      * 
      * @since   1.7.0
-     * @param   type        $slug           Taxonomy term slug to pass into the query
-     * @return  array                       Empty array if $slug is empty or completed taxonomy query array
+     * @param   string      $slug       Taxonomy term slug to pass into the query
+     * @return  array                   Empty array if $slug is empty or completed taxonomy query array
      */
-    public function tax_query_args( $slug ) {
+    protected function tax_query_args( $slug ) {
         if ( empty( $slug ) ) 
             return;
         
