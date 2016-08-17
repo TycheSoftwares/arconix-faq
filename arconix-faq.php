@@ -217,5 +217,4 @@ function arconix_faq_run() {
     
     $arconix_faq = new Arconix_FAQ_Plugin();
     $arconix_faq->init();
-    flush_rewrite_rules();
 }
