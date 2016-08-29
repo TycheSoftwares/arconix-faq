@@ -6,7 +6,13 @@ PLEASE DO NOT make modifications to this file directly as it will be overwritten
 Instead, save a copy of this file to your theme directory. It will then be loaded in place
 of the plugin's version and will maintain your changes on upgrade
 */
-jQuery(document).ready( function(){
+jQuery(document).ready(function(){
+    
+    // Users sent to specific FAQ's will start with them open
+    if(window.location.hash) {
+        var hash = window.location.hash.substring(1);
+        jQuery('#' + hash).addClass('faq-open').removeClass('faq-closed').next('.arconix-faq-content').addClass('faq-open').removeClass('faq-closed');
+    }
 
     // This looks at the initial state of each content area, and hide content areas that are closed
     jQuery('.arconix-faq-content').each( function() {
