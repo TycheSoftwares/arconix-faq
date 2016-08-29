@@ -113,14 +113,17 @@ class Arconix_FAQ_Public {
      * @since   1.7.0
      */
     public function base_styles() {
+        // Set our .min suffix
+        $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+        
         // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
         if ( ! current_theme_supports( 'arconix-faq', 'css' ) && apply_filters( 'pre_register_arconix_faq_css', true ) ) {
-            if( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
+            if ( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
                 wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, Arconix_FAQ_Plugin::version );
-            elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
+            elseif ( file_exists( get_template_directory() . '/arconix-faq.css' ) )
                 wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, Arconix_FAQ_Plugin::version );
             else
-                wp_enqueue_style( 'arconix-faq', $this->url . 'css/arconix-faq.css', false, Arconix_FAQ_Plugin::version );
+                wp_enqueue_style( 'arconix-faq', $this->url . "css/arconix-faq{$suffix}.css", false, Arconix_FAQ_Plugin::version );
         }
     }
 
@@ -172,9 +175,9 @@ class Arconix_FAQ_Public {
      */
     public function scripts() {
         if ( ! current_theme_supports( 'arconix-faq', 'js' ) && apply_filters( 'pre_register_arconix_faq_js', true ) ) {
-            if( file_exists( get_stylesheet_directory() . '/arconix-faq.js' ) )
+            if ( file_exists( get_stylesheet_directory() . '/arconix-faq.js' ) )
                 wp_register_script( 'arconix-faq-js', get_stylesheet_directory_uri() . '/arconix-faq.js', array( 'jquery-ui-accordion' ), Arconix_FAQ_Plugin::version );
-            elseif( file_exists( get_template_directory() . '/arconix-faq.js' ) )
+            elseif ( file_exists( get_template_directory() . '/arconix-faq.js' ) )
                 wp_register_script( 'arconix-faq-js', get_template_directory_uri() . '/arconix-faq.js', array( 'jquery-ui-accordion' ), Arconix_FAQ_Plugin::version );
             else
                 wp_register_script( 'arconix-faq-js', $this->url . 'js/arconix-faq.js', array( 'jquery-ui-accordion' ), Arconix_FAQ_Plugin::version );
@@ -194,8 +197,8 @@ class Arconix_FAQ_Public {
             wp_enqueue_script( 'arconix-faq-js' );
 
         // Translate 'all' to nopaging = true ( for backward compatibility)
-        if( isset( $atts['showposts'] ) ) {
-            if( $atts['showposts'] != "all" and $atts['showposts'] > 0 ) {
+        if ( isset( $atts['showposts'] ) ) {
+            if ( $atts['showposts'] != "all" and $atts['showposts'] > 0 ) {
                 $atts['posts_per_page'] = $atts['showposts'];
             }
         }

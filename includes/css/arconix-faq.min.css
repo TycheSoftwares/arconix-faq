@@ -1,0 +1,12 @@
+h3.arconix-faq-term-title{margin:20px 0 10px}
+p.arconix-faq-term-description{font-style:italic}
+.arconix-faq-wrap{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;background:none repeat scroll 0 0 #fbfbfb;clear:both;border:1px solid #ddd;margin:10px 0;padding:5px 10px}
+.arconix-faq-title{background:url(../../images/toggle-open.png) no-repeat left transparent;cursor:pointer;font-size:16px;padding:0 0 0 30px;position:relative}
+.arconix-faq-title.faq-open{background:url(../../images/toggle-close.png) no-repeat left transparent}
+.arconix-faq-content{margin-left:10px;padding:5px 20px}
+.arconix-faq-content p{padding:0!important}
+.arconix-faq-content p:last-child{margin:0!important}
+.arconix-faq-accordion-title.ui-state-default{background:#fbfbfb}
+.arconix-faq-accordion-content{padding:5px 15px 5px 10px}
+.arconix-faq-accordion-content p{padding:0!important}
+.arconix-faq-accordion-content p:last-child{margin:0!important}
