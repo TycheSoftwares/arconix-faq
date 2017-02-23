@@ -4,7 +4,7 @@
  * Class for Registering Custom Post Types
  * 
  * New Post Types are added by instantiating the class and passing the necessary arguments
- * to the 'add' function.
+ * to the 'add' function. Users should search/replace 'textdomain' with their own plugin-specific domain
  *
  * @license GPL-2.0+
  * @version 1.0.0
@@ -15,7 +15,7 @@ class Arconix_CPT_Register {
      * Post Type Name
      *
      * @since   1.0.0
-     * @var		string			$post_type_name     Name of the Custom Post Type.
+     * @var     string      $post_type_name     Name of the Custom Post Type.
      */
     protected $post_type_name;
 
@@ -24,7 +24,7 @@ class Arconix_CPT_Register {
      * friendly name, capitalized with spaces.
      *
      * @since   1.0.0
-     * @var		string			$singular			Post type singular name. 
+     * @var     string      $singular       Post type singular name. 
      */
     protected $singular;
 
@@ -33,23 +33,15 @@ class Arconix_CPT_Register {
      * friendly name, capitalized with spaces.
      *
      * @since   1.0.0
-     * @var		string			$plural				Post type plural name.
+     * @var     string      $plural     Post type plural name.
      */
     protected $plural;
-
-    /**
-     * Textdomain used for translation.
-     *
-     * @since   1.0.0
-     * @var		string			$textdomain			Used for i18n.
-     */
-    protected $textdomain;
 
     /**
      * Custom Post Type registration labels.
      *
      * @since   1.0.0
-     * @var		array			$labels				Post Type registration labels.
+     * @var     array       $labels     Post Type registration labels.
      */
     protected $labels;
 
@@ -57,7 +49,7 @@ class Arconix_CPT_Register {
      * Additional settings for post type registration.
      *
      * @since   1.0.0
-     * @var		array			$settings			Post Type registration settings.
+     * @var     array       $settings       Post Type registration settings.
      */
     protected $settings;
 
@@ -76,22 +68,20 @@ class Arconix_CPT_Register {
      * Add a new Custom Post Type
      * 
      * @since   1.0.0
-     * @param	string|array	$post_type_names        Single post type name or array of post type names
+     * @param   string|array	$post_type_names        Single post type name or array of post type names
      *                                              	including singular and plural options
-     * @param	array           $settings               Array of additional post type registration settings
+     * @param   array           $settings               Array of additional post type registration settings
      *                                                  (see https://codex.wordpress.org/Function_Reference/register_post_type#Arguments )
-     * @param	string          $textdomain             For i18n
-     * @return	void                                    Return early if no valid post types were provided
+     * @return  void                                    Return early if no valid post types were provided
      */
-    public function add( $post_type_names, $settings = array(), $textdomain = 'default' ) {
+    public function add( $post_type_names, $settings = array() ) {
         // Bail if the post type name hasn't been set
         if ( !isset( $post_type_names ) )
             return;
 
         $this->set_post_type_names( $post_type_names );
-        $this->textdomain = $textdomain;
-        $this->labels     = $this->set_labels();
-        $this->settings   = $this->set_settings( $settings );
+        $this->labels   = $this->set_labels();
+        $this->settings = $this->set_settings( $settings );
     }
 
     /**
@@ -115,8 +105,8 @@ class Arconix_CPT_Register {
      * Assign the Custom Post Type registration settings
      * 
      * @since   1.0.0
-     * @param	array           $settings               Post Type settings. Default is a public post type
-     * @return	array                                   Array of Post Type settings merged with defaults
+     * @param   array       $settings       Post Type settings. Default is a public post type
+     * @return  array                       Array of Post Type settings merged with defaults
      */
     protected function set_settings( $settings = array() ) {
         // Set the post type to public by default
@@ -132,7 +122,7 @@ class Arconix_CPT_Register {
      * Set the Custom Post Type labels.
      * 
      * @since   1.0.0
-     * @return	array           $labels                 Post Type labels
+     * @return  array       $labels     Post Type labels
      */
     protected function set_labels() {
 
@@ -165,7 +155,7 @@ class Arconix_CPT_Register {
      * programatically if not.
      * 
      * @since   1.0.0
-     * @param	string|array	$post_type_names        Name of the post type or array of post type conditional names.
+     * @param   string|array	$post_type_names        Name of the post type or array of post type conditional names.
      */
     protected function set_post_type_names( $post_type_names ) {
         // Check if all the post_type_names have been supplied
@@ -213,8 +203,8 @@ class Arconix_CPT_Register {
      * Returns the human friendly singular name.
      *
      * @since   1.0.0
-     * @param	string			$name				The name you want to unpluralize.
-     * @return	string								The friendly singular name.
+     * @param   string      $name       The name you want to unpluralize.
+     * @return  string                  The friendly singular name.
      */
     protected function get_singular( $name = null ) {
         // If no name is passed the post_type_name is used.
@@ -238,8 +228,8 @@ class Arconix_CPT_Register {
      * Returns the human friendly plural name.
      *
      * @since   1.0.0
-     * @param	string			$name				The name you want to pluralize.
-     * @return	string								The friendly pluralized name.
+     * @param   string      $name       The name you want to pluralize.
+     * @return  string                  The friendly pluralized name.
      */
     protected function get_plural( $name = null ) {
         // If no name is passed the post_type_name is used.
@@ -260,8 +250,8 @@ class Arconix_CPT_Register {
      *    str_replace  Replace all instances of hyphens and underscores to spaces
      *
      * @since   1.0.0
-     * @param	string			$name				The name you want to make friendly.
-     * @return	string								The human friendly name.
+     * @param   string      $name       The name you want to make friendly.
+     * @return  string                  The human friendly name.
      */
     protected function get_human_friendly( $name = null ) {
         // If no name is passed the post_type_name is used.
