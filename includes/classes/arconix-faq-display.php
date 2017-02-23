@@ -177,7 +177,7 @@ class Arconix_FAQ_Display {
 
         $html .= '<div id="' . $link . '" class="arconix-faq-accordion-title">';
         $html .= get_the_title() . '</div>';
-        $html .= '<div id="' . $link . '" class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
+        $html .= '<div class="arconix-faq-accordion-content">' . apply_filters( 'the_content', get_the_content() );
         $html .= $this->return_to_top( $link );
         $html .= '</div>';
 
