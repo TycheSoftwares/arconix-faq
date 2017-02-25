@@ -191,8 +191,29 @@ final class Arconix_FAQ_Plugin {
                     'menu_icon'         => 'dashicons-editor-help',
                     'has_archive'       => false,
                     'supports'          => array( 'title', 'editor', 'revisions', 'page-attributes' ),
-                    'rewrite'           => array( 'with_front' => false )
-                )
+                    'rewrite'           => array( 'with_front' => false ),
+                    'capability_type'   => array( 'faq', 'faqs' ),
+                    'capabilities' => array(
+                        'edit_others_posts'         => 'edit_others_faqs',
+                        'delete_others_posts'       => 'delete_others_faqs',
+                        'delete_private_posts'      => 'delete_private_faqs',
+                        'edit_private_posts'        => 'edit_private_faqs',
+                        'read_private_posts'        => 'read_private_faqs',
+                        'edit_published_posts'      => 'edit_published_faqs',
+                        'delete_published_posts'    => 'delete_published_faqs',
+
+                        
+                        'publish_posts'         => 'create_faqs',
+                        'edit_posts'            => 'create_faqs',
+                        'edit_others_posts'     => 'create_faqs',
+                        'delete_posts'          => 'delete_faqs',
+                        'create_faqs'           => 'create_faqs',
+                        'read_private_posts'    => 'create_faqs',
+                        'edit_post'             => 'create_faqs',
+                        'delete_post'           => 'delete_faqs',
+                        'read_post'             => 'create_faqs',
+                    )
+                )    
             ),
             'taxonomy' => array(
                 'args' => array(
