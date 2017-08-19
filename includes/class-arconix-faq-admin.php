@@ -60,7 +60,6 @@ class Arconix_FAQ_Admin {
         add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
         add_filter( 'cmb_meta_boxes',               array( $this, 'metaboxes' ) );
         add_action( 'add_meta_boxes_faq',           array( $this, 'add_faq_metabox' ) );
-
         add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
     }
 
@@ -198,6 +197,45 @@ class Arconix_FAQ_Admin {
     }
 
     /**
+     * Load JavaScripts and Stylesheets.
+     */
+    function load_scripts(){
+         // Set our JS to load
+        wp_enqueue_script( 'arconix-faq-js' );
+        /**
+         * Load the CSS necessary for the accordion script
+         *
+         * If you plan on adding a filter to use a different jQuery UI theme, it's highly recommended
+         * you reference the $wp_scripts global as well as the $ui variable to make sure we load the CSS
+         * for the version of jQuery WordPress loads
+         */
+        if( apply_filters( 'pre_register_arconix_faq_jqui_css', true ) ) {
+            global $wp_scripts;
+
+            // get registered script object for jquery-ui
+            $ui = $wp_scripts->query( 'jquery-ui-core' );
+
+            $css_args = apply_filters( 'arconix_jqueryui_css_reg', array(
+                'url' => '//ajax.googleapis.com/ajax/libs/jqueryui/' . $ui->ver . '/themes/smoothness/jquery-ui.min.css',
+                'ver' => $ui->ver,
+                'dep' => false
+            ) );
+
+            wp_enqueue_style( 'jquery-ui-smoothness', $css_args['url'], $css_args['dep'], $css_args['ver'] );
+        }
+
+        // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
+        if( apply_filters( 'pre_register_arconix_faq_css', true ) ) {
+            if( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
+                wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, $this->version );
+            elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
+                wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, $this->version );
+            else
+                wp_enqueue_style( 'arconix-faq', $this->url . 'css/arconix-faq.css', false, $this->version );
+        }
+    }
+
+    /**
      * Display FAQs
      *
      * @since   0.9
@@ -205,9 +243,9 @@ class Arconix_FAQ_Admin {
      * @param   array $atts
      */
     function faq_shortcode( $atts, $content = null ) {
-        // Set our JS to load
-        wp_enqueue_script( 'arconix-faq-js' );
-
+       
+        // Load scripts and styles for FAQs
+        $this->load_scripts();
         // Translate 'all' to nopaging = true ( for backward compatibility)
         if( isset( $atts['showposts'] ) ) {
             if( $atts['showposts'] != "all" and $atts['showposts'] > 0 ) {
@@ -246,37 +284,37 @@ class Arconix_FAQ_Admin {
                 wp_register_script( 'arconix-faq-js', $this->url . 'js/arconix-faq.js', array( 'jquery-ui-accordion' ), $this->version );
         }
 
-        /**
-         * Load the CSS necessary for the accordion script
-         *
-         * If you plan on adding a filter to use a different jQuery UI theme, it's highly recommended
-         * you reference the $wp_scripts global as well as the $ui variable to make sure we load the CSS
-         * for the version of jQuery WordPress loads
-         */
-        if( apply_filters( 'pre_register_arconix_faq_jqui_css', true ) ) {
-            global $wp_scripts;
+        // /**
+        //  * Load the CSS necessary for the accordion script
+        //  *
+        //  * If you plan on adding a filter to use a different jQuery UI theme, it's highly recommended
+        //  * you reference the $wp_scripts global as well as the $ui variable to make sure we load the CSS
+        //  * for the version of jQuery WordPress loads
+        //  */
+        // if( apply_filters( 'pre_register_arconix_faq_jqui_css', true ) ) {
+        //     global $wp_scripts;
 
-            // get registered script object for jquery-ui
-            $ui = $wp_scripts->query( 'jquery-ui-core' );
+        //     // get registered script object for jquery-ui
+        //     $ui = $wp_scripts->query( 'jquery-ui-core' );
 
-            $css_args = apply_filters( 'arconix_jqueryui_css_reg', array(
-                'url' => '//ajax.googleapis.com/ajax/libs/jqueryui/' . $ui->ver . '/themes/smoothness/jquery-ui.min.css',
-                'ver' => $ui->ver,
-                'dep' => false
-            ) );
+        //     $css_args = apply_filters( 'arconix_jqueryui_css_reg', array(
+        //         'url' => '//ajax.googleapis.com/ajax/libs/jqueryui/' . $ui->ver . '/themes/smoothness/jquery-ui.min.css',
+        //         'ver' => $ui->ver,
+        //         'dep' => false
+        //     ) );
 
-            wp_enqueue_style( 'jquery-ui-smoothness', $css_args['url'], $css_args['dep'], $css_args['ver'] );
-        }
+        //     wp_enqueue_style( 'jquery-ui-smoothness', $css_args['url'], $css_args['dep'], $css_args['ver'] );
+        // }
 
-        // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
-        if( apply_filters( 'pre_register_arconix_faq_css', true ) ) {
-            if( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
-                wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, $this->version );
-            elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
-                wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, $this->version );
-            else
-                wp_enqueue_style( 'arconix-faq', $this->url . 'css/arconix-faq.css', false, $this->version );
-        }
+        // // Load the CSS - Check the theme directory first, the parent theme (if applicable) second, otherwise load the plugin file
+        // if( apply_filters( 'pre_register_arconix_faq_css', true ) ) {
+        //     if( file_exists( get_stylesheet_directory() . '/arconix-faq.css' ) )
+        //         wp_enqueue_style( 'arconix-faq', get_stylesheet_directory_uri() . '/arconix-faq.css', false, $this->version );
+        //     elseif( file_exists( get_template_directory() . '/arconix-faq.css' ) )
+        //         wp_enqueue_style( 'arconix-faq', get_template_directory_uri() . '/arconix-faq.css', false, $this->version );
+        //     else
+        //         wp_enqueue_style( 'arconix-faq', $this->url . 'css/arconix-faq.css', false, $this->version );
+        // }
 
     }
 
