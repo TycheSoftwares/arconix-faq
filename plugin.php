@@ -4,10 +4,10 @@
  * Plugin URI: http://arconixpc.com/plugins/arconix-faq
  * Description: Plugin to handle the display of FAQs
  *
- * Version: 1.7.0
+ * Version: 1.6.1
  *
- * Author: Tyche Softwares
- * Author URI: https://tychesoftwares.com/
+ * Author: John Gardner
+ * Author URI: http://arconixpc.com/
  *
  * Text Domain: arconix-faq
  *

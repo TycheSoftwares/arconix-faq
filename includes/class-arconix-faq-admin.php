@@ -38,7 +38,7 @@ class Arconix_FAQ_Admin {
      * Initialize the class and set its properties.
      *
      * @since   1.4.0
-     * @version 1.7.0
+     * @version 1.6.0
      * @param   string      $version    The version of this plugin.
      */
     public function __construct( $version ) {
@@ -60,7 +60,6 @@ class Arconix_FAQ_Admin {
         add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
         add_filter( 'cmb_meta_boxes',               array( $this, 'metaboxes' ) );
         add_action( 'add_meta_boxes_faq',           array( $this, 'add_faq_metabox' ) );
-
         add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
     }
 
@@ -197,7 +196,8 @@ class Arconix_FAQ_Admin {
         return $meta_boxes;
     }
 
-   * Load JavaScripts and Stylesheets.
+    /**
+     * Load JavaScripts and Stylesheets.
      */
     function load_scripts(){
          // Set our JS to load
@@ -243,9 +243,9 @@ class Arconix_FAQ_Admin {
      * @param   array $atts
      */
     function faq_shortcode( $atts, $content = null ) {
+       
         // Load scripts and styles for FAQs
         $this->load_scripts();
-        
         // Translate 'all' to nopaging = true ( for backward compatibility)
         if( isset( $atts['showposts'] ) ) {
             if( $atts['showposts'] != "all" and $atts['showposts'] > 0 ) {
@@ -253,9 +253,9 @@ class Arconix_FAQ_Admin {
             }
         }
 
-        $faq_display = new Arconix_FAQ_Display;
+        $f = new Arconix_FAQ_Display;
 
-        return $faq_display->loop( $atts );
+        return $f->loop( $atts );
     }
 
     /**
@@ -343,8 +343,8 @@ class Arconix_FAQ_Admin {
         global $post, $post_ID;
         $post_type = get_post_type( $post_ID );
 
-        $post_type_obj = get_post_type_object( $post_type );
-        $singular = $post_type_obj->labels->singular_name;
+        $obj = get_post_type_object( $post_type );
+        $singular = $obj->labels->singular_name;
 
         $messages[$post_type] = array(
             0  => '', // Unused. Messages start at index 1.
