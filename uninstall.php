@@ -14,11 +14,12 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-
+//get data from wp_posts table where 'post_type' is 'faq'. So thet we can delete that data.
 $post_data = get_posts( array( 'post_type' => 'faq') );
-    
-   foreach( $post_data as $each_post ) {
-     // Delete's each post.
-    wp_delete_post( $each_post->ID, true );
-    // Set to False if you want to send them to Trash.
-   }
+  
+//wp_delete_post need post_id and boolean value to delete each post.  
+foreach( $post_data as $each_post ) {
+	// Delete each post.
+	wp_delete_post( $each_post->ID, true );
+	// Set to False if you want to send them to Trash.
+}

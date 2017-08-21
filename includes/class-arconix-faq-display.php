@@ -29,7 +29,8 @@ class Arconix_FAQ_Display {
             'style'             => 'toggle',
             'posts_per_page'    => -1,
             'nopaging'          => true,
-            'group'             => ''
+            'group'             => '',
+            'exclude_group'     => ''
         );
     }
 
@@ -99,9 +100,9 @@ class Arconix_FAQ_Display {
                     );
 
                     // New query just for the tax term we're looping through
-                    $q = new WP_Query( $query_args );
+                    $wp_query = new WP_Query( $query_args );
 
-                    if ( $q->have_posts() ) {
+                    if ( $wp_query->have_posts() ) {
                         if( !( $exclude == $term->slug ) ) {
                             $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
@@ -114,7 +115,7 @@ class Arconix_FAQ_Display {
                                 $html .= '<div class="arconix-faq-accordion-wrap">';
 
                             // Loop through the rest of the posts for the term
-                            while ( $q->have_posts() ) : $q->the_post();
+                            while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
                                 if ( $accordion )
                                     $html .= $this->accordion_output();
@@ -136,7 +137,7 @@ class Arconix_FAQ_Display {
             else { // If $terms is blank (faq groups aren't in use) or $skip_group is true
 
                 // Set up our standard query args.
-                $q = new WP_Query( array(
+                $wp_query = new WP_Query( array(
                     'post_type'         => 'faq',
                     'p'                 => $args['p'],
                     'order'             => $args['order'],
@@ -145,12 +146,12 @@ class Arconix_FAQ_Display {
                 ) );
 
 
-                if ( $q->have_posts() ) {
+                if ( $wp_query->have_posts() ) {
 
                     if ( $accordion )
                         $html .= '<div class="arconix-faq-accordion-wrap">';
 
-                    while ( $q->have_posts() ) : $q->the_post();
+                    while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
                         if ( $accordion )
                             $html .= $this->accordion_output();
