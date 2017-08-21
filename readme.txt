@@ -3,8 +3,8 @@ Contributors: jgardner03
 Donate link: http://arcnx.co/acfdonation
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 4.8
-Stable tag: 1.7.0
+Tested up to: 4.4
+Stable tag: 1.6.1
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -60,11 +60,6 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
-= 1.7.0 =
-* Exclude Group shortcode to not display a particular group's FAQs.
-* Scripts will be include only on the pages where shortcode is use.
-* Hide Title shortcode to not display a group's Title.
-
 = 1.6.1 =
 Fixed a bug which caused the FAQ Group descriptions to output incorrectly when using the accordion style
 
