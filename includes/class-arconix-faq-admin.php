@@ -38,7 +38,7 @@ class Arconix_FAQ_Admin {
      * Initialize the class and set its properties.
      *
      * @since   1.4.0
-     * @version 1.6.0
+     * @version 1.7.0
      * @param   string      $version    The version of this plugin.
      */
     public function __construct( $version ) {
