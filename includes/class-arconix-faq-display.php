@@ -29,8 +29,7 @@ class Arconix_FAQ_Display {
             'style'             => 'toggle',
             'posts_per_page'    => -1,
             'nopaging'          => true,
-            'group'             => '',
-            'exclude_group'     => ''
+            'group'             => ''
         );
     }
 
@@ -58,100 +57,63 @@ class Arconix_FAQ_Display {
     public function loop( $args, $echo = false ) {
         // Merge incoming args with the class defaults
         $args = wp_parse_args( $args, $this->getdefaults() );
-        $exclude = $args['exclude_group'];
-        
-            $html = '';
-    
-            // Get the taxonomy terms assigned to all FAQs
-            $terms = get_terms( 'group' );
 
-            // Are we skipping the group check?
-            $skip_group = $args['skip_group'];
+        // Container
+        $html = '';
 
-            // Do we have an accordion?
-            $args['style'] == 'accordion' ? $accordion = true : $accordion = false;
+        // Get the taxonomy terms assigned to all FAQs
+        $terms = get_terms( 'group' );
+
+        // Are we skipping the group check?
+        $skip_group = $args['skip_group'];
+
+        // Do we have an accordion?
+        $args['style'] == 'accordion' ? $accordion = true : $accordion = false;
 
 
-            // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
-            if ( ! empty( $terms ) && $skip_group == false && empty( $args['p'] ) ) {
+        // If there are any terms being used, loop through each one to output the relevant FAQ's, else just output all FAQs
+        if ( ! empty( $terms ) && $skip_group == false && empty( $args['p'] ) ) {
 
-                foreach ( $terms as $term ) {
+            foreach ( $terms as $term ) {
 
-                    // If a user sets a specific group in the params, that's the only one we care about
-                    $group = $args['group'];
-                    
-                    if ( isset( $group ) && $group != '' && $term->slug != $group )
-                        continue;
-
-                    // Set up our standard query args.
-                    $query_args = array(
-                        'post_type'         => 'faq',
-                        'order'             => $args['order'],
-                        'orderby'           => $args['orderby'],
-                        'posts_per_page'    => $args['posts_per_page'],
-                        'tax_query'         => array(
-                            array(
-                                'taxonomy'  => 'group',
-                                'field'     => 'slug',
-                                'terms'     => array( $term->slug ),
-                                'operator'  => 'IN'
-                            )
-                        )
-                    );
-
-                    // New query just for the tax term we're looping through
-                    $wp_query = new WP_Query( $query_args );
-
-                    if ( $wp_query->have_posts() ) {
-                        if( !( $exclude == $term->slug ) ) {
-                            $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
-
-                            // If the term has a description, show it
-                            if ( $term->description )
-                                $html .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
-
-                            // Output the accordion wrapper if that style has been set
-                            if ( $accordion )
-                                $html .= '<div class="arconix-faq-accordion-wrap">';
-
-                            // Loop through the rest of the posts for the term
-                            while ( $wp_query->have_posts() ) : $wp_query->the_post();
-
-                                if ( $accordion )
-                                    $html .= $this->accordion_output();
-                                else
-                                    $html .= $this->toggle_output();
-
-                            endwhile;
-
-                            // Close the accordion wrapper if necessary
-                            if ( $accordion )
-                                $html .= '</div>';
-                        }
-
-                    } // end have_posts()
-
-                    wp_reset_postdata();
-                } // end foreach
-            } // End if( $terms )
-            else { // If $terms is blank (faq groups aren't in use) or $skip_group is true
+                // If a user sets a specific group in the params, that's the only one we care about
+                $group = $args['group'];
+                if ( isset( $group ) && $group != '' && $term->slug != $group )
+                    continue;
 
                 // Set up our standard query args.
-                $wp_query = new WP_Query( array(
+                $query_args = array(
                     'post_type'         => 'faq',
-                    'p'                 => $args['p'],
                     'order'             => $args['order'],
                     'orderby'           => $args['orderby'],
-                    'posts_per_page'    => $args['posts_per_page']
-                ) );
+                    'posts_per_page'    => $args['posts_per_page'],
+                    'tax_query'         => array(
+                        array(
+                            'taxonomy'  => 'group',
+                            'field'     => 'slug',
+                            'terms'     => array( $term->slug ),
+                            'operator'  => 'IN'
+                        )
+                    )
+                );
 
+                // New query just for the tax term we're looping through
+                $q = new WP_Query( $query_args );
 
-                if ( $wp_query->have_posts() ) {
+                if ( $q->have_posts() ) {
 
+                    $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
+
+                    // If the term has a description, show it
+                    if ( $term->description )
+                        $html .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
+
+                    // Output the accordion wrapper if that style has been set
                     if ( $accordion )
                         $html .= '<div class="arconix-faq-accordion-wrap">';
 
-                    while ( $wp_query->have_posts() ) : $wp_query->the_post();
+                    // Loop through the rest of the posts for the term
+                    while ( $q->have_posts() ) : $q->the_post();
 
                         if ( $accordion )
                             $html .= $this->accordion_output();
@@ -160,13 +122,48 @@ class Arconix_FAQ_Display {
 
                     endwhile;
 
+                    // Close the accordion wrapper if necessary
                     if ( $accordion )
                         $html .= '</div>';
+
                 } // end have_posts()
 
                 wp_reset_postdata();
-            }
-        // }
+            } // end foreach
+        } // End if( $terms )
+        else { // If $terms is blank (faq groups aren't in use) or $skip_group is true
+
+            // Set up our standard query args.
+            $q = new WP_Query( array(
+                'post_type'         => 'faq',
+                'p'                 => $args['p'],
+                'order'             => $args['order'],
+                'orderby'           => $args['orderby'],
+                'posts_per_page'    => $args['posts_per_page']
+            ) );
+
+
+            if ( $q->have_posts() ) {
+
+                if ( $accordion )
+                    $html .= '<div class="arconix-faq-accordion-wrap">';
+
+                while ( $q->have_posts() ) : $q->the_post();
+
+                    if ( $accordion )
+                        $html .= $this->accordion_output();
+                    else
+                        $html .= $this->toggle_output();
+
+                endwhile;
+
+                if ( $accordion )
+                    $html .= '</div>';
+            } // end have_posts()
+
+            wp_reset_postdata();
+        }
+
         // Allow complete override of the FAQ content
         $html = apply_filters( 'arconix_faq_return', $html, $args );
 
