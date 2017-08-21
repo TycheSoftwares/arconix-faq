@@ -30,6 +30,7 @@ class Arconix_FAQ_Display {
             'posts_per_page'    => -1,
             'nopaging'          => true,
             'group'             => '',
+            'exclude_group'     => '',
             'hide_title'        => false
         );
     }
@@ -58,6 +59,9 @@ class Arconix_FAQ_Display {
     public function loop( $args, $echo = false ) {
         // Merge incoming args with the class defaults
         $args = wp_parse_args( $args, $this->getdefaults() );
+        
+        //group which want to exclude
+        $exclude = $args[ 'exclude_group' ];
 
         // Container
         $html = '';
@@ -102,32 +106,33 @@ class Arconix_FAQ_Display {
                 $q = new WP_Query( $query_args );
 
                 if ( $q->have_posts() ) {
-                    //Allow to hide Group title of FAQs
-                   if ( ! $args['hide_title'] )
-                        $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
+                    if( !( $exclude == $term->slug ) ) {
+                        //Allow to hide Group title of FAQs
+                       if ( ! $args['hide_title'] )
+                            $html .= '<h3 id="faq-' . $term->slug . '" class="arconix-faq-term-title arconix-faq-term-' . $term->slug . '">' . $term->name . '</h3>';
 
-                    // If the term has a description, show it
-                    if ( $term->description )
-                        $html .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
+                        // If the term has a description, show it
+                        if ( $term->description )
+                            $html .= '<p class="arconix-faq-term-description">' . $term->description . '</p>';
 
-                    // Output the accordion wrapper if that style has been set
-                    if ( $accordion )
-                        $html .= '<div class="arconix-faq-accordion-wrap">';
-
-                    // Loop through the rest of the posts for the term
-                    while ( $q->have_posts() ) : $q->the_post();
-
+                        // Output the accordion wrapper if that style has been set
                         if ( $accordion )
-                            $html .= $this->accordion_output();
-                        else
-                            $html .= $this->toggle_output();
+                            $html .= '<div class="arconix-faq-accordion-wrap">';
 
-                    endwhile;
+                        // Loop through the rest of the posts for the term
+                        while ( $q->have_posts() ) : $q->the_post();
 
-                    // Close the accordion wrapper if necessary
-                    if ( $accordion )
-                        $html .= '</div>';
+                            if ( $accordion )
+                                $html .= $this->accordion_output();
+                            else
+                                $html .= $this->toggle_output();
 
+                        endwhile;
+
+                        // Close the accordion wrapper if necessary
+                        if ( $accordion )
+                            $html .= '</div>';
+                    }
                 } // end have_posts()
 
                 wp_reset_postdata();
