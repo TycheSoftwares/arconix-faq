@@ -60,6 +60,11 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+= 1.7.0 =
+* You can now exclude certain groups from the FAQs using the exclude_group attribute. The value of this attribute should be the slug of the group.
+* Javascript and CSS files from the plugin will only be included when the shortcode is used on any page.
+* You can now hide the titles of the groups using the hide_title attribute for the [faq] shortcode. The value should be true if you want to hide the titles else false.
+
 = 1.6.1 =
 Fixed a bug which caused the FAQ Group descriptions to output incorrectly when using the accordion style
 
