@@ -249,7 +249,7 @@ class Arconix_FAQ_Admin {
      */
     function faq_shortcode( $atts, $content = null ) {
         
-        load_scripts();
+        $this->load_scripts();
 
         // Translate 'all' to nopaging = true ( for backward compatibility)
         if( isset( $atts['showposts'] ) ) {
