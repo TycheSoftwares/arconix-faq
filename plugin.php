@@ -4,7 +4,7 @@
  * Plugin URI: http://arconixpc.com/plugins/arconix-faq
  * Description: Plugin to handle the display of FAQs
  *
- * Version: 1.6.1
+ * Version: 1.7.0
  *
  * Author: John Gardner
  * Author URI: http://arconixpc.com/
@@ -41,7 +41,7 @@ class Arconix_FAQ {
      * @since   1.6.0
      */
     public function __construct() {
-        $this->version = '1.6.1';
+        $this->version = '1.7.0';
         $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
         $this->load_dependencies();
         $this->load_admin();
