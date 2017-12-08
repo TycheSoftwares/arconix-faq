@@ -7,29 +7,48 @@ Instead, save a copy of this file to your theme directory. It will then be loade
 of the plugin's version and will maintain your changes on upgrade
 */
 jQuery(document).ready( function(){
-
-    // This looks at the initial state of each content area, and hide content areas that are closed
-    jQuery('.arconix-faq-content').each( function() {
-        if( jQuery(this).hasClass('faq-closed')) {
-            jQuery(this).hide();
-        }
-    });
-
-    // This runs when a Toggle Title is clicked. It changes the CSS and then runs the animation
-    jQuery('.arconix-faq-title').each( function() {
-        jQuery(this).click(function() {
-            var toggleContent = jQuery(this).next('.arconix-faq-content');
-
-            jQuery(this).toggleClass('faq-open').toggleClass('faq-closed');
-            toggleContent.toggleClass('faq-open').toggleClass('faq-closed');
-            toggleContent.slideToggle();
-        });
-    });
-
     // If the user sets the style to "accordion"
-    jQuery('.arconix-faq-accordion-wrap').accordion( {
+    var $accordions = jQuery('.arconix-faq-accordion-wrap');
+
+    $accordions.accordion({
         collapsible: true,
         active: false,
-        heightStyle: "content"
+        heightStyle: "content",
+        event: "click",
+        beforeActivate: function(event, ui) {
+            _this = this;
+
+            $accordions.each(function(i) {
+                if (this !== _this) {
+                    // Close any open FAQ entries.
+                    jQuery(this).accordion("option", "active", false);
+                }
+            });
+        },
+        activate: function(event, ui) {
+            if (ui.newHeader.length) {
+                var extraOffset = 0;
+
+                // Handle WordPress adminbar.
+                $adminbar = jQuery("#wpadminbar");
+                if ($adminbar.length) {
+                    extraOffset = - $adminbar.height();
+                }
+
+                // Ensure that FAQ is visible.
+                jQuery('html, body').animate({
+                    scrollTop: ui.newHeader.offset().top + extraOffset
+                }, 'fast');
+            }
+        },
     });
+
+    // Users sent to specific FAQ's will start with them open
+    if (window.location.hash) {
+        var $panel = jQuery('#' + window.location.hash.substring(1));
+        var index  = $panel.parent().children(".ui-accordion-header").index($panel);
+
+        // Open linked FAQ entry.
+        $panel.closest(".arconix-faq-accordion-wrap").accordion("option", "active", index);
+    }
 });
