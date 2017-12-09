@@ -192,7 +192,7 @@ class Arconix_FAQ_Display {
         $html = '';
 
         // Set up our anchor link
-        $link = 'faq-' . sanitize_html_class( get_the_title() );
+        $link = 'faq-' . sanitize_html_class( sanitize_title( get_the_title() ) );
 
         $html .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-accordion-title">';
         $html .= get_the_title() . '</div>';
@@ -226,7 +226,7 @@ class Arconix_FAQ_Display {
         $lo == true ? $lo = ' faq-open' : $lo = ' faq-closed';
 
         // Set up our anchor link
-        $link = 'faq-' . sanitize_html_class( get_the_title() );
+        $link = 'faq-' . sanitize_html_class( sanitize_title( get_the_title() ) );
 
         $html .= '<div id="faq-' . get_the_id() . '" class="arconix-faq-wrap">';
         $html .= '<div id="' . $link . '" class="arconix-faq-title' . $lo . '">' . get_the_title() . '</div>';
