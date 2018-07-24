@@ -316,11 +316,11 @@ class FAQ_TS_tracking {
 		if ( isset( $_GET[ self::$plugin_prefix . '_tracker_optin' ] ) && isset( $_GET[ self::$plugin_prefix . '_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ self::$plugin_prefix . '_tracker_nonce' ], self::$plugin_prefix . '_tracker_optin' ) ) {
 			update_option( self::$plugin_prefix . '_allow_tracking', 'yes' );
 			FAQ_TS_Tracker::ts_send_tracking_data( true );
-			header( 'Location: ' . $_SERVER[ 'HTTP_REFERER' ] );
+			@header( 'Location: ' . $_SERVER[ 'HTTP_REFERER' ] );
 		} elseif ( isset( $_GET[ self::$plugin_prefix . '_tracker_optout' ] ) && isset( $_GET[ self::$plugin_prefix . '_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ self::$plugin_prefix . '_tracker_nonce' ], self::$plugin_prefix . '_tracker_optout' ) ) {
 			update_option( self::$plugin_prefix . '_allow_tracking', 'no' );
 			FAQ_TS_Tracker::ts_send_tracking_data( false );
-			header( 'Location: ' . $_SERVER[ 'HTTP_REFERER' ] );
+			@header( 'Location: ' . $_SERVER[ 'HTTP_REFERER' ] );
 		}
 	}
 
