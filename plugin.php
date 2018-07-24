@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Arconix FAQ
- * Plugin URI: http://arconixpc.com/plugins/arconix-faq
+ * Plugin URI: https://www.tychesoftwares.com/
  * Description: Plugin to handle the display of FAQs
  *
- * Version: 1.7.0
+ * Version: 1.8.1
  *
- * Author: John Gardner
- * Author URI: http://arconixpc.com/
+ * Author: Tyche Softwares
+ * Author URI: https://www.tychesoftwares.com/
  *
  * Text Domain: arconix-faq
  *
@@ -41,7 +41,7 @@ class Arconix_FAQ {
      * @since   1.6.0
      */
     public function __construct() {
-        $this->version = '1.7.0';
+        $this->version = '1.8.1';
         $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
         $this->load_dependencies();
         $this->load_admin();
@@ -61,7 +61,11 @@ class Arconix_FAQ {
     private function load_dependencies() {
         require_once( $this->inc . 'class-arconix-faq-admin.php' );
         require_once( $this->inc . 'class-arconix-faq-display.php' );
-
+        $is_admin = is_admin();
+        if ( true === $is_admin ) {
+            require_once( $this->inc . 'arconix-faq-all-component.php' );
+        }
+        
         if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
             require_once( $this->inc . 'class-gamajo-dashboard-glancer.php' );
     }

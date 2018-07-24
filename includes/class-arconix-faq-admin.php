@@ -62,6 +62,16 @@ class Arconix_FAQ_Admin {
         add_action( 'add_meta_boxes_faq',           array( $this, 'add_faq_metabox' ) );
 
         add_shortcode( 'faq',                       array( $this, 'faq_shortcode' ) );
+
+        $faq_is_admin = is_admin();
+        if ( true === $faq_is_admin ) {
+            add_action( 'admin_init',                    array( &$this, 'faq_admin_actions' ) );
+            add_filter( 'ts_deativate_plugin_questions', array( &$this, 'faq_deactivate_add_questions' ), 10, 1 );
+
+            add_filter( 'ts_tracker_data',               array( &$this, 'faq_ts_add_plugin_tracking_data' ), 10, 1 );
+            add_filter( 'ts_tracker_opt_out_data',       array( &$this, 'faq_get_data_for_opt_out' ), 10, 1 );
+            add_action( 'admin_menu',                    array( &$this, 'faq_admin_menu' ), 100 );
+        }
     }
 
     /**
@@ -80,6 +90,14 @@ class Arconix_FAQ_Admin {
      * @since 1.2.0
      */
     function deactivation() {
+        global $wpdb;
+        delete_option( 'faq_pro_welcome_page_shown' );
+        delete_option( 'faq_pro_welcome_page_shown_time' );
+        delete_option( 'faq_allow_tracking' );
+        delete_option( 'faq_ts_tracker_last_send' );
+
+        $sql_table_user_meta_cart = "DELETE FROM `" . $wpdb->prefix . "usermeta` WHERE meta_key LIKE  '%faq_%'";
+        $wpdb->get_results( $sql_table_user_meta_cart );
         flush_rewrite_rules();
     }
 
@@ -157,7 +175,7 @@ class Arconix_FAQ_Admin {
                 )
             )
         );
-
+        
         return apply_filters( 'arconix_faq_defaults', $defaults );
     }
 
@@ -221,10 +239,12 @@ class Arconix_FAQ_Admin {
             $ui = $wp_scripts->query( 'jquery-ui-core' );
 
             $css_args = apply_filters( 'arconix_jqueryui_css_reg', array(
-                'url' => '//ajax.googleapis.com/ajax/libs/jqueryui/' . $ui->ver . '/themes/smoothness/jquery-ui.min.css',
-                'ver' => $ui->ver,
+                'url' =>  $this->url . 'css/themes/smoothness/jquery.ui.theme.css',
+                'ver' => $this->version,
                 'dep' => false
             ) );
+
+            wp_enqueue_style( 'arconix-faq', $this->url . 'css/arconix-faq.css', false, $this->version );
 
             wp_enqueue_style( 'jquery-ui-smoothness', $css_args['url'], $css_args['dep'], $css_args['ver'] );
         }
@@ -493,5 +513,113 @@ class Arconix_FAQ_Admin {
         <p><input type="text" value="[faq p=<?php echo $post_ID; ?>]" readonly="readonly" class="widefat wp-ui-text-highlight code"></p>
         <?php
     }
+
+    /**
+     * It will add the deactivation question for the plugin.
+     */
+    public function faq_deactivate_add_questions ( $faq_deactivate_questions ) {
+        $faq_deactivate_questions = array(
+            0 => array(
+                'id'                => 4,
+                'text'              => __( "I can't differentiate between Invoice, Delivery Notes & Receipt. The templates are the same. ", "arconix-faq" ),
+                'input_type'        => '',
+                'input_placeholder' => ''
+                ), 
+            1 =>  array(
+                'id'                => 5,
+                'text'              => __( "The invoice sent through mail can't be downloaded as PDF directly.", "arconix-faq" ),
+                'input_type'        => '',
+                'input_placeholder' => ''
+            ),
+            2 => array(
+                'id'                => 6,
+                'text'              => __( "The plugin is not compatible with another plugin.", "arconix-faq" ),
+                'input_type'        => 'textfield',
+                'input_placeholder' => 'Which plugin?'
+            ),
+            3 => array(
+                'id'                => 7,
+                'text'              => __( "This plugin is not useful to me.", "arconix-faq" ),
+                'input_type'        => '',
+                'input_placeholder' => ''
+            )
+
+        );
+        return $faq_deactivate_questions;
+    }
+
+    /**
+         * Plugin's data to be tracked when Allow option is choosed.
+         *
+         * @hook ts_tracker_data
+         *
+         * @param array $data Contains the data to be tracked.
+         *
+         * @return array Plugin's data to track.
+         * 
+         */
+
+        public static function faq_ts_add_plugin_tracking_data ( $data ) {
+            if ( isset( $_GET[ 'wcdn_tracker_optin' ] ) && isset( $_GET[ 'wcdn_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ 'wcdn_tracker_nonce' ], 'wcdn_tracker_optin' ) ) {
+
+                $plugin_data[ 'ts_meta_data_table_name' ] = 'ts_tracking_faq_meta_data';
+                $plugin_data[ 'ts_plugin_name' ]		  = 'Arconix FAQ';
+                /**
+                 * Add Plugin data
+                 */
+                $plugin_data[ 'faq_plugin_version' ]      = self::$plugin_version;
+                $plugin_data[ 'faq_allow_tracking' ]     = get_option ( 'faq_allow_tracking' );
+                $data[ 'plugin_data' ]                    = $plugin_data;
+            }
+            return $data;
+        }
+
+
+        /**
+         * Tracking data to send when No, thanks. button is clicked.
+         *
+         * @hook ts_tracker_opt_out_data
+         *
+         * @param array $params Parameters to pass for tracking data.
+         *
+         * @return array Data to track when opted out.
+         * 
+         */
+        public static function faq_get_data_for_opt_out ( $params ) {
+            $plugin_data[ 'ts_meta_data_table_name']   = 'ts_tracking_faq_meta_data';
+            $plugin_data[ 'ts_plugin_name' ]		   = 'Arconix FAQ';
+            
+            // Store count info
+            $params[ 'plugin_data' ]  				   = $plugin_data;
+            
+            return $params;
+        }
+
+        /**
+         * Admin actions
+         */
+        public function faq_admin_actions() {
+
+            /**
+             * We need to store the plugin version in DB, so we can show the welcome page and other contents.
+             */
+            $faq_version_in_db = get_option( 'faq_version' ); 
+            if ( $faq_version_in_db != $this->version ){
+                update_option( 'faq_version', $this->version );
+            }
+            
+            /**
+             * It is used when plugin is activated. It will add the update time and then show the notices.
+             */
+            do_action ( 'faq_activate' );
+
+        }
+
+        /**
+         * Add Faq and support page
+         */
+        public function faq_admin_menu () {
+            do_action ('faq_add_submenu');
+        }
 
 }
