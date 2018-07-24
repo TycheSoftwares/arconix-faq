@@ -196,7 +196,7 @@ if ( ! class_exists( 'Arconix_FAQ_Component' ) ) {
 
             $ts_faq = array(
                 1 => array (
-                        'question' => 'how do I display my FAQ’s?',
+                        'question' => 'How do I display my FAQ’s?',
                         'answer'   => 'Use the [faq] shortcode in a widget or on a post/page. This will output the FAQ’s using the default settings (Ascending order by Title in a Toggle configuration). If you’d like to use a different order, consult the <a href="https://www.tychesoftwares.com/docs/docs/faq/?utm_source=wpfaqpage&utm_medium=link&utm_campaign=FAQ" rel="nofollow" target="_blank">Documentation</a> for assistance.'
                     ), 
                 2 => array (

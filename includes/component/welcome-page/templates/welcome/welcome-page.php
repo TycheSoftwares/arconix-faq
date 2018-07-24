@@ -113,14 +113,14 @@ $ts_dir_image_path = $faq_array['ts_dir_image_path'];
             <h3><?php esc_html_e( 'Getting to Know Tyche Softwares', 'arconix-faq' ); ?></h3>
 
             <ul class="ul-disc">
-                <li><a href="https://tychesoftwares.com/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank"><?php esc_html_e( 'Visit the Tyche Softwares Website', 'arconix-faq' ); ?></a></li>
-                <li><a href="https://tychesoftwares.com/premium-woocommerce-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank"><?php esc_html_e( 'View all Premium Plugins', 'arconix-faq' ); ?></a>
+                <li><a href="https://tychesoftwares.com/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank"><?php esc_html_e( 'Visit the Tyche Softwares Website', 'arconix-faq' ); ?></a></li>
+                <li><a href="https://tychesoftwares.com/premium-woocommerce-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank"><?php esc_html_e( 'View all Premium Plugins', 'arconix-faq' ); ?></a>
                 <ul class="ul-disc">
-                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank">Abandoned Cart Pro Plugin for WooCommerce</a></li>
-                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank">Booking & Appointment Plugin for WooCommerce</a></li>
-                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank">Order Delivery Date for WooCommerce</a></li>
-                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank">Product Delivery Date for WooCommerce</a></li>
-                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank">Deposits for WooCommerce</a></li>
+                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank">Abandoned Cart Pro Plugin for WooCommerce</a></li>
+                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank">Booking & Appointment Plugin for WooCommerce</a></li>
+                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank">Order Delivery Date for WooCommerce</a></li>
+                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank">Product Delivery Date for WooCommerce</a></li>
+                    <li><a href="https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQPlugin" target="_blank">Deposits for WooCommerce</a></li>
                 </ul>
                 </li>
                 <li><a href="https://tychesoftwares.com/about/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=FAQ" target="_blank"><?php esc_html_e( 'Meet the team', 'arconix-faq' ); ?></a></li>
