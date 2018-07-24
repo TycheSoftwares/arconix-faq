@@ -78,39 +78,7 @@ $ts_faq = $faq_array['ts_faq'];
         <p><?php echo $ts_faq[3]['answer'] ?></p>
     </div>
 
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[4]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[4]['answer'] ?></p>
-    </div>
-
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[5]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[5]['answer'] ?></p>
-    </div>
-
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[6]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[6]['answer'] ?></p>
-    </div>
-
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[7]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[7]['answer'] ?></p>
-    </div>
-
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[8]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[8]['answer'] ?></p>
-    </div>
-
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[9]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[9]['answer'] ?></p>
-    </div>
-    <button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[10]['question'] ?></strong></button>
-    <div class="panel">
-        <p><?php echo $ts_faq[10]['answer'] ?></p>
-    </div>
+    
 </div>
 
 <div class="support-panel">

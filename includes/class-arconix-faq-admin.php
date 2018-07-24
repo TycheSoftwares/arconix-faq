@@ -520,16 +520,16 @@ class Arconix_FAQ_Admin {
     public function faq_deactivate_add_questions ( $faq_deactivate_questions ) {
         $faq_deactivate_questions = array(
             0 => array(
-                'id'                => 4,
-                'text'              => __( "I can't differentiate between Invoice, Delivery Notes & Receipt. The templates are the same. ", "arconix-faq" ),
+                'id'                => 4, 
+                'text'              => __( "I'm not able to link my one FAQ to another FAQ.", "arconix-faq" ),
                 'input_type'        => '',
                 'input_placeholder' => ''
                 ), 
             1 =>  array(
                 'id'                => 5,
-                'text'              => __( "The invoice sent through mail can't be downloaded as PDF directly.", "arconix-faq" ),
-                'input_type'        => '',
-                'input_placeholder' => ''
+                'text'              => __( "The styling of the plugin does not work with my theme.", "arconix-faq" ),
+                'input_type'        => 'textfield',
+                'input_placeholder' => 'Which Theme?'
             ),
             2 => array(
                 'id'                => 6,
@@ -546,6 +546,41 @@ class Arconix_FAQ_Admin {
 
         );
         return $faq_deactivate_questions;
+    }
+
+    public static function faq_get_group () {
+
+        global $wpdb;
+        $faq_query = "SELECT ID FROM `{$wpdb->prefix}posts` WHERE post_type='faq' AND post_status = 'publish'";
+        $faq_posts = $wpdb->get_results($faq_query);
+
+        $faq_group_array = array();
+        foreach ($faq_posts as $faq_posts_key => $faq_posts_value ) {
+            $faq_id = $faq_posts_value->ID;
+            
+            $faq_group = wp_get_object_terms( (int)$faq_id, 'group' );
+            if ( count ($faq_group) > 0 ) {
+                foreach ( $faq_group as $faq_group_key => $faq_group_value ){
+                    $faq_group_array [ $faq_id ] [] = $faq_group_value->name;
+                }
+            }
+        }
+          
+        return $faq_group_array;
+          
+    }
+
+    public static function faq_get_total_count () {
+        global $wpdb;
+
+        $total_faq_query = "SELECT COUNT('ID') as total_faq FROM `{$wpdb->prefix}posts` WHERE post_type='faq' AND post_status = 'publish'";
+        $total_count_result     = $wpdb->get_results($total_faq_query);
+
+        $total_faq = 0 ;
+        if ( count ( $total_count_result ) > 0 && isset ( $total_count_result [0] ) ) {
+            $total_faq = $total_count_result [0]->total_faq;
+        }
+        return $total_faq;
     }
 
     /**
@@ -567,6 +602,8 @@ class Arconix_FAQ_Admin {
                 /**
                  * Add Plugin data
                  */
+                $plugin_data[ 'faq_count' ]               = self::faq_get_total_count();
+                $plugin_data[ 'faq_group' ]               = serialize ( self::faq_get_group() );
                 $plugin_data[ 'faq_plugin_version' ]      = self::$plugin_version;
                 $plugin_data[ 'faq_allow_tracking' ]     = get_option ( 'faq_allow_tracking' );
                 $data[ 'plugin_data' ]                    = $plugin_data;
