@@ -4,7 +4,7 @@
  * No personal information is tracked, only general settings, order and user counts and admin email for 
  * discount code.
  *
- * @class 		WCDN_TS_Tracker
+ * @class 		FAQ_TS_Tracker
  * @version		6.8
  */
 
@@ -19,7 +19,7 @@ class FAQ_TS_Tracker {
 	 * @var string
 	 */
 
-	private static $api_url = 'http://trackingdev.tychesoftwares.com/v1/';
+	private static $api_url = 'http://tracking.tychesoftwares.com/v1/';
 
 	/**
 	* @var string Plugin prefix
@@ -130,32 +130,27 @@ class FAQ_TS_Tracker {
 		$data[ 'active_plugins' ]    = $all_plugins[ 'active_plugins' ];
 		$data[ 'inactive_plugins' ]  = $all_plugins[ 'inactive_plugins' ];
 
-		//WooCommerce version 
-		$data[ 'wc_plugin_version' ] = self::ts_get_wc_plugin_version();
-
-
-				
 		return apply_filters( 'ts_tracker_data', $data );
 	}
-
-	/**
-	 * Get Selected city of the WooCommerce store.
-	 * @return string $ts_city Name of the city
-	 */
-	private static function ts_get_wc_city () {
-		$ts_city = get_option ( 'woocommerce_store_city' ); 
-		return $ts_city;
+	
+	private static function tyche_let_to_num( $size ) {
+		$l   = substr( $size, -1 );
+		$ret = substr( $size, 0, -1 );
+		switch ( strtoupper( $l ) ) {
+			case 'P':
+				$ret *= 1024;
+			case 'T':
+				$ret *= 1024;
+			case 'G':
+				$ret *= 1024;
+			case 'M':
+				$ret *= 1024;
+			case 'K':
+				$ret *= 1024;
+		}
+		return $ret;
 	}
 
-	/**
-	 * Get Selected country of the WooCommerce store.
-	 * @return string $ts_country Name of the city
-	 */
-	private static function ts_get_wc_country () {
-		$ts_country = get_option ( 'woocommerce_default_country' ); 
-		return $ts_country;
-	}
-    
 	/**
 	 * Get WordPress related data.
 	 * @return array
@@ -163,10 +158,10 @@ class FAQ_TS_Tracker {
 	private static function ts_get_wordpress_info() {
 		$wp_data = array();
 
-		$memory = wc_let_to_num( WP_MEMORY_LIMIT );
+		$memory = self::tyche_let_to_num( WP_MEMORY_LIMIT );
 
 		if ( function_exists( 'memory_get_usage' ) ) {
-			$system_memory = wc_let_to_num( @ini_get( 'memory_limit' ) );
+			$system_memory = self::tyche_let_to_num( @ini_get( 'memory_limit' ) );
 			$memory        = max( $memory, $system_memory );
 		}
 
@@ -177,8 +172,6 @@ class FAQ_TS_Tracker {
 		$wp_data[ 'multisite' ]    = is_multisite() ? 'Yes' : 'No';
 		$wp_data[ 'blogdescription' ] = get_option ( 'blogdescription' );
 		$wp_data[ 'blogname' ] = get_option ( 'blogname' );
-		$wp_data[ 'wc_city' ] 	 = self::ts_get_wc_city();
-		$wp_data[ 'wc_country' ] = self::ts_get_wc_country();
 
 		return $wp_data;
 	}
@@ -213,7 +206,7 @@ class FAQ_TS_Tracker {
 		}
 
 		if ( function_exists( 'ini_get' ) ) {
-			$server_data[ 'php_post_max_size' ] = size_format( wc_let_to_num( ini_get( 'post_max_size' ) ) );
+			$server_data[ 'php_post_max_size' ] = size_format( self::tyche_let_to_num( ini_get( 'post_max_size' ) ) );
 			$server_data[ 'php_time_limt' ] = ini_get( 'max_execution_time' );
 			$server_data[ 'php_max_input_vars' ] = ini_get( 'max_input_vars' );
 			$server_data[ 'php_suhosin' ] = extension_loaded( 'suhosin' ) ? 'Yes' : 'No';
@@ -270,13 +263,5 @@ class FAQ_TS_Tracker {
 		}
 
 		return array( 'active_plugins' => $active_plugins, 'inactive_plugins' => $plugins );
-	}
-	
-	/**
-	 * Sends current WooCommerce version
-	 * @return string
-	 */
-	private static function ts_get_wc_plugin_version() {
-		return WC()->version;
 	}
 }

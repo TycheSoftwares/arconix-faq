@@ -42,6 +42,7 @@ class Arconix_FAQ_Admin {
      * @param   string      $version    The version of this plugin.
      */
     public function __construct( $version ) {
+        
         $this->version = $version;
         $this->dir = trailingslashit( plugin_dir_path( __FILE__ ) );
         $this->url = trailingslashit( plugin_dir_url( __FILE__ ) );
@@ -65,12 +66,12 @@ class Arconix_FAQ_Admin {
 
         $faq_is_admin = is_admin();
         if ( true === $faq_is_admin ) {
-            add_action( 'admin_init',                    array( &$this, 'faq_admin_actions' ) );
-            add_filter( 'ts_deativate_plugin_questions', array( &$this, 'faq_deactivate_add_questions' ), 10, 1 );
+            add_action( 'admin_init',                    array( $this, 'faq_admin_actions' ) );
+            add_filter( 'ts_deativate_plugin_questions', array( $this, 'faq_deactivate_add_questions' ), 10, 1 );
 
-            add_filter( 'ts_tracker_data',               array( &$this, 'faq_ts_add_plugin_tracking_data' ), 10, 1 );
-            add_filter( 'ts_tracker_opt_out_data',       array( &$this, 'faq_get_data_for_opt_out' ), 10, 1 );
-            add_action( 'admin_menu',                    array( &$this, 'faq_admin_menu' ), 100 );
+            add_filter( 'ts_tracker_data',               array( $this, 'faq_ts_add_plugin_tracking_data' ), 10, 1 );
+            add_filter( 'ts_tracker_opt_out_data',       array( $this, 'faq_get_data_for_opt_out' ), 10, 1 );
+            add_action( 'admin_menu',                    array( $this, 'faq_admin_menu' ), 100 );
         }
     }
 
@@ -175,6 +176,7 @@ class Arconix_FAQ_Admin {
                 )
             )
         );
+
         
         return apply_filters( 'arconix_faq_defaults', $defaults );
     }
@@ -425,6 +427,7 @@ class Arconix_FAQ_Admin {
                 the_excerpt();
                 break;
             case "faq_groups":
+            
                 echo get_the_term_list( $post->ID, 'group', '', ', ', '' );
                 break;
             case "faq_shortcode":
@@ -595,7 +598,7 @@ class Arconix_FAQ_Admin {
          */
 
         public static function faq_ts_add_plugin_tracking_data ( $data ) {
-            if ( isset( $_GET[ 'wcdn_tracker_optin' ] ) && isset( $_GET[ 'wcdn_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ 'wcdn_tracker_nonce' ], 'wcdn_tracker_optin' ) ) {
+            if ( isset( $_GET[ 'faq_tracker_optin' ] ) && isset( $_GET[ 'faq_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ 'faq_tracker_nonce' ], 'faq_tracker_optin' ) ) {
 
                 $plugin_data[ 'ts_meta_data_table_name' ] = 'ts_tracking_faq_meta_data';
                 $plugin_data[ 'ts_plugin_name' ]		  = 'Arconix FAQ';
@@ -604,8 +607,9 @@ class Arconix_FAQ_Admin {
                  */
                 $plugin_data[ 'faq_count' ]               = self::faq_get_total_count();
                 $plugin_data[ 'faq_group' ]               = serialize ( self::faq_get_group() );
-                $plugin_data[ 'faq_plugin_version' ]      = self::$plugin_version;
-                $plugin_data[ 'faq_allow_tracking' ]     = get_option ( 'faq_allow_tracking' );
+                $plugin_data[ 'faq_plugin_version' ]      = $this->version;
+                
+                $plugin_data[ 'faq_allow_tracking' ]      = get_option ( 'faq_allow_tracking' );
                 $data[ 'plugin_data' ]                    = $plugin_data;
             }
             return $data;
@@ -636,7 +640,7 @@ class Arconix_FAQ_Admin {
          * Admin actions
          */
         public function faq_admin_actions() {
-
+            
             /**
              * We need to store the plugin version in DB, so we can show the welcome page and other contents.
              */
