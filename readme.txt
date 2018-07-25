@@ -3,7 +3,7 @@ Contributors: jgardner03, tychesoftwares, bhavik.kiri
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
 Tested up to: 4.9.6
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -24,15 +24,15 @@ The FAQ's can be displayed in groups by tagging them during the FAQ item's creat
 * Can be displayed individually, or in FAQ groups by using the "group" taxonomy
 
 = Some of our Pro plugins =
-1. **[Deposits plugin for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQ "Deposits plugin for WooCommerce")**
+1. **[Deposits plugin for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQPlugin "Deposits plugin for WooCommerce")**
 
-2. **[Order Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=otherprolink&utm_campaign=FAQ "Order Delivery Date Pro for WooCommerce")**
+2. **[Order Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=otherprolink&utm_campaign=FAQPlugin "Order Delivery Date Pro for WooCommerce")**
 
-3. **[Abandoned Cart Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQ "Abandoned Cart Pro for WooCommerce")**
+3. **[Abandoned Cart Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQPlugin "Abandoned Cart Pro for WooCommerce")**
 
-4. **[Booking & Appointment Plugin for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQ "Booking & Appointment Plugin for WooCommerce")**
+4. **[Booking & Appointment Plugin for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQPlugin "Booking & Appointment Plugin for WooCommerce")**
 
-5. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQ "Product Delivery Date Pro for WooCommerce")**
+5. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=FAQPlugin "Product Delivery Date Pro for WooCommerce")**
 
 
 
@@ -100,6 +100,9 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+
+= 1.8.2 =
+* Usage Tracking has been added in the plugin. It provides an option to allow tracking of the non-sensitive data of our plugin from the website. You can read more about it [here](https://www.tychesoftwares.com/docs/docs/faq/usage-tracking/).
 
 = 1.8.1 =
 * Bug Fixed - The style='accordion' for the faq shortcode was broken. This has been fixed.
