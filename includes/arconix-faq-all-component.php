@@ -42,7 +42,7 @@ if ( ! class_exists( 'Arconix_FAQ_Component' ) ) {
 
                 $faq_get_previous_version = get_option( 'faq_version', '1' );
 
-                $faq_blog_post_link       = 'https://www.tychesoftwares.com/docs/docs/woocommerce-print-invoice-delivery-note/usage-tracking/';
+                $faq_blog_post_link       = 'https://www.tychesoftwares.com/docs/docs/faq/usage-tracking/';
 
                 $faq_plugins_page         = 'edit.php?post_type=faq';
                 $faq_plugin_slug          = 'edit.php?post_type=faq';
