@@ -59,7 +59,12 @@ if ( ! class_exists( 'Arconix_FAQ_Component' ) ) {
                 $faq_deativate->init ( $faq_file_name, $faq_plugin_name );
 
                 
-                new FAQ_TS_Welcome ( $faq_plugin_name, $faq_plugin_prefix, $faq_locale, $faq_plugin_folder_name, $faq_plugin_dir_name, $faq_get_previous_version );
+                $user = wp_get_current_user();
+                
+                if ( in_array( 'administrator', (array) $user->roles ) ) {
+                    
+                    new FAQ_TS_Welcome ( $faq_plugin_name, $faq_plugin_prefix, $faq_locale, $faq_plugin_folder_name, $faq_plugin_dir_name, $faq_get_previous_version );
+                }
 
                 $ts_pro_faq = self::faq_get_faq ();
                 new FAQ_TS_Faq_Support( $faq_plugin_name, $faq_plugin_prefix, $faq_plugins_page, $faq_locale, $faq_plugin_folder_name, $faq_plugin_slug, $ts_pro_faq, 'faq_support_page' );
