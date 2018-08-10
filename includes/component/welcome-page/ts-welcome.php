@@ -92,6 +92,9 @@ class FAQ_TS_Welcome {
 		self::$plugin_folder    	  = $ts_plugin_folder_name;
 		self::$plugin_file_path       = $ts_plugin_dir_name;
 		
+		add_action( 'admin_init', array( &$this, 'ts_add_plugin_active_check' ),1 );
+
+		register_deactivation_hook( self::$plugin_file_path, array( &$this, 'ts_delete_plugin_from_active_check' ) );
 
 		//Update plugin
 		add_action( 'admin_init', array( &$this, 'ts_update_db_check' ) );
@@ -109,6 +112,30 @@ class FAQ_TS_Welcome {
 		self::$previous_plugin_version = $ts_previous_version;
 		self::$plugin_url     		   = $this->ts_get_plugin_url();
 		self::$template_base  		   = $this->ts_get_template_path();
+	}
+
+	function ts_delete_plugin_from_active_check ( ){
+
+		$active_ts_plugins = get_option( 'active_TS_plugins', array() );
+		if ( in_array ( self::$plugin_name , $active_ts_plugins) ){
+
+			$ts_plugin_name = array ( self::$plugin_name );
+			
+			$updated_activated_ts_plugins = array_diff( $active_ts_plugins, $ts_plugin_name );
+			update_option( 'active_TS_plugins', $updated_activated_ts_plugins );
+		}
+	}
+
+	function ts_add_plugin_active_check () {
+
+		$active_ts_plugins = get_option( 'active_TS_plugins', array() );
+
+		if ( !in_array ( self::$plugin_name , $active_ts_plugins) ){
+
+			$active_ts_plugins [] = self::$plugin_name;
+			
+			update_option( 'active_TS_plugins', $active_ts_plugins );
+		}
 	}
 
 	/**
@@ -263,9 +290,16 @@ class FAQ_TS_Welcome {
 			return;
 		}
 
-		if( !get_option( self::$plugin_prefix . '_pro_welcome_page_shown' ) ) {
-			wp_safe_redirect( admin_url( 'index.php?page=' . self::$plugin_prefix . '-pro-about' ) );
-			exit;
+		$active_ts_plugins = get_option( 'active_TS_plugins', array() );
+
+		/**
+		 * This count of active plugins indicate that we will not redirect to the welcome page when there are more than 2 of our plugins are activated.
+		 */
+		if( count ( $active_ts_plugins ) == 1 ) {
+			if( !get_option( self::$plugin_prefix . '_pro_welcome_page_shown' ) ) {
+				wp_safe_redirect( admin_url( 'index.php?page=' . self::$plugin_prefix . '-pro-about' ) );
+				exit;
+			}
 		}
 	}
 
