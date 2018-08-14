@@ -54,8 +54,11 @@ class Arconix_FAQ_Admin {
         add_action( 'wp_enqueue_scripts',           array( $this, 'enq_scripts' ) );
         add_action( 'admin_enqueue_scripts',        array( $this, 'enq_admin_scripts' ) );
         add_action( 'manage_posts_custom_column',   array( $this, 'column_action' ) );
-        add_action( 'dashboard_glance_items',       array( $this, 'at_a_glance' ) );
-        add_action( 'wp_dashboard_setup',           array( $this, 'dashboard_widget' ) );
+        /**
+         * We have commented this, because we will create a feed from our site and then we can enable this widget.
+         */
+        // add_action( 'dashboard_glance_items',       array( $this, 'at_a_glance' ) );
+        // add_action( 'wp_dashboard_setup',           array( $this, 'dashboard_widget' ) );
 
         add_filter( 'manage_faq_posts_columns',     array( $this, 'columns_filter' ) );
         add_filter( 'post_updated_messages',        array( $this, 'messages' ) );
