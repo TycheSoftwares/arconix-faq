@@ -66,8 +66,11 @@ class Arconix_FAQ {
             require_once( $this->inc . 'arconix-faq-all-component.php' );
         }
         
-        if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
-            require_once( $this->inc . 'class-gamajo-dashboard-glancer.php' );
+        /**
+         * We have commented this, because we will create a feed from our site and then we can enable this widget.
+         */
+        // if ( ! class_exists( 'Gamajo_Dashboard_Glancer' ) )
+        //     require_once( $this->inc . 'class-gamajo-dashboard-glancer.php' );
     }
 
     /**
