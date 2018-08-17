@@ -2,8 +2,8 @@
 Contributors: jgardner03, tychesoftwares, bhavik.kiri
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 4.9.6
-Stable tag: 1.8.2
+Tested up to: 4.9.8
+Stable tag: 1.8.3
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -100,6 +100,9 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+
+= 1.8.3 =
+* We have temporary removed the dashboard widget from the plugin.
 
 = 1.8.2 =
 * Usage Tracking has been added in the plugin. It provides an option to allow tracking of the non-sensitive data of our plugin from the website. You can read more about it [here](https://www.tychesoftwares.com/docs/docs/faq/usage-tracking/).

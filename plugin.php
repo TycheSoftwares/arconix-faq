@@ -4,7 +4,7 @@
  * Plugin URI: https://www.tychesoftwares.com/
  * Description: Plugin to handle the display of FAQs
  *
- * Version: 1.8.2
+ * Version: 1.8.3
  *
  * Author: Tyche Softwares
  * Author URI: https://www.tychesoftwares.com/
@@ -41,7 +41,7 @@ class Arconix_FAQ {
      * @since   1.6.0
      */
     public function __construct() {
-        $this->version = '1.8.2';
+        $this->version = '1.8.3';
         $this->inc = trailingslashit( plugin_dir_path( __FILE__ ) . '/includes' );
         $this->load_dependencies();
         $this->load_admin();
