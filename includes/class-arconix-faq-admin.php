@@ -610,7 +610,7 @@ class Arconix_FAQ_Admin {
                  */
                 $plugin_data[ 'faq_count' ]               = self::faq_get_total_count();
                 $plugin_data[ 'faq_group' ]               = serialize ( self::faq_get_group() );
-                $plugin_data[ 'faq_plugin_version' ]      = $this->version;
+                $plugin_data[ 'faq_plugin_version' ]      = self::version;
                 
                 $plugin_data[ 'faq_allow_tracking' ]      = get_option ( 'faq_allow_tracking' );
                 $data[ 'plugin_data' ]                    = $plugin_data;
