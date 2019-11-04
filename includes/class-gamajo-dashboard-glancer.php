@@ -45,7 +45,7 @@ class Gamajo_Dashboard_Glancer {
 	 * @since 1.0.0
 	 *
 	 * @param array|string $post_types Post type name, or array of post type names.
-	 * @param array|string $statuses   Post status or array of different post type statuses
+	 * @param array|string $statuses   Post status or array of different post type statuses.
 	 *
 	 * @return Return early if action hook has already passed, or no valid post types were given.
 	 */
@@ -58,17 +58,17 @@ class Gamajo_Dashboard_Glancer {
 
 		$post_types = $this->unset_invalid_post_types( (array) $post_types );
 
-		// If all given post types were invalid, bail now
+		// If all given post types were invalid, bail now.
 		if ( ! $post_types ) {
 			return;
 		}
 
-		// Register each combination of given post type and status
-		foreach( $post_types as $post_type ) {
+		// Register each combination of given post type and status.
+		foreach ( $post_types as $post_type ) {
 			foreach ( (array) $statuses as $status ) {
 				$this->items[] = array(
 					'type'   => $post_type,
-					'status' => $status, // No checks yet to see if status is valid
+					'status' => $status, // No checks yet to see if status is valid.
 				);
 			}
 		}
@@ -83,7 +83,7 @@ class Gamajo_Dashboard_Glancer {
 		foreach ( $this->items as $item ) {
 			echo $this->get_single_item( $item );
 		}
-		// Reset items, so items aren't shown again if show() is re-called
+		// Reset items, so items aren't shown again if show() is re-called.
 		unset( $this->items );
 	}
 
@@ -97,7 +97,7 @@ class Gamajo_Dashboard_Glancer {
 	 * @return array List of the given post types that are valid.
 	 */
 	protected function unset_invalid_post_types( array $post_types ) {
-		foreach( $post_types as $index => $post_type ) {
+		foreach ( $post_types as $index => $post_type ) {
 			$post_type_object = get_post_type_object( $post_type );
 			if ( is_null( $post_type_object ) ) {
 				unset( $post_types[ $index ] );
@@ -120,16 +120,16 @@ class Gamajo_Dashboard_Glancer {
 	 */
 	protected function get_single_item( array $item ) {
 		$num_posts = wp_count_posts( $item['type'] );
-		$status = $item['status'];
-		$count = (int) $num_posts->$status;
+		$status    = $item['status'];
+		$count     = (int) $num_posts->$status;
 
 		if ( ! $count ) {
 			return '';
 		}
 
-		$href  = $this->get_link_url( $item );
-		$text  = number_format_i18n( $count ) . ' ' . $this->get_label( $item, $count );
-		$text  = $this->maybe_link( $text, $href );
+		$href = $this->get_link_url( $item );
+		$text = number_format_i18n( $count ) . ' ' . $this->get_label( $item, $count );
+		$text = $this->maybe_link( $text, $href );
 
 		return $this->get_markup( $text, $item['type'] );
 	}
@@ -146,9 +146,9 @@ class Gamajo_Dashboard_Glancer {
 	 */
 	protected function get_label( array $item, $count ) {
 		$post_type_object = get_post_type_object( $item['type'] );
-		$label = 1 === $count ? $post_type_object->labels->singular_name : $post_type_object->labels->name;
+		$label            = 1 === $count ? $post_type_object->labels->singular_name : $post_type_object->labels->name;
 
-		// Append status for non-publish statuses for disambiguation
+		// Append status for non-publish statuses for disambiguation.
 		if ( 'publish' !== $item['status'] ) {
 			$label .= ' (' . $item['status'] . ')';
 		}
@@ -174,8 +174,8 @@ class Gamajo_Dashboard_Glancer {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $text Text to potentially wrap in a link.
-	 * @param string  $href Link target.
+	 * @param string $text Text to potentially wrap in a link.
+	 * @param string $href Link target.
 	 *
 	 * @return string       Text wrapped in a link if current user can edit posts, or original text otherwise.
 	 */
@@ -191,7 +191,8 @@ class Gamajo_Dashboard_Glancer {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $text  Text to display. May be wrapped in a link.
+	 * @param string $text  Text to display. May be wrapped in a link.
+	 * @param string $post_type Post Type.
 	 */
 	protected function get_markup( $text, $post_type ) {
 		return '<li class="' . sanitize_html_class( $post_type . '-count' ) . '">' . $text . '</li>' . "\n";

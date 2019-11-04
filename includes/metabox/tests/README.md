@@ -1,5 +1,4 @@
-# CMB Test Suite
-
+# CMB Test Suite [![Travis](http://img.shields.io/travis/CMB2/CMB2.svg?style=flat)]()
 
 The CMB Test Suite uses PHPUnit to help us maintain the best possible code quality.
 
@@ -13,7 +12,7 @@ Quick Start (For Manual Runs)
 
 ### 1. Clone this repository
 ```bash
-git clone git://github.com/WebDevStudios/Custom-Metaboxes-and-Fields-for-WordPress.git ./
+git clone git@github.com:CMB2/CMB2.git ./
 ```
 
 ### 2. [Install PHPUnit](https://github.com/sebastianbergmann/phpunit#installation)
@@ -26,8 +25,13 @@ If you haven't already installed the WordPress testing library, we have a helpfu
 
 Note: you'll need to already have `svn`, `wget`, and `mysql` available.
 
+Change to the CMB directory:
 ```bash
-./tests/bin/install-wp-tests.sh wordpress_test root '' localhost latest
+cd CMB2
+```
+
+```bash
+bash tests/bin/install-wp-tests.sh wordpress_test root '' localhost latest
 ```
 * `wordpress_test` is the name of the test database (**all data will be deleted!**)
 * `root` is the MySQL user name
@@ -42,7 +46,7 @@ phpunit
 ```
 
 ### 5. Bonus Round: Run tests automatically before each commit
-All you need to do is run these two commands, and then priort to accepting any commit grunt will run phpunit.
+All you need to do is run these two commands, and then prior to accepting any commit grunt will run phpunit.
 If a test fails, the commit will be rejected, giving you the opportunity to fix the problem first.
 
 ```bash
