@@ -6,7 +6,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -50,3 +51,21 @@ build/Release
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
 
+# PHPStorm
+.idea
+
+# Sass Cache
+*.sass-cache
+
+dandelion.yml
+ocular.phar
+.tx
+
+# PHPunit config
+phpunit.xml
+
+# Composer
+vendor
+
+# General
+NOTES.md
