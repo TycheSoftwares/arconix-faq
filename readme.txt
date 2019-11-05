@@ -3,7 +3,7 @@ Contributors: jgardner03, tychesoftwares, bhavik.kiri
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
 Tested up to: 4.9.8
-Stable tag: 1.8.3
+Stable tag: 1.9
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -101,6 +101,10 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 
 == Changelog ==
 
+= 1.9 =
+* Updated the CMB library to its latest version.
+* Optimized the code with respect to WordPress Coding Standards.
+ 
 = 1.8.3 =
 * We have temporarily removed the dashboard widget from the plugin.
 
