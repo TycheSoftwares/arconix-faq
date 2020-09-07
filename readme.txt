@@ -1,9 +1,9 @@
 === Arconix FAQ ===
-Contributors: jgardner03, tychesoftwares, bhavik.kiri
+Contributors: jgardner03, tychesoftwares, shasvat
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 4.9.8
-Stable tag: 1.9
+Tested up to: 5.5
+Stable tag: trunk
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -100,6 +100,12 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+
+= 1.9.2 =
+* Compatibility with WordPress 5.5
+
+= 1.9.1 =
+* Fixed an issue where CRON for tracking was running every minute.
 
 = 1.9 =
 * Updated the CMB library to its latest version.
