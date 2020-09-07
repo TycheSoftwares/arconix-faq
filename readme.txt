@@ -2,7 +2,7 @@
 Contributors: jgardner03, tychesoftwares, bhavik.kiri
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 5.3
+Tested up to: 5.5
 Stable tag: trunk
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
