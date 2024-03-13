@@ -277,7 +277,7 @@ class FAQ_TS_tracking {
 	 * @access public
 	 */
 	public static function ts_admin_notices_scripts() {
-		
+		$nonce = wp_create_nonce( 'tracking_notice' );
         wp_enqueue_script(
             'ts_dismiss_notice',
 			self::$ts_file_path . '/assets/js/dismiss-notice.js',
@@ -300,6 +300,10 @@ class FAQ_TS_tracking {
 	 */
 
     public static function ts_admin_notices() {
+		$nonce = $_POST['tracking_notice'];//phpcs:ignore
+		if ( ! wp_verify_nonce( $nonce, 'tracking_notice' ) ) {
+			return;
+		}
         update_option( self::$plugin_prefix . '_allow_tracking', 'dismissed' );
         FAQ_TS_Tracker::ts_send_tracking_data( false );
         die();
