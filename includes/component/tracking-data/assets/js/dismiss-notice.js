@@ -28,7 +28,8 @@ jQuery(document).ready( function() {
 				jQuery(this).slideUp( 100, function() {
 					jQuery(this).remove();
 					var data = {
-						action: ts_dismiss_notice.ts_prefix_of_plugin + "_admin_notices"
+						action: ts_dismiss_notice.ts_prefix_of_plugin + "_admin_notices",
+						tracking_notice : ts_dismiss_notice.tracking_notice
 					};
 					var admin_url = ts_dismiss_notice.ts_admin_url;
 					
