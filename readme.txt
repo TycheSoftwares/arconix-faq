@@ -101,6 +101,11 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 
 == Changelog ==
 
+= 1.9.4 =
+* Tweak - Update compatibility with WordPress 6.5.
+* Tweak - Update compatibility with WooCommerce 8.7.
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+
 = 1.9.3 =
 * Fix - Cross Site Request Forgery (CSRF) vulnerability.
 
