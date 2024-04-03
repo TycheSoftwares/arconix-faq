@@ -298,7 +298,6 @@ class FAQ_TS_tracking {
 	 * @since 6.8
 	 * @access public
 	 */
-
 	public static function ts_admin_notices() {
 		$nonce = $_POST['tracking_notice'];//phpcs:ignore
 		if ( is_user_logged_in() && current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, 'tracking_notice' ) ) {
