@@ -132,11 +132,9 @@ class FAQ_TS_tracking {
 		
 		$ts_action_links = array();
 		$nonce           = wp_create_nonce( 'ts_nonce_action' );
-		
 		if ( 'unknown' != get_option( self::$plugin_prefix . '_allow_tracking', 'unknown' ) ) {
 			
 			$ts_action = self::$ts_settings_page . '&ts_action=reset_tracking&nonce=' . $nonce;
-			
 			$ts_action_links = array(
 				'reset_tracking' => '<a href="'.$ts_action.'" class="reset_tracking" title= "This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data.">Reset Usage Tracking</a>',
 			);                
@@ -168,11 +166,11 @@ class FAQ_TS_tracking {
 	/**
 	 * It will delete the tracking option from the database.
 	 */
-	public static function ts_reset_tracking_setting () {
+	public static function ts_reset_tracking_setting() {
 		$nonce = isset( $_GET ['nonce'] ) ? $_GET['nonce'] : '';//phpcs:ignore
 		if ( is_user_logged_in() && current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, 'ts_nonce_action' ) ) {
 
-			if ( isset ( $_GET [ 'ts_action' ] ) && 'reset_tracking' == $_GET [ 'ts_action' ] ) {
+			if ( isset( $_GET ['ts_action'] ) && 'reset_tracking' === $_GET ['ts_action'] ) {
 				delete_option( self::$plugin_prefix . '_allow_tracking' );
 				delete_option( self::$plugin_prefix . '_ts_tracker_last_send' );
 				$ts_url = remove_query_arg( 'ts_action' );
