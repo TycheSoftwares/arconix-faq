@@ -134,7 +134,7 @@ class FAQ_TS_tracking {
 		$nonce           = wp_create_nonce( 'ts_nonce_action' );
 		if ( 'unknown' != get_option( self::$plugin_prefix . '_allow_tracking', 'unknown' ) ) {
 			
-			$ts_action = self::$ts_settings_page . '&ts_action=reset_tracking&nonce=' . $nonce;
+			$ts_action       = self::$ts_settings_page . '&ts_action=reset_tracking&nonce=' . $nonce;
 			$ts_action_links = array(
 				'reset_tracking' => '<a href="'.$ts_action.'" class="reset_tracking" title= "This will reset your usage tracking settings, causing it to show the opt-in banner again and not sending any data.">Reset Usage Tracking</a>',
 			);                
