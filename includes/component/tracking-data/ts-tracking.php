@@ -169,14 +169,11 @@ class FAQ_TS_tracking {
 	 */
 	public static function ts_reset_tracking_setting() {
 		$nonce = isset( $_GET ['nonce'] ) ? $_GET['nonce'] : '';//phpcs:ignore
-		if ( is_user_logged_in() && current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, 'ts_nonce_action' ) ) {
-
-			if ( isset( $_GET ['ts_action'] ) && 'reset_tracking' === $_GET ['ts_action'] ) {
-				delete_option( self::$plugin_prefix . '_allow_tracking' );
-				delete_option( self::$plugin_prefix . '_ts_tracker_last_send' );
-				$ts_url = remove_query_arg( 'ts_action' );
-				wp_safe_redirect( $ts_url );
-			}
+		if ( is_user_logged_in() && current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, 'ts_nonce_action' ) && ( isset( $_GET ['ts_action'] ) && 'reset_tracking' === $_GET ['ts_action'] ) ) {
+			delete_option( self::$plugin_prefix . '_allow_tracking' );
+			delete_option( self::$plugin_prefix . '_ts_tracker_last_send' );
+			$ts_url = remove_query_arg( 'ts_action' );
+			wp_safe_redirect( $ts_url );
 		}
 	}
 
