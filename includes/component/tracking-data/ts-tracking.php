@@ -128,6 +128,7 @@ class FAQ_TS_tracking {
 	 *
 	 * Add the Reset tracking link on the  plugins page.
 	 * @hook 'plugin_action_links_' . self::$ts_plugin_dir
+	 * @param string $links links.
 	 */
 	public static function ts_plugin_action_links( $links ) {
 		$ts_action_links = array();
