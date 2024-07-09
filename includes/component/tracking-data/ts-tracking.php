@@ -128,11 +128,10 @@ class FAQ_TS_tracking {
 	 * Add the Reset tracking link on the  plugins page.
 	 * @hook 'plugin_action_links_' . self::$ts_plugin_dir
 	 */
-	public static function ts_plugin_action_links ( $links ) {
-		
+	public static function ts_plugin_action_links( $links ) {
 		$ts_action_links = array();
 		$nonce           = wp_create_nonce( 'ts_nonce_action' );
-		if ( 'unknown' != get_option( self::$plugin_prefix . '_allow_tracking', 'unknown' ) ) {
+		if ( 'unknown' !== get_option( self::$plugin_prefix . '_allow_tracking', 'unknown' ) ) {
 			
 			$ts_action       = self::$ts_settings_page . '&ts_action=reset_tracking&nonce=' . $nonce;
 			$ts_action_links = array(
