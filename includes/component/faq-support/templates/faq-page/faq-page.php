@@ -83,7 +83,7 @@ $ts_faq = $faq_array['ts_faq'];
 
 <div class="support-panel">
     <p style="font-size: 19px">
-        If your queries are not answered here, you can send an email directly to <strong>support@tychesoftwares.freshdesk.com</strong> for some additional requirements. 
+        If your queries are not answered here, you can send an email directly to <strong>support@tychesoftwares.com</strong> for some additional requirements. 
     </p>
 </div>
 <script>
