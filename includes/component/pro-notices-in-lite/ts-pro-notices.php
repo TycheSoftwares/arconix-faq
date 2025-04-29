@@ -103,7 +103,11 @@ class FAQ_ts_pro_notices {
 				
 				$class = 'updated notice-info point-notice one';
 				$style = 'position:relative';
-				$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+				$cancel_button = sprintf(
+					'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+					esc_url( $add_query_arguments ),
+					esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+				);
 				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[1], $cancel_button );
 			}
 
