@@ -103,12 +103,13 @@ class FAQ_ts_pro_notices {
 				
 				$class = 'updated notice-info point-notice one';
 				$style = 'position:relative';
+
 				$cancel_button = sprintf(
 					'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
 					esc_url( $add_query_arguments ),
 					esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
 				);
-				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[1], $cancel_button );
+				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( self::$ts_pro_notices[1] ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_first_notice_ignore' ) && 
