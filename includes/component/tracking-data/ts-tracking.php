@@ -299,11 +299,12 @@ class FAQ_TS_tracking {
 	 * @access public
 	 */
 	public static function ts_admin_notices() {
-		$nonce = $_POST['tracking_notice'];//phpcs:ignore
-		if ( is_user_logged_in() && current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, 'tracking_notice' ) ) {
-			update_option( self::$plugin_prefix . '_allow_tracking', 'dismissed' );
-			FAQ_TS_Tracker::ts_send_tracking_data( false );
-			die();
+		if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
+			if ( isset( $_POST['tracking_notice'] ) && wp_verify_nonce( $_POST['tracking_notice'], 'tracking_notice' ) ) {
+				update_option( self::$plugin_prefix . '_allow_tracking', 'dismissed' );
+				FAQ_TS_Tracker::ts_send_tracking_data( false );
+				die();
+			}
 		}
 	}
 
