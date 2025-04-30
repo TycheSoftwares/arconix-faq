@@ -300,7 +300,7 @@ class FAQ_TS_tracking {
 	 */
 	public static function ts_admin_notices() {
 		if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
-			if ( isset( $_POST['tracking_notice'] ) && wp_verify_nonce( $_POST['tracking_notice'], 'tracking_notice' ) ) {
+			if ( isset( $_POST['tracking_notice'] ) && wp_verify_nonce( $_POST['tracking_notice'], 'tracking_notice' ) ) { // phpcs:ignore
 				update_option( self::$plugin_prefix . '_allow_tracking', 'dismissed' );
 				FAQ_TS_Tracker::ts_send_tracking_data( false );
 				die();
