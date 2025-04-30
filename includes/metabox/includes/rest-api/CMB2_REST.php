@@ -667,7 +667,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @return mixed                            False if field can't be read or true|CMB2_Field object.
 	 */
 	public function field_can_read( $field_id, $return_object = false ) {
-		return $this->field_can( 'read_fields', $field_id, $return_object );
+		return $this->field_can( $field_id, 'read_fields', $return_object );
 	}
 
 	/**
@@ -681,7 +681,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @return mixed                            False if field can't be edited or true|CMB2_Field object.
 	 */
 	public function field_can_edit( $field_id, $return_object = false ) {
-		return $this->field_can( 'edit_fields', $field_id, $return_object );
+		return $this->field_can( $field_id, 'edit_fields', $return_object );
 	}
 
 	/**
