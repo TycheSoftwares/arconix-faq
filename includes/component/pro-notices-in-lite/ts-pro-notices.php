@@ -91,6 +91,7 @@ class FAQ_ts_pro_notices {
 		$current_time  = current_time ( 'timestamp' );
 		$add_query_arguments = '';
 		$message             = '';
+		$nonce               = wp_create_nonce( 'ts_dismiss_notice' );
 
 		if( '' != self::$ts_pro_file_name && !is_plugin_active( self::$ts_pro_file_name ) && 
             ( false === $activate_time || ( $activate_time > 0 && $current_time >= $sixty_days ) ) ) {
@@ -99,11 +100,13 @@ class FAQ_ts_pro_notices {
 			
 			if( ! get_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_first_notice_ignore' ) ) {
 				
-				$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_first_notice_ignore', '0' );
+				$add_query_arguments = add_query_arg([
+					self::$pro_plugin_prefix . '_first_notice_ignore' => '0',
+					'_wpnonce' => $nonce,
+				]);
 				
 				$class = 'updated notice-info point-notice one';
 				$style = 'position:relative';
-
 				$cancel_button = sprintf(
 					'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
 					esc_url( $add_query_arguments ),
@@ -120,13 +123,20 @@ class FAQ_ts_pro_notices {
 				$fifteen_days = strtotime( '+15 Days', $first_ignore_time[0] );
 
 				if ( $current_time > $fifteen_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_second_notice_ignore', '0' );
-					
+
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_second_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
+
 					$class = 'updated notice-info point-notice two';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[2], $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( self::$ts_pro_notices[2] ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 			
@@ -139,13 +149,20 @@ class FAQ_ts_pro_notices {
 				$ts_fifteen_days = strtotime( '+15 Days', $second_ignore_time[0] );
 
 				if ( $current_time > $ts_fifteen_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_third_notice_ignore', '0' );
+
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_third_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[3], $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( self::$ts_pro_notices[3] ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -159,13 +176,20 @@ class FAQ_ts_pro_notices {
 				$ts_fifteen_days = strtotime( '+15 Days', $third_ignore_time[0] );
 
 				if ( $current_time > $ts_fifteen_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_fourth_notice_ignore', '0' );
+
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_fourth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[4], $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( self::$ts_pro_notices[4] ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -180,13 +204,20 @@ class FAQ_ts_pro_notices {
 				$ts_fifteen_days = strtotime( '+15 Days', $fourth_ignore_time[0] );
 
 				if ( $current_time > $ts_fifteen_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_fifth_notice_ignore', '0' );
+
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_fifth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[5], $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( self::$ts_pro_notices[5] ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -240,17 +271,24 @@ class FAQ_ts_pro_notices {
 					$ts_consider_time = strtotime( '+7 Days', $ts_consider_time );
 				}
 
-				$sixth_message = self::$ts_pro_notices[6] ['message'];
-				
-				if ( $current_time > $ts_consider_time ) { 
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_sixth_notice_ignore', '0' );
-					
+				$sixth_message = wp_kses_post( self::$ts_pro_notices[6]['message'] );
+
+				if ( $current_time > $ts_consider_time ) {
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_sixth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
+
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $sixth_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $sixth_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
-				
+
 			}
 
 			if ( !is_plugin_active( $sixth_plugin_link ) && 
@@ -262,15 +300,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days = strtotime( '+7 Days', $sixth_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_seventh_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_seventh_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$seventh_message = self::$ts_pro_notices[7] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $seventh_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $seventh_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -285,15 +329,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days = strtotime( '+7 Days', $seventh_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_eigth_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_eigth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$eight_message = self::$ts_pro_notices[8] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $eight_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $eight_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -306,15 +356,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+7 Days', $eigth_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_ninth_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_ninth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$ninth_message = self::$ts_pro_notices[9] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $ninth_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $ninth_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -329,15 +385,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+7 Days', $ninth_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_tenth_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_tenth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$tenth_message = self::$ts_pro_notices[10] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $tenth_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $tenth_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 			} else if ( !is_plugin_active( $tenth_plugin_link ) && 
@@ -350,15 +412,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+30 Days', $activate_time );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_tenth_notice_ignore', '0' );
-					
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_tenth_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
+
 					$tenth_message = self::$ts_pro_notices[10] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $tenth_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $tenth_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 			}
@@ -373,15 +441,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+7 Days', $tenth_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_eleven_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_eleven_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$eleven_message = self::$ts_pro_notices[11] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $eleven_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $eleven_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 			} else if ( !is_plugin_active( $eleven_plugin_link ) && 
@@ -396,15 +470,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+7 Days', $tenth_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_eleven_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_eleven_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$eleven_message = self::$ts_pro_notices[11] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $eleven_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $eleven_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 			} else if ( !is_plugin_active( $eleven_plugin_link ) && 
@@ -442,15 +522,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+7 Days', $eleventh_ignore_time[0] );
 
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_twelve_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_twelve_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$twelve_message = self::$ts_pro_notices[12] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $twelve_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $twelve_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 			} else if ( !is_plugin_active( $twelve_plugin_link ) && 
@@ -513,15 +599,21 @@ class FAQ_ts_pro_notices {
 				$ts_seven_days   = strtotime( '+7 Days', $twelve_ignore_time[0] );
 				
 				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_thirteen_notice_ignore', '0' );
+					$add_query_arguments = add_query_arg([
+						self::$pro_plugin_prefix . '_thirteen_notice_ignore' => '0',
+						'_wpnonce' => $nonce,
+					]);
 					
 					$thirteen_message = self::$ts_pro_notices[13] ['message'];
 
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, $thirteen_message, $cancel_button );
+					$cancel_button = sprintf(
+						'<a href="%s" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="%s"></a>',
+						esc_url( $add_query_arguments ),
+						esc_attr( 'position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;' )
+					);
+					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', esc_attr( $class ), esc_attr( $style ), wp_kses_post( $thirteen_message ), $cancel_button );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 
 			} else if ( !is_plugin_active( $thirteen_plugin_link ) && 
@@ -582,91 +674,42 @@ class FAQ_ts_pro_notices {
 	 * Ignore pro notice
 	 */
 	public static function ts_ignore_pro_notices() {
-
-		if( !get_option( self::$plugin_prefix . 'activate_time' ) ) {
-            add_option( self::$plugin_prefix . '_activate_time', current_time( 'timestamp' ) );
+		if ( ! get_option( self::$plugin_prefix . '_activate_time' ) ) {
+			add_option( self::$plugin_prefix . '_activate_time', current_time( 'timestamp' ) );
 		}
-		
-		// If user clicks to ignore the notice, add that to their user meta
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_first_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_first_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_first_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_first_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_first_notice_ignore' ) );
-
+	
+		$notice_keys = [
+			'first_notice_ignore',
+			'second_notice_ignore',
+			'third_notice_ignore',
+			'fourth_notice_ignore',
+			'fifth_notice_ignore',
+			'sixth_notice_ignore',
+			'seventh_notice_ignore',
+			'eigth_notice_ignore',
+			'ninth_notice_ignore',
+			'tenth_notice_ignore',
+			'eleven_notice_ignore',
+			'twelve_notice_ignore',
+			'thirteen_notice_ignore',
+		];
+	
+		foreach ( $notice_keys as $key ) {
+			$query_key = self::$pro_plugin_prefix . '_' . $key;
+	
+			if ( isset( $_GET[ $query_key ] ) && '0' === $_GET[ $query_key ] ) {
+				if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'ts_dismiss_notice' ) ) {
+					wp_die( __( 'Security check failed.', 'arconix-faq' ) );
+				}
+	
+				add_user_meta( get_current_user_id(), $query_key, 'true', true );
+				add_user_meta( get_current_user_id(), $query_key . '_time', current_time( 'timestamp' ), true );
+	
+				wp_safe_redirect( remove_query_arg( [ $query_key, '_wpnonce' ] ) );
+				exit;
+			}
 		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_second_notice_ignore'] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_second_notice_ignore'] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_second_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_second_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_second_notice_ignore' )  );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_third_notice_ignore'] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_third_notice_ignore'] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_third_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_third_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_third_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_fourth_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_fourth_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_fourth_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_fourth_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_fourth_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_fifth_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_fifth_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_fifth_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_fifth_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_fifth_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_sixth_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_sixth_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_sixth_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_sixth_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_sixth_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_seventh_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_seventh_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_seventh_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_seventh_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_seventh_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_eigth_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_eigth_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_eigth_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_eigth_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_eigth_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_ninth_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_ninth_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_ninth_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_ninth_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_ninth_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_tenth_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_tenth_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_tenth_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_tenth_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_tenth_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_eleven_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_eleven_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_eleven_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_eleventh_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_eleven_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_twelve_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_twelve_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_twelve_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_twelve_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_twelve_notice_ignore' ) );
-		}
-
-		if ( isset( $_GET[ self::$pro_plugin_prefix . '_thirteen_notice_ignore' ] ) && '0' === $_GET[ self::$pro_plugin_prefix . '_thirteen_notice_ignore' ] ) {
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_thirteen_notice_ignore', 'true', true );
-			add_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_thirteen_notice_ignore_time', current_time( 'timestamp' ), true );
-			wp_safe_redirect( remove_query_arg( self::$pro_plugin_prefix . '_thirteen_notice_ignore' ) );
-		}
-
 	}
+	
 }
 
