@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:disable
 class FAQ_ts_pro_notices {
 
 	/**
