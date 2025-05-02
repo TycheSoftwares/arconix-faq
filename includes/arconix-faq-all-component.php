@@ -30,48 +30,53 @@ if ( ! class_exists( 'Arconix_FAQ_Component' ) ) {
 				require_once 'component/welcome-page/ts-welcome.php';
 				require_once 'component/faq-support/ts-faq-support.php';
 				require_once 'component/pro-notices-in-lite/ts-pro-notices.php';
+				add_action( 'init', array( $this, 'delayed_admin_init' ) );
+		}
 
-				$faq_plugin_name = self::ts_get_plugin_name();
+		/**
+		 * Fucntion delayed_admin_init.
+		 */
+		public function delayed_admin_init() { // phpcs:ignore
+			$faq_plugin_name = self::ts_get_plugin_name();
 
-				$faq_locale = self::ts_get_plugin_locale();
+			$faq_locale = self::ts_get_plugin_locale();
 
-				$faq_file_name          = 'arconix-faq/plugin.php';
-				$faq_plugin_prefix      = 'faq';
-				$faq_lite_plugin_prefix = 'faq';
-				$faq_plugin_folder_name = 'arconix-faq/';
-				$faq_plugin_dir_name    = dirname( untrailingslashit( plugin_dir_path( __FILE__ ) ) ) . '/plugin.php';
-				$faq_plugin_url         = dirname( untrailingslashit( plugins_url( '/', __FILE__ ) ) );
+			$faq_file_name          = 'arconix-faq/plugin.php';
+			$faq_plugin_prefix      = 'faq';
+			$faq_lite_plugin_prefix = 'faq';
+			$faq_plugin_folder_name = 'arconix-faq/';
+			$faq_plugin_dir_name    = dirname( untrailingslashit( plugin_dir_path( __FILE__ ) ) ) . '/plugin.php';
+			$faq_plugin_url         = dirname( untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 
-				$faq_get_previous_version = get_option( 'faq_version', '1' );
+			$faq_get_previous_version = get_option( 'faq_version', '1' );
 
-				$faq_blog_post_link = 'https://www.tychesoftwares.com/docs/docs/faq/usage-tracking/';
+			$faq_blog_post_link = 'https://www.tychesoftwares.com/docs/docs/faq/usage-tracking/';
 
-				$faq_plugins_page  = 'edit.php?post_type=faq';
-				$faq_plugin_slug   = 'edit.php?post_type=faq';
-				$faq_pro_file_name = '';
+			$faq_plugins_page  = 'edit.php?post_type=faq';
+			$faq_plugin_slug   = 'edit.php?post_type=faq';
+			$faq_pro_file_name = '';
 
-				$faq_settings_page = 'edit.php?post_type=faq';
+			$faq_settings_page = 'edit.php?post_type=faq';
 
-				new FAQ_TS_tracking( $faq_plugin_prefix, $faq_plugin_name, $faq_blog_post_link, $faq_locale, $faq_plugin_url, $faq_settings_page, '', '', '', $faq_file_name );
+			new FAQ_TS_tracking( $faq_plugin_prefix, $faq_plugin_name, $faq_blog_post_link, $faq_locale, $faq_plugin_url, $faq_settings_page, '', '', '', $faq_file_name );
 
-				new FAQ_TS_Tracker( $faq_plugin_prefix, $faq_plugin_name );
+			new FAQ_TS_Tracker( $faq_plugin_prefix, $faq_plugin_name );
 
-				$faq_deativate = new FAQ_TS_deactivate();
-				$faq_deativate->init( $faq_file_name, $faq_plugin_name );
+			$faq_deativate = new FAQ_TS_deactivate();
+			$faq_deativate->init( $faq_file_name, $faq_plugin_name );
 
-				// $user = wp_get_current_user();
+			// $user = wp_get_current_user();
 
-				// if ( in_array( 'administrator', (array) $user->roles ) ) {
+			// if ( in_array( 'administrator', (array) $user->roles ) ) {
 
-				// new FAQ_TS_Welcome ( $faq_plugin_name, $faq_plugin_prefix, $faq_locale, $faq_plugin_folder_name, $faq_plugin_dir_name, $faq_get_previous_version );
-				// }
+			// new FAQ_TS_Welcome ( $faq_plugin_name, $faq_plugin_prefix, $faq_locale, $faq_plugin_folder_name, $faq_plugin_dir_name, $faq_get_previous_version );
+			// }
 
-				$ts_pro_faq = self::faq_get_faq();
-				new FAQ_TS_Faq_Support( $faq_plugin_name, $faq_plugin_prefix, $faq_plugins_page, $faq_locale, $faq_plugin_folder_name, $faq_plugin_slug, $ts_pro_faq, 'faq_support_page' );
-				if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ) ) ) {
-					$ts_pro_notices = self::faq_get_notice_text();
-					new FAQ_ts_pro_notices( $faq_plugin_name, $faq_lite_plugin_prefix, $faq_plugin_prefix, $ts_pro_notices, $faq_file_name, $faq_pro_file_name );
-				}
+			$ts_pro_faq = self::faq_get_faq();
+			new FAQ_TS_Faq_Support( $faq_plugin_name, $faq_plugin_prefix, $faq_plugins_page, $faq_locale, $faq_plugin_folder_name, $faq_plugin_slug, $ts_pro_faq, 'faq_support_page' );
+			if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ) ) ) { // phpcs:ignore
+				$ts_pro_notices = self::faq_get_notice_text();
+				new FAQ_ts_pro_notices( $faq_plugin_name, $faq_lite_plugin_prefix, $faq_plugin_prefix, $ts_pro_notices, $faq_file_name, $faq_pro_file_name );
 			}
 		}
 
