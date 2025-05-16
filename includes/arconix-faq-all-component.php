@@ -74,7 +74,7 @@ if ( ! class_exists( 'Arconix_FAQ_Component' ) ) {
 
 			$ts_pro_faq = self::faq_get_faq();
 			new FAQ_TS_Faq_Support( $faq_plugin_name, $faq_plugin_prefix, $faq_plugins_page, $faq_locale, $faq_plugin_folder_name, $faq_plugin_slug, $ts_pro_faq, 'faq_support_page' );
-			if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ) ) ) {
+			if ( in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins' ), true ) ) {
 				$ts_pro_notices = self::faq_get_notice_text();
 				new FAQ_ts_pro_notices( $faq_plugin_name, $faq_lite_plugin_prefix, $faq_plugin_prefix, $ts_pro_notices, $faq_file_name, $faq_pro_file_name );
 			}
