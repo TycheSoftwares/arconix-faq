@@ -30,6 +30,7 @@ if ( ! class_exists( 'Arconix_FAQ_Component' ) ) {
 				require_once 'component/welcome-page/ts-welcome.php';
 				require_once 'component/faq-support/ts-faq-support.php';
 				add_action( 'init', array( $this, 'delayed_admin_init' ) );
+			}
 		}
 
 		/**
