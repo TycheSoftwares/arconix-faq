@@ -2,8 +2,8 @@
 Contributors: jgardner03, tychesoftwares, shasvat
 Tags: arconix, faq, toggle, accordion, faq plugin, frequently asked questions
 Requires at least: 3.8
-Tested up to: 6.5.5
-Stable tag: trunk
+Tested up to: 6.8.1
+Stable tag: 1.9.6
 
 Arconix FAQ provides an easy way to add FAQ items to your website.
 
@@ -100,6 +100,12 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 3. Grouping and Toggling display
 
 == Changelog ==
+
+= 1.9.6 =
+* Fix - PHP deprecation notices and warnings appearing on plugin activation.
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+* Tweak - Update for compatibility with WordPress 6.8.1.
+* Tweak - Update for compatibility with WooCommerce 9.8.5.
 
 = 1.9.5 =
 * Fix - Added a nonce check for Cross Site Request Forgery (CSRF) vulnerability on reset button.
