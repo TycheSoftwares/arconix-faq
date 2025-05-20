@@ -105,7 +105,6 @@ That's fantastic! Feel free to open an issue or submit a pull request over at [G
 * Fix - PHP deprecation notices and warnings appearing on plugin activation.
 * Fix - Cross Site Request Forgery (CSRF) vulnerability.
 * Tweak - Update for compatibility with WordPress 6.8.1.
-* Tweak - Update for compatibility with WooCommerce 9.8.5.
 
 = 1.9.5 =
 * Fix - Added a nonce check for Cross Site Request Forgery (CSRF) vulnerability on reset button.
