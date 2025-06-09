@@ -194,6 +194,9 @@ class FAQ_TS_deactivate {
 	 * @since  1.1.2
 	 */
 	public static function _submit_uninstall_reason_action() {
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'ts_faq_submit_uninstall_reason_nonce' ) || ! isset( $_POST['reason_id'] ) || ! isset( $_POST['reason_text'] ) ) { // phpcs:ignore
+				wp_send_json_error( 0 );
+		}
 		if ( ! isset( $_POST[ 'reason_id' ] ) ) {
 			exit;
 		}
