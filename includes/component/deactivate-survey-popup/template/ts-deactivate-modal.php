@@ -31,7 +31,7 @@ foreach ( $reasons as $reason ) {
 	$reasons_list_items_html .= '<li class="' . $list_item_classes . '" data-input-type="' . $ts_reason_input_type . '" data-input-placeholder="' . $ts_reason_input_placeholder . '"><label><span><input type="radio" name="selected-reason" value="' . $ts_reason_id . '" ' . $selected . '/></span><span>' . $ts_reason_text . '</span></label>' . $reason_html . '</li>';
 	$incr ++;
 }
- 
+$ts_nonce = wp_create_nonce( 'ts_faq_submit_uninstall_reason_nonce' );
 ?>
 <style>
     .ts-modal {
@@ -173,6 +173,10 @@ foreach ( $reasons as $reason ) {
 
 </style>
 <script type="text/javascript">
+    var arconixFaqAjax = {
+        ajax_url: "<?php echo admin_url( 'admin-ajax.php' ); // phpcs:ignore ?>", 
+        nonce: "<?php echo esc_js( $ts_nonce ); ?>"
+    };
     var currentPluginName = "";
     var TSCustomReasons = {};
     var TSDefaultReason = {};
@@ -230,6 +234,7 @@ foreach ( $reasons as $reason ) {
                             'reason_id': 0,
                             'reason_text': "Deactivated without any option",
                             'plugin_basename': currentPluginName,
+                            '_wpnonce': arconixFaqAjax.nonce,
                         };
                     } else {
                         var data = {
@@ -238,6 +243,7 @@ foreach ( $reasons as $reason ) {
                             'reason_text': $selected_reason.text(),
                             'reason_info': (0 !== $input.length) ? $input.val().trim() : '',
                             'plugin_basename': currentPluginName,
+                            '_wpnonce': arconixFaqAjax.nonce,
                         };
                     }
                     
